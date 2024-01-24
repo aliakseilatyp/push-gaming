@@ -1,3 +1,3 @@
-const JackpotTierInstanceAudit = () => <div>MAIN</div>;
+const JackpotTierInstanceAudit = () => <div>JackpotTierInstanceAudit</div>;
 
 export default JackpotTierInstanceAudit;

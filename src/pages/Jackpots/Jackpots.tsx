@@ -1,3 +1,4 @@
-const Jackpots = () => <div />;
 
-export default Jackpots
+const Jackpots = () => <div>Jackpots</div>;
+
+export default Jackpots;

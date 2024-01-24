@@ -1,3 +1,3 @@
-const JackpotTierInstance = () => <div />;
+const JackpotTierInstance = () => <div>JackpotTierInstance</div>;
 
 export default JackpotTierInstance

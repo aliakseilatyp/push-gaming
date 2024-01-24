@@ -1,5 +1,5 @@
 export default {
-  jackpot: 'jackpot',
+  jackpots: 'jackpots',
   jackpotAudit: 'jackpotAudit',
   jackpotTierInstance: 'jackpotTierInstance',
   jackpotTierInstanceAudit: 'jackpotTierInstanceAudit',

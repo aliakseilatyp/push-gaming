@@ -1,12 +1,13 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Wrapper } from './styles';
 
 const AppWrapper = () => (
-  <div>
+  <Wrapper>
     <Suspense fallback="...Loading">
       <Outlet />
     </Suspense>
-  </div>
+  </Wrapper>
 );
 
 export default AppWrapper;

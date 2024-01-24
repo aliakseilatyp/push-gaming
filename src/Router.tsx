@@ -15,9 +15,9 @@ const routes: RouteObject[] = [
 
     children: [
       { path: ROUTES.login, element: <Login /> },
-      { path: ROUTES.jackpot, element: <Jackpots /> },
-      { path: ROUTES.jackpot, element: <JackpotAudit /> },
-      { path: ROUTES.jackpot, element: <JackpotTierInstance /> },
+      { path: ROUTES.jackpots, element: <Jackpots /> },
+      { path: ROUTES.jackpotAudit, element: <JackpotAudit /> },
+      { path: ROUTES.jackpotTierInstance, element: <JackpotTierInstance /> },
       { path: ROUTES.jackpotTierInstanceAudit, element: <JackpotTierInstanceAudit /> },
     ],
   },
