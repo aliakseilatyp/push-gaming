@@ -1,3 +1,3 @@
-const JackpotAudit = () => <div>JackpotAudit</div>;
+const JackpotAudit = () => <h1>Jackpot Audit</h1>;
 
 export default JackpotAudit

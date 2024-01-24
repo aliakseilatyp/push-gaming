@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 
-export const Wrapper = styled(Container)`
+export const Wrapper = styled(Box)`
   padding-top: 24px;
   padding-bottom: 24px;
+  && {
+    display: flex;
+  }
 `;
