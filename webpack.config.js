@@ -48,7 +48,16 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
-        // components: path.resolve(__dirname, './src/components'),
+        '@tanstack/react-query': path.join(__dirname, '/node_modules/@tanstack/react-query'),
+        components: path.resolve(__dirname, './src/components'),
+        constants: path.resolve(__dirname, './src/constants'),
+        hooks: path.resolve(__dirname, './src/hooks'),
+        images: path.resolve(__dirname, './src/images'),
+        pages: path.resolve(__dirname, './src/pages'),
+        services: path.resolve(__dirname, './src/services'),
+        styles: path.resolve(__dirname, './src/styles'),
+        types: path.resolve(__dirname, './src/types'),
+        utils: path.resolve(__dirname, './src/utils'),
       },
     },
     output: {
