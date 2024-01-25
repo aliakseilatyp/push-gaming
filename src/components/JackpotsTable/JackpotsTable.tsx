@@ -13,15 +13,21 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { getJackpots } from 'mockData/getJackpots';
 import dayjs from 'dayjs';
 import TableHeadComponent from 'components/TableHeadComponent';
-import { JACKPOTS_HEADER_TABLE_ROW } from 'constants/constants';
+import { StatusColor } from 'types';
+import { TableContainerStyled } from './styles';
 
-const statusColor = {
-  ACTIVE: 'green',
-  NEW: 'orange',
-  SUSPENDED: 'orange',
-  FINISHED: 'grey',
-  DELETED: 'grey',
-};
+const JACKPOTS_HEADER_TABLE_ROW = [
+  { label: 'Jackpot ID' },
+  { label: 'Status' },
+  { label: 'Created at' },
+  { label: 'Modified at' },
+  { label: 'Config schema ID' },
+  { label: 'Tier instance config schema ID' },
+  { label: 'Detailed' },
+  { label: 'Action' },
+  { label: 'Audit TrailD' },
+  { label: 'View Instances' },
+];
 
 const JackpotsTable = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -38,60 +44,62 @@ const JackpotsTable = () => {
   const { content } = getJackpots();
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHeadComponent headerTableItems={JACKPOTS_HEADER_TABLE_ROW} />
-        <TableBody>
-          {content.map(({ jackpotId, status, createdAt, modifiedAt, configSchemaId, tierInstanceConfigSchemaId }) => (
-            <TableRow key={jackpotId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell align="center">{jackpotId}</TableCell>
-              <TableCell align="center" style={{ color: statusColor[status] }}>
-                {status}
-              </TableCell>
-              <TableCell align="center">{dayjs(createdAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
-              <TableCell align="center">{dayjs(modifiedAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
-              <TableCell align="center">{configSchemaId}</TableCell>
-              <TableCell align="center">{tierInstanceConfigSchemaId}</TableCell>
-              <TableCell align="center">
-                <Button>Detailed</Button>
-              </TableCell>
-              <TableCell align="center">
-                <IconButton
-                  aria-label="more"
-                  id="long-button"
-                  aria-controls={open ? 'long-menu' : undefined}
-                  aria-expanded={open ? 'true' : undefined}
-                  aria-haspopup="true"
-                  onClick={handleClick}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id="long-menu"
-                  MenuListProps={{
-                    'aria-labelledby': 'long-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>ACTIVATE</MenuItem>
-                  <MenuItem onClick={handleClose}>UPDATE</MenuItem>
-                  <MenuItem onClick={handleClose}>FINISH</MenuItem>
-                  <MenuItem onClick={handleClose}>SUSPEND</MenuItem>
-                </Menu>
-              </TableCell>
-              <TableCell align="center">
-                <Button>Audit trail</Button>
-              </TableCell>
-              <TableCell align="center">
-                <Button>View Instances</Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Paper>
+      <TableContainerStyled>
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHeadComponent headerTableItems={JACKPOTS_HEADER_TABLE_ROW} />
+          <TableBody>
+            {content.map(({ jackpotId, status, createdAt, modifiedAt, configSchemaId, tierInstanceConfigSchemaId }) => (
+              <TableRow key={jackpotId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell align="center">{jackpotId}</TableCell>
+                <TableCell align="center" style={{ color: StatusColor[status] }}>
+                  {status}
+                </TableCell>
+                <TableCell align="center">{dayjs(createdAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
+                <TableCell align="center">{dayjs(modifiedAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
+                <TableCell align="center">{configSchemaId}</TableCell>
+                <TableCell align="center">{tierInstanceConfigSchemaId}</TableCell>
+                <TableCell align="center">
+                  <Button>Detailed</Button>
+                </TableCell>
+                <TableCell align="center">
+                  <IconButton
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls={open ? 'long-menu' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                      'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>ACTIVATE</MenuItem>
+                    <MenuItem onClick={handleClose}>UPDATE</MenuItem>
+                    <MenuItem onClick={handleClose}>FINISH</MenuItem>
+                    <MenuItem onClick={handleClose}>SUSPEND</MenuItem>
+                  </Menu>
+                </TableCell>
+                <TableCell align="center">
+                  <Button>Audit trail</Button>
+                </TableCell>
+                <TableCell align="center">
+                  <Button>View Instances</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainerStyled>
+    </Paper>
   );
 };
 export default JackpotsTable;

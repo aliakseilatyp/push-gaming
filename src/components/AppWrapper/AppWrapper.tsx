@@ -2,17 +2,17 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Wrapper } from './styles';
 import SideMenu from 'components/SideMenu';
-import { Container } from '@mui/material';
+import Stack from '@mui/material/Stack';
 
 const AppWrapper = () => (
-  <Wrapper>
+  <Stack direction="row">
     <SideMenu />
-    <Container>
+    <Wrapper>
       <Suspense fallback="...Loading">
         <Outlet />
       </Suspense>
-    </Container>
-  </Wrapper>
+    </Wrapper>
+  </Stack>
 );
 
 export default AppWrapper;

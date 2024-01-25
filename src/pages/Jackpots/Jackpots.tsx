@@ -1,28 +1,31 @@
 import JackpotsTable from 'components/JackpotsTable';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Pagination from '@mui/material/Pagination';
-import { useState } from 'react';
+import PaginationTable from 'components/Pagination';
+import usePagination from 'hooks/usePagination';
+import { CreateButtonWrapper } from './styles';
 
 const Jackpots = () => {
-  const [page, setPage] = useState(1);
+  const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination({
+    initialPage: 1,
+    initialPageSize: 20,
+  });
 
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
-  
   return (
     <div>
       <h1>Jackpots</h1>
-      <Stack direction="row" justifyContent="right" style={{ margin: '10px 0' }}>
+      <CreateButtonWrapper direction="row" justifyContent="right">
         <Button variant="contained" size="large">
           Create Jackpot
         </Button>
-      </Stack>
+      </CreateButtonWrapper>
       <JackpotsTable />
-      <Stack direction="row" justifyContent="center" style={{ margin: '10px 0' }}>
-        <Pagination count={10} page={page} onChange={handleChange} />
-      </Stack>
+      <PaginationTable
+        pageCount={10}
+        page={page}
+        pageSize={pageSize}
+        handleChangePage={handleChangePage}
+        handlePageSizeChange={handlePageSizeChange}
+      />
     </div>
   );
 };
