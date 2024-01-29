@@ -36,9 +36,7 @@ const MultipleSelect = ({ children, status, handleChangeStatus, handleDeleteStat
                   key={status}
                   label={status}
                   deleteIcon={<CloseIcon onMouseDown={(event) => event.stopPropagation()} />}
-                  onDelete={(e) => {
-                    handleDeleteStatus(e, status);
-                  }}
+                  onDelete={(e) => handleDeleteStatus(e, status)}
                   sx={{ color: statusColor[status] }}
                 />
               );
