@@ -27,12 +27,12 @@ export interface Sort {
   unsorted: boolean;
 }
 
-export enum StatusColor {
-  ACTIVE = 'green',
-  NEW = 'orange',
-  SUSPENDED = 'orange',
-  FINISHED = 'grey',
-  DELETED = 'grey',
+export enum StatusJackpotsColor {
+  ACTIVE = 'ACTIVE',
+  NEW = 'NEW',
+  SUSPENDED = 'SUSPENDED',
+  FINISHED = 'FINISHED',
+  DELETED = 'DELETED',
 }
 
 export interface Content {
@@ -41,7 +41,7 @@ export interface Content {
   createdAt: string;
   jackpotId: string;
   modifiedAt: string;
-  status: keyof typeof StatusColor;
+  status: keyof typeof StatusJackpotsColor;
   tierInstanceConfigSchemaId: string;
   updateConfigSchemaId: string;
 }

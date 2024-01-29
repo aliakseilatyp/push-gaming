@@ -1,6 +1,6 @@
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
+import { TableHeaderCell } from './styles';
 
 interface ITableHeadComponent {
   headerTableItems: {
@@ -13,9 +13,9 @@ const TableHeadComponent: React.FC<ITableHeadComponent> = ({ headerTableItems })
     <TableHead>
       <TableRow>
         {headerTableItems.map(({ label }) => (
-          <TableCell align="center" key={label}>
+          <TableHeaderCell align="center" key={label}>
             {label}
-          </TableCell>
+          </TableHeaderCell>
         ))}
       </TableRow>
     </TableHead>
