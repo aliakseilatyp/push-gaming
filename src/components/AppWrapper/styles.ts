@@ -3,4 +3,5 @@ import { Box } from '@mui/material';
 
 export const Wrapper = styled(Box)`
   padding: 24px;
+  flex-grow: 1;
 `;
