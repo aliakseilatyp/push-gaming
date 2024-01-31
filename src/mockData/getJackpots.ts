@@ -362,6 +362,10 @@ export const JackpotsArray: Content[] = Array.from({ length: 100 }, (_, i) => ({
           enabled: true,
           multiplier: 1,
         },
+        USD: {
+          enabled: false,
+          multiplier: 2,
+        },
       },
       type: 'fixed',
     },
@@ -383,6 +387,44 @@ export const JackpotsArray: Content[] = Array.from({ length: 100 }, (_, i) => ({
           },
         },
       },
+      pushGaming: {
+        enabled: true,
+        games: {
+          'fatrabbit1-*': {
+            enabled: true,
+          },
+          'wildswarm-*': {
+            enabled: true,
+          },
+          'CS': {
+            enabled: false,
+          },
+        },
+        igpCodes: {
+          '*': {
+            enabled: true,
+          },
+        },
+      },
+      dota2: {
+        enabled: true,
+        games: {
+          'fatrabbit1-*': {
+            enabled: true,
+          },
+          'wildswarm-*': {
+            enabled: true,
+          },
+          'CS': {
+            enabled: false,
+          },
+        },
+        igpCodes: {
+          '*': {
+            enabled: true,
+          },
+        },
+      },
     },
     minWager: 1,
     schedule: {
@@ -391,6 +433,16 @@ export const JackpotsArray: Content[] = Array.from({ length: 100 }, (_, i) => ({
     },
     tiers: {
       'daily-drop': {
+        contributionPct: 100,
+        minContribution: 0,
+        reseedPct: 0,
+        seedAmount: 10000,
+        trigger: {
+          dropAt: '0 20 * * * *',
+          type: 'time-fixed',
+        },
+      },
+      'monthly-drop': {
         contributionPct: 100,
         minContribution: 0,
         reseedPct: 0,

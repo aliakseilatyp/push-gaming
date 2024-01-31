@@ -51,10 +51,10 @@ export interface Config {
   contribution: Contribution;
   exchangeRates: ExchangeRates;
   houseEdge: number;
-  integrations: Integrations;
+  integrations: any;
   minWager: number;
   schedule: Schedule;
-  tiers: Tiers;
+  tiers: any;
 }
 
 export interface Tiers {
@@ -103,7 +103,7 @@ export interface Fatrabbit1 {
 }
 
 export interface ExchangeRates {
-  currencies: Currencies;
+  currencies: any;
   type: string;
 }
 
