@@ -1,18 +1,17 @@
 import { Link } from 'react-router-dom';
-import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { JackpotsArray, getJackpots } from 'mockData/getJackpots';
 import dayjs from 'dayjs';
 import TableHeadComponent from 'components/TableHeadComponent';
 import ActionMenu from 'components/ActionMenu';
 import routes from 'constants/routes';
-import { statusColor } from 'constants/colors';
-import { TableContainerStyled } from './styles';
+import { statusJackpotsColor } from 'constants/colors';
+import { ContentJackpots } from 'types';
+import { TableContainerStyled, TableStyled } from 'layouts/Table/Table';
 
 const JACKPOTS_HEADER_TABLE_ROW = [
   { label: 'Jackpot ID' },
@@ -21,25 +20,27 @@ const JACKPOTS_HEADER_TABLE_ROW = [
   { label: 'Modified at' },
   { label: 'Config schema ID' },
   { label: 'Tier instance config schema ID' },
-  { label: 'Detailed' },
+  { label: 'View details' },
   { label: 'Action' },
   { label: 'Audit Trail ID' },
   { label: 'View Instances' },
 ];
 
-const JackpotsTable = () => {
-  const content = JackpotsArray;
+interface IJackpotsTable {
+  content: ContentJackpots[];
+}
 
+const JackpotsTable = ({ content }: IJackpotsTable) => {
   return (
     <Paper>
       <TableContainerStyled>
-        <Table stickyHeader sx={{ minWidth: 650 }}>
+        <TableStyled stickyHeader>
           <TableHeadComponent headerTableItems={JACKPOTS_HEADER_TABLE_ROW} />
           <TableBody>
             {content.map(({ jackpotId, status, createdAt, modifiedAt, configSchemaId, tierInstanceConfigSchemaId }) => (
               <TableRow key={jackpotId}>
                 <TableCell align="center">{jackpotId}</TableCell>
-                <TableCell align="center" style={{ color: statusColor[status] }}>
+                <TableCell align="center" style={{ color: statusJackpotsColor[status] }}>
                   {status}
                 </TableCell>
                 <TableCell align="center">{dayjs(createdAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
@@ -48,7 +49,7 @@ const JackpotsTable = () => {
                 <TableCell align="center">{tierInstanceConfigSchemaId}</TableCell>
                 <TableCell align="center">
                   <Link to={`${routes.jackpots}/${jackpotId}`}>
-                    <Button>Detailed </Button>
+                    <Button>View details</Button>
                   </Link>
                 </TableCell>
                 <TableCell align="center">
@@ -68,7 +69,7 @@ const JackpotsTable = () => {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
+        </TableStyled>
       </TableContainerStyled>
     </Paper>
   );

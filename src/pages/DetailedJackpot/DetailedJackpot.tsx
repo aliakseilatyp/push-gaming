@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { JackpotsArray } from 'mockData/getJackpots';
+import { JackpotsData } from 'mockData/JackpotsMockData';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
@@ -11,8 +11,8 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import TableHeadComponent from 'components/TableHeadComponent';
 import CollapsibleRow from 'components/CollapsibleRow';
-import { DetailedList, TableTitle } from './styles';
-import { TableCustomCell } from 'layouts/Table/Table';
+import { DetailedList } from './styles';
+import { TableCustomCell, TableTitle } from 'layouts/Table/Table';
 
 const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
 const TIERS_HEADER_TABLE_ROW = [
@@ -28,13 +28,16 @@ const INTEGRATIONS_HEADER_TABLE_ROW = [{ label: 'Integrations' }, { label: 'Enab
 
 const DetailedJackpot = () => {
   const { id } = useParams();
-  const jackpot = JackpotsArray.find(({ jackpotId }) => jackpotId === id);
+  const jackpot = JackpotsData.find(({ jackpotId }) => jackpotId === id);
 
   return (
     <>
-      <h1>Jackpot ID: {jackpot?.jackpotId}</h1>
+      <h1>Jackpot details</h1>
       <Stack direction="row" spacing={5}>
         <Box>
+          <Box marginBottom="5px">
+            Jackpot ID: <strong>{jackpot?.jackpotId}</strong>
+          </Box>
           <Box marginBottom="5px">
             Base currency: <strong>{jackpot?.config.baseCurrency}</strong>
           </Box>

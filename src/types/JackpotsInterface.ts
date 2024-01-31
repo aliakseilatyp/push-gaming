@@ -1,5 +1,5 @@
 export interface JackpotsInterface {
-  content: Content[];
+  content: ContentJackpots[];
   empty: boolean;
   first: boolean;
   last: boolean;
@@ -35,7 +35,7 @@ export enum StatusJackpotsColor {
   DELETED = 'DELETED',
 }
 
-export interface Content {
+export interface ContentJackpots {
   config: Config;
   configSchemaId: string;
   createdAt: string;

@@ -9,6 +9,7 @@ const JackpotAudit = lazy(() => import('pages/JackpotAudit'));
 const JackpotTierInstance = lazy(() => import('pages/JackpotTierInstance'));
 const JackpotTierInstanceAudit = lazy(() => import('pages/JackpotTierInstanceAudit'));
 const DetailedJackpot = lazy(() => import('pages/DetailedJackpot'));
+const DetailedJackpotTierInstance = lazy(() => import('pages/DetailedJackpotTierInstance'));
 
 const routes: RouteObject[] = [
   {
@@ -24,7 +25,13 @@ const routes: RouteObject[] = [
         ],
       },
       { path: ROUTES.jackpotAudit, element: <JackpotAudit /> },
-      { path: ROUTES.jackpotTierInstance, element: <JackpotTierInstance /> },
+      {
+        path: ROUTES.jackpotTierInstance,
+        children: [
+          { path: ROUTES.jackpotTierInstance, element: <JackpotTierInstance /> },
+          { path: `${ROUTES.jackpotTierInstance}/:id`, element: <DetailedJackpotTierInstance /> },
+        ],
+      },
       { path: ROUTES.jackpotTierInstanceAudit, element: <JackpotTierInstanceAudit /> },
     ],
   },
