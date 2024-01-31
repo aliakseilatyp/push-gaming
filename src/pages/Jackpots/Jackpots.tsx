@@ -1,14 +1,15 @@
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import Stack from '@mui/material/Stack';
 import JackpotsTable from 'components/JackpotsTable';
 import PaginationTable from 'components/Pagination';
 import MultipleSelect from 'components/MultipleSelect';
 import InputSearch from 'components/InputSearch';
 import usePagination from 'hooks/usePagination';
 import useSearchValue from 'hooks/useSearchValue';
-import { StatusJackpotsColor } from 'types';
 import useStatus from 'hooks/useStatus';
-import { CreateButtonWrapper } from './styles';
+import { StatusJackpotsColor } from 'types';
+import { JackpotsData } from 'mockData/JackpotsMockData';
 
 const Jackpots = () => {
   const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination({
@@ -17,16 +18,13 @@ const Jackpots = () => {
   });
   const [searchValue, searchHandler] = useSearchValue();
   const { status, handleChangeStatus, handleDeleteStatus } = useStatus(['NEW', 'ACTIVE']);
+  const content = JackpotsData;
 
   return (
-    <div>
+    <>
       <h1>Jackpots</h1>
-      <CreateButtonWrapper direction="row" justifyContent="right" alignItems="center" spacing={2}>
-        <MultipleSelect
-          status={status}
-          handleChangeStatus={handleChangeStatus}
-          handleDeleteStatus={handleDeleteStatus}
-        >
+      <Stack direction="row" justifyContent="right" alignItems="center" spacing={2} margin="10px 0">
+        <MultipleSelect status={status} handleChangeStatus={handleChangeStatus} handleDeleteStatus={handleDeleteStatus}>
           {Object.keys(StatusJackpotsColor).map((name) => (
             <MenuItem key={name} value={name} style={{ whiteSpace: 'normal' }}>
               {name}
@@ -37,8 +35,8 @@ const Jackpots = () => {
         <Button variant="contained" size="large">
           Create Jackpot
         </Button>
-      </CreateButtonWrapper>
-      <JackpotsTable />
+      </Stack>
+      <JackpotsTable content={content} />
       <PaginationTable
         pageCount={10}
         page={page}
@@ -46,7 +44,7 @@ const Jackpots = () => {
         handleChangePage={handleChangePage}
         handlePageSizeChange={handlePageSizeChange}
       />
-    </div>
+    </>
   );
 };
 

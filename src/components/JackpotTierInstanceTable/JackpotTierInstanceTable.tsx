@@ -1,71 +1,56 @@
-import { Link } from 'react-router-dom';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
 import dayjs from 'dayjs';
 import TableHeadComponent from 'components/TableHeadComponent';
-import ActionMenu from 'components/ActionMenu';
-import routes from 'constants/routes';
-import { ContentJackpots } from 'types';
+import { ContentJackpotTierInstance } from 'types/JackpotTierInstanceInterface';
 import { TableContainerStyled, TableStyled } from 'layouts/Table/Table';
+import { Link } from 'react-router-dom';
+import routes from 'constants/routes';
 import { statusColors } from 'constants/colors';
 import { DATE_FORMAT } from 'constants/constants';
 
-const JACKPOTS_HEADER_TABLE_ROW = [
+interface IJackpotTierInstanceTable {
+  content: ContentJackpotTierInstance[];
+}
+
+const JACKPOT_TIER_INSTANCE_HEADER_TABLE_ROW = [
+  { label: 'Instance ID' },
   { label: 'Jackpot ID' },
+  { label: 'Tier ID' },
   { label: 'Status' },
   { label: 'Created at' },
   { label: 'Modified at' },
-  { label: 'Config schema ID' },
-  { label: 'Tier instance config schema ID' },
   { label: 'View details' },
-  { label: 'Action' },
-  { label: 'Audit Trail ID' },
-  { label: 'View Instances' },
+  { label: 'View Jackpot' },
 ];
 
-interface IJackpotsTable {
-  content: ContentJackpots[];
-}
-
-const JackpotsTable = ({ content }: IJackpotsTable) => {
+const JackpotTierInstanceTable = ({ content }: IJackpotTierInstanceTable) => {
   return (
     <Paper>
       <TableContainerStyled>
         <TableStyled stickyHeader>
-          <TableHeadComponent headerTableItems={JACKPOTS_HEADER_TABLE_ROW} />
+          <TableHeadComponent headerTableItems={JACKPOT_TIER_INSTANCE_HEADER_TABLE_ROW} />
           <TableBody>
-            {content.map(({ jackpotId, status, createdAt, modifiedAt, configSchemaId, tierInstanceConfigSchemaId }) => (
+            {content.map(({ instanceId, jackpotId, tierId, status, createdAt, modifiedAt }) => (
               <TableRow key={jackpotId}>
+                <TableCell align="center">{instanceId}</TableCell>
                 <TableCell align="center">{jackpotId}</TableCell>
+                <TableCell align="center">{tierId}</TableCell>
                 <TableCell align="center" style={{ color: statusColors[status] }}>
                   {status}
                 </TableCell>
                 <TableCell align="center">{dayjs(createdAt).format(DATE_FORMAT)}</TableCell>
                 <TableCell align="center">{dayjs(modifiedAt).format(DATE_FORMAT)}</TableCell>
-                <TableCell align="center">{configSchemaId}</TableCell>
-                <TableCell align="center">{tierInstanceConfigSchemaId}</TableCell>
                 <TableCell align="center">
-                  <Link to={`${routes.jackpots}/${jackpotId}`}>
+                <Link to={`${routes.jackpotTierInstance}/${instanceId}`}>
                     <Button>View details</Button>
                   </Link>
                 </TableCell>
                 <TableCell align="center">
-                  <ActionMenu>
-                    <MenuItem>ACTIVATE</MenuItem>
-                    <MenuItem>UPDATE</MenuItem>
-                    <MenuItem>FINISH</MenuItem>
-                    <MenuItem>SUSPEND</MenuItem>
-                  </ActionMenu>
-                </TableCell>
-                <TableCell align="center">
-                  <Button>Audit trail</Button>
-                </TableCell>
-                <TableCell align="center">
-                  <Button>View Instances</Button>
+                  <Button>View Jackpot</Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -75,4 +60,5 @@ const JackpotsTable = ({ content }: IJackpotsTable) => {
     </Paper>
   );
 };
-export default JackpotsTable;
+
+export default JackpotTierInstanceTable;

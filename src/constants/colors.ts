@@ -1,9 +1,8 @@
-import { StatusJackpotsColor } from 'types';
-
-export const statusColor: { [key: string]: string } = {
-  [StatusJackpotsColor.ACTIVE]: 'green',
-  [StatusJackpotsColor.NEW]: 'orange',
-  [StatusJackpotsColor.SUSPENDED]: 'orange',
-  [StatusJackpotsColor.FINISHED]: 'grey',
-  [StatusJackpotsColor.DELETED]: 'grey',
+export const statusColors: { [key: string]: string } = {
+  ACTIVE: 'green',
+  NEW: 'orange',
+  SUSPENDED: 'orange',
+  FINISHED: 'grey',
+  DELETED: 'grey',
+  VOIDED: 'red',
 };

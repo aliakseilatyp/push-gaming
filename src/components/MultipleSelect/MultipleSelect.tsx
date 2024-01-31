@@ -5,7 +5,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
 import { FormControlWrapper, StatusChip } from './styles';
-import { statusColor } from 'constants/colors';
+import { statusColors } from 'constants/colors';
 
 interface IMultipleSelect {
   children: ReactNode;
@@ -37,7 +37,7 @@ const MultipleSelect = ({ children, status, handleChangeStatus, handleDeleteStat
                   label={status}
                   deleteIcon={<CloseIcon onMouseDown={(event) => event.stopPropagation()} />}
                   onDelete={(e) => handleDeleteStatus(e, status)}
-                  sx={{ color: statusColor[status] }}
+                  sx={{ color: statusColors[status] }}
                 />
               );
             })}
