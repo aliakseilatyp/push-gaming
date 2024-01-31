@@ -13,20 +13,3 @@ export const TableTitle = styled.h3`
   font-weight: 500;
 `;
 
-type Cell = {
-  $open?: boolean;
-  $enabled?: boolean;
-};
-
-export const TableCustomRow = styled(TableRow)`
-  border-bottom: 1px solid rgba(224, 224, 224, 1);
-  &:nth-last-child(1) {
-    border-bottom: 0;
-  }
-`;
-
-export const TableCustomCell = styled(TableCell)<Cell>`
-  && {
-    padding: ${({ $open }) => ($open ? '16px' : '0px')};
-    color: ${({ $enabled }) => ($enabled ? 'green' : 'red')};
-`;

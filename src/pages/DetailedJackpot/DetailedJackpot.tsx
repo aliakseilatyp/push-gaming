@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { JackpotsArray } from 'mockData/getJackpots';
@@ -10,12 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import TableHeadComponent from 'components/TableHeadComponent';
-import { DetailedList, TableCustomCell, TableCustomRow, TableTitle } from './styles';
 import CollapsibleRow from 'components/CollapsibleRow';
+import { DetailedList, TableTitle } from './styles';
+import { TableCustomCell } from 'layouts/Table/Table';
 
 const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
 const TIERS_HEADER_TABLE_ROW = [
@@ -28,72 +25,70 @@ const TIERS_HEADER_TABLE_ROW = [
   { label: 'Type' },
 ];
 const INTEGRATIONS_HEADER_TABLE_ROW = [{ label: 'Integrations' }, { label: 'Enabled' }];
-const GAMES_HEADER_TABLE_ROW = [{ label: 'Game' }, { label: 'Enabled' }];
 
 const DetailedJackpot = () => {
   const { id } = useParams();
-  const [{ jackpotId, config }] = JackpotsArray.filter((el) => id === el.jackpotId);
+  const jackpot = JackpotsArray.find(({ jackpotId }) => jackpotId === id);
 
   return (
     <>
-      <h1>Jackpot ID: {jackpotId}</h1>
+      <h1>Jackpot ID: {jackpot?.jackpotId}</h1>
       <Stack direction="row" spacing={5}>
         <Box>
           <Box marginBottom="5px">
-            Base currency: <strong>{config.baseCurrency}</strong>
+            Base currency: <strong>{jackpot?.config.baseCurrency}</strong>
           </Box>
           <div>Contributing details:</div>
           <DetailedList>
             <li>
-              Amount: <strong>{config.contribution.amount}</strong>
+              Amount: <strong>{jackpot?.config.contribution.amount}</strong>
             </li>
             <li>
-              Operator percent: <strong>{config.contribution.operatorPct}</strong>
+              Operator percent: <strong>{jackpot?.config.contribution.operatorPct}</strong>
             </li>
             <li>
-              Player percent: <strong>{config.contribution.playerPct}</strong>
+              Player percent: <strong>{jackpot?.config.contribution.playerPct}</strong>
             </li>
             <li>
-              Type: <strong>{config.contribution.type}</strong>
+              Type: <strong>{jackpot?.config.contribution.type}</strong>
             </li>
           </DetailedList>
         </Box>
         <div>
           <Box marginBottom="5px">
-            House edge: <strong>{config.houseEdge}</strong>
+            House edge: <strong>{jackpot?.config.houseEdge}</strong>
           </Box>
           <Box marginBottom="5px">
-            Min wager: <strong>{config.minWager}</strong>
+            Min wager: <strong>{jackpot?.config.minWager}</strong>
           </Box>
           <div>Schedule:</div>
           <DetailedList>
             <li>
-              Iterations: <strong>{config.schedule.iterations}</strong>
+              Iterations: <strong>{jackpot?.config.schedule.iterations}</strong>
             </li>
             <li>
-              Start at: <strong>{dayjs(config.schedule.startAt).format('DD/MM/YYYY HH:mm:ss')}</strong>
+              Start at: <strong>{dayjs(jackpot?.config.schedule.startAt).format('DD/MM/YYYY HH:mm:ss')}</strong>
             </li>
           </DetailedList>
         </div>
       </Stack>
       <TableTitle>Exchange rates</TableTitle>
       <Box marginBottom="5px">
-        Type: <strong>{config.exchangeRates.type}</strong>
+        Type: <strong>{jackpot?.config.exchangeRates.type}</strong>
       </Box>
       <Paper>
         <TableContainer>
           <Table>
             <TableHeadComponent headerTableItems={CURRENCY_HEADER_TABLE_ROW} />
             <TableBody>
-              {Object.keys(config.exchangeRates.currencies).map((value) => {
-                const currency = config.exchangeRates.currencies[value];
+              {Object.entries(jackpot?.config.exchangeRates.currencies ?? {}).map(([currencyName, currencyInfo]) => {
                 return (
-                  <TableRow key={value}>
-                    <TableCell align="center">{value}</TableCell>
-                    <TableCustomCell align="center" $enabled={currency.enabled}>
-                      {currency.enabled ? 'true' : 'false'}
+                  <TableRow key={currencyName}>
+                    <TableCell align="center">{currencyName}</TableCell>
+                    <TableCustomCell align="center" $enabled={currencyInfo.enabled}>
+                      {currencyInfo.enabled ? 'true' : 'false'}
                     </TableCustomCell>
-                    <TableCell align="center">{currency.multiplier}</TableCell>
+                    <TableCell align="center">{currencyInfo.multiplier}</TableCell>
                   </TableRow>
                 );
               })}
@@ -107,54 +102,13 @@ const DetailedJackpot = () => {
           <Table>
             <TableHeadComponent headerTableItems={INTEGRATIONS_HEADER_TABLE_ROW} />
             <TableBody>
-              {Object.keys(config.integrations).map((value) => {
-                const integration = config.integrations[value];
+              {Object.entries(jackpot?.config.integrations ?? {}).map(([integrationName, integrationInfo]) => {
                 return (
-                  <Fragment key={value}>
-                    <CollapsibleRow
-                      renderRow={(open) => (
-                        <>
-                          <TableCell align="center">
-                            <Stack direction="row">
-                              {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                              <Box flexGrow={1}> {value}</Box>
-                            </Stack>
-                          </TableCell>
-                          <TableCustomCell align="center" $enabled={integration.enabled}>
-                            {integration.enabled ? 'true' : 'false'}
-                          </TableCustomCell>
-                        </>
-                      )}
-                      renderCollapse={(open) => (
-                        <>
-                          <TableCustomCell colSpan={2} $open={open}>
-                            <Collapse in={open} timeout="auto" unmountOnExit>
-                              <Paper>
-                                <TableContainer>
-                                  <Table>
-                                    <TableHeadComponent headerTableItems={GAMES_HEADER_TABLE_ROW} />
-                                    <TableBody>
-                                      {Object.keys(integration.games).map((gameValue) => {
-                                        const game = integration.games[gameValue];
-                                        return (
-                                          <TableCustomRow key={gameValue}>
-                                            <TableCell align="center">{gameValue}</TableCell>
-                                            <TableCustomCell align="center" $enabled={game.enabled}>
-                                              {game.enabled ? 'true' : 'false'}
-                                            </TableCustomCell>
-                                          </TableCustomRow>
-                                        );
-                                      })}
-                                    </TableBody>
-                                  </Table>
-                                </TableContainer>
-                              </Paper>
-                            </Collapse>
-                          </TableCustomCell>
-                        </>
-                      )}
-                    />
-                  </Fragment>
+                  <CollapsibleRow
+                    integrationName={integrationName}
+                    integrationInfo={integrationInfo}
+                    key={integrationName}
+                  />
                 );
               })}
             </TableBody>
@@ -167,17 +121,16 @@ const DetailedJackpot = () => {
           <Table>
             <TableHeadComponent headerTableItems={TIERS_HEADER_TABLE_ROW} />
             <TableBody>
-              {Object.keys(config.tiers).map((value) => {
-                const tier = config.tiers[value];
+              {Object.entries(jackpot?.config.tiers ?? {}).map(([tierName, tierInfo]) => {
                 return (
-                  <TableRow key={value}>
-                    <TableCell align="center">{value}</TableCell>
-                    <TableCell align="center">{tier.contributionPct}</TableCell>
-                    <TableCell align="center">{tier.minContribution}</TableCell>
-                    <TableCell align="center">{tier.reseedPct}</TableCell>
-                    <TableCell align="center">{tier.seedAmount}</TableCell>
-                    <TableCell align="center">{tier.trigger.dropAt}</TableCell>
-                    <TableCell align="center">{tier.trigger.type}</TableCell>
+                  <TableRow key={tierName}>
+                    <TableCell align="center">{tierName}</TableCell>
+                    <TableCell align="center">{tierInfo.contributionPct}</TableCell>
+                    <TableCell align="center">{tierInfo.minContribution}</TableCell>
+                    <TableCell align="center">{tierInfo.reseedPct}</TableCell>
+                    <TableCell align="center">{tierInfo.seedAmount}</TableCell>
+                    <TableCell align="center">{tierInfo.trigger.dropAt}</TableCell>
+                    <TableCell align="center">{tierInfo.trigger.type}</TableCell>
                   </TableRow>
                 );
               })}
