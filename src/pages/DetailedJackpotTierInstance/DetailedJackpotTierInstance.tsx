@@ -12,10 +12,11 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { JackpotTierInstanceData } from 'mockData/JackpotTierInstanceMockData';
-import { statusJackpotTierInstanceColor } from 'constants/colors';
 import TableHeadComponent from 'components/TableHeadComponent';
 import { TableCustomCell, TableTitle } from 'layouts/Table/Table';
 import { useState } from 'react';
+import { statusColors } from 'constants/colors';
+import { DATE_FORMAT } from 'constants/constants';
 
 const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
 
@@ -44,14 +45,14 @@ const DetailedJackpotTierInstance = () => {
         </Box>
         <Box>
           <Box marginBottom="5px">
-            Created at: <strong>{dayjs(jackpotTierInstance?.createdAt).format('DD/MM/YYYY HH:mm:ss')}</strong>
+            Created at: <strong>{dayjs(jackpotTierInstance?.createdAt).format(DATE_FORMAT)}</strong>
           </Box>
           <Box marginBottom="5px">
-            Modified at: <strong>{dayjs(jackpotTierInstance?.modifiedAt).format('DD/MM/YYYY HH:mm:ss')}</strong>
+            Modified at: <strong>{dayjs(jackpotTierInstance?.modifiedAt).format(DATE_FORMAT)}</strong>
           </Box>
           <Box marginBottom="5px">
             Status:{' '}
-            <strong style={{ color: statusJackpotTierInstanceColor[jackpotTierInstance?.status || 'ACTIVE'] }}>
+            <strong style={{ color: statusColors[jackpotTierInstance?.status || 'ACTIVE'] }}>
               {jackpotTierInstance?.status}
             </strong>
           </Box>

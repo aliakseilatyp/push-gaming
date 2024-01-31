@@ -6,10 +6,11 @@ import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
 import TableHeadComponent from 'components/TableHeadComponent';
 import { ContentJackpotTierInstance } from 'types/JackpotTierInstanceInterface';
-import { statusJackpotTierInstanceColor } from 'constants/colors';
 import { TableContainerStyled, TableStyled } from 'layouts/Table/Table';
 import { Link } from 'react-router-dom';
 import routes from 'constants/routes';
+import { statusColors } from 'constants/colors';
+import { DATE_FORMAT } from 'constants/constants';
 
 interface IJackpotTierInstanceTable {
   content: ContentJackpotTierInstance[];
@@ -38,11 +39,11 @@ const JackpotTierInstanceTable = ({ content }: IJackpotTierInstanceTable) => {
                 <TableCell align="center">{instanceId}</TableCell>
                 <TableCell align="center">{jackpotId}</TableCell>
                 <TableCell align="center">{tierId}</TableCell>
-                <TableCell align="center" style={{ color: statusJackpotTierInstanceColor[status] }}>
+                <TableCell align="center" style={{ color: statusColors[status] }}>
                   {status}
                 </TableCell>
-                <TableCell align="center">{dayjs(createdAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
-                <TableCell align="center">{dayjs(modifiedAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
+                <TableCell align="center">{dayjs(createdAt).format(DATE_FORMAT)}</TableCell>
+                <TableCell align="center">{dayjs(modifiedAt).format(DATE_FORMAT)}</TableCell>
                 <TableCell align="center">
                 <Link to={`${routes.jackpotTierInstance}/${instanceId}`}>
                     <Button>View details</Button>

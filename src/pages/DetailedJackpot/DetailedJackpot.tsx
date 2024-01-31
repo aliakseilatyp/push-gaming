@@ -13,6 +13,7 @@ import TableHeadComponent from 'components/TableHeadComponent';
 import CollapsibleRow from 'components/CollapsibleRow';
 import { DetailedList } from './styles';
 import { TableCustomCell, TableTitle } from 'layouts/Table/Table';
+import { DATE_FORMAT } from 'constants/constants';
 
 const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
 const TIERS_HEADER_TABLE_ROW = [
@@ -70,7 +71,7 @@ const DetailedJackpot = () => {
               Iterations: <strong>{jackpot?.config.schedule.iterations}</strong>
             </li>
             <li>
-              Start at: <strong>{dayjs(jackpot?.config.schedule.startAt).format('DD/MM/YYYY HH:mm:ss')}</strong>
+              Start at: <strong>{dayjs(jackpot?.config.schedule.startAt).format(DATE_FORMAT)}</strong>
             </li>
           </DetailedList>
         </div>

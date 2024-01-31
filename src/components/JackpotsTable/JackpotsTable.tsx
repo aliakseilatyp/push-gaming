@@ -9,9 +9,10 @@ import dayjs from 'dayjs';
 import TableHeadComponent from 'components/TableHeadComponent';
 import ActionMenu from 'components/ActionMenu';
 import routes from 'constants/routes';
-import { statusJackpotsColor } from 'constants/colors';
 import { ContentJackpots } from 'types';
 import { TableContainerStyled, TableStyled } from 'layouts/Table/Table';
+import { statusColors } from 'constants/colors';
+import { DATE_FORMAT } from 'constants/constants';
 
 const JACKPOTS_HEADER_TABLE_ROW = [
   { label: 'Jackpot ID' },
@@ -40,11 +41,11 @@ const JackpotsTable = ({ content }: IJackpotsTable) => {
             {content.map(({ jackpotId, status, createdAt, modifiedAt, configSchemaId, tierInstanceConfigSchemaId }) => (
               <TableRow key={jackpotId}>
                 <TableCell align="center">{jackpotId}</TableCell>
-                <TableCell align="center" style={{ color: statusJackpotsColor[status] }}>
+                <TableCell align="center" style={{ color: statusColors[status] }}>
                   {status}
                 </TableCell>
-                <TableCell align="center">{dayjs(createdAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
-                <TableCell align="center">{dayjs(modifiedAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
+                <TableCell align="center">{dayjs(createdAt).format(DATE_FORMAT)}</TableCell>
+                <TableCell align="center">{dayjs(modifiedAt).format(DATE_FORMAT)}</TableCell>
                 <TableCell align="center">{configSchemaId}</TableCell>
                 <TableCell align="center">{tierInstanceConfigSchemaId}</TableCell>
                 <TableCell align="center">
