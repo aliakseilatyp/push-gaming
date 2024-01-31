@@ -1,10 +1,11 @@
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import routes from 'constants/routes';
 import Router from './Router';
 import 'styles/index.scss';
+import { theme } from 'styles/theme';
 
 const rootNode = document.getElementById('root');
 
@@ -14,16 +15,6 @@ if (rootNode) {
       queries: {
         refetchOnWindowFocus: false,
         retry: false,
-      },
-    },
-  });
-
-  const theme = createTheme({
-    typography: {
-      allVariants: {
-        fontFamily: 'Roboto, sans-serif',
-        textTransform: 'none',
-        fontSize: 16,
       },
     },
   });

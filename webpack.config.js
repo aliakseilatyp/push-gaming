@@ -56,6 +56,7 @@ module.exports = (env, argv) => {
         pages: path.resolve(__dirname, './src/pages'),
         services: path.resolve(__dirname, './src/services'),
         styles: path.resolve(__dirname, './src/styles'),
+        layouts: path.resolve(__dirname, './src/layouts'),
         types: path.resolve(__dirname, './src/types'),
         utils: path.resolve(__dirname, './src/utils'),
         mockData: path.resolve(__dirname, './src/mockData'),
