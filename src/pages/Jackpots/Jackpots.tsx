@@ -9,7 +9,7 @@ import usePagination from 'hooks/usePagination';
 import useSearchValue from 'hooks/useSearchValue';
 import useStatus from 'hooks/useStatus';
 import { StatusJackpotsColor } from 'types';
-import { JackpotsData } from 'mockData/JackpotsMockData';
+import { jackpotData } from 'mockData/JackpotsMockData';
 
 const Jackpots = () => {
   const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination({
@@ -18,7 +18,7 @@ const Jackpots = () => {
   });
   const [searchValue, searchHandler] = useSearchValue();
   const { status, handleChangeStatus, handleDeleteStatus } = useStatus(['NEW', 'ACTIVE']);
-  const content = JackpotsData;
+  const content = jackpotData;
 
   return (
     <>

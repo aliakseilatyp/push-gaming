@@ -5,11 +5,14 @@ import ROUTES from 'constants/routes';
 
 const Login = lazy(() => import('pages/Login'));
 const Jackpots = lazy(() => import('pages/Jackpots'));
+const JackpotDetails = lazy(() => import('pages/JackpotDetails'));
 const JackpotAudit = lazy(() => import('pages/JackpotAudit'));
+const JackpotAuditDetails = lazy(() => import('pages/JackpotAuditDetails'));
 const JackpotTierInstance = lazy(() => import('pages/JackpotTierInstance'));
+const JackpotTierInstanceDetails = lazy(() => import('pages/JackpotTierInstanceDetails'));
 const JackpotTierInstanceAudit = lazy(() => import('pages/JackpotTierInstanceAudit'));
-const DetailedJackpot = lazy(() => import('pages/DetailedJackpot'));
-const DetailedJackpotTierInstance = lazy(() => import('pages/DetailedJackpotTierInstance'));
+const TierInstanceAuditDetails = lazy(() => import('pages/TierInstanceAuditDetails'));
+
 
 const routes: RouteObject[] = [
   {
@@ -21,18 +24,30 @@ const routes: RouteObject[] = [
         path: ROUTES.jackpots,
         children: [
           { path: ROUTES.jackpots, element: <Jackpots /> },
-          { path: `${ROUTES.jackpots}/:id`, element: <DetailedJackpot /> },
+          { path: `${ROUTES.jackpots}/:id`, element: <JackpotDetails /> },
         ],
       },
-      { path: ROUTES.jackpotAudit, element: <JackpotAudit /> },
+      {
+        path: ROUTES.jackpotAudit,
+        children: [
+          { path: ROUTES.jackpotAudit, element: <JackpotAudit /> },
+          { path: `${ROUTES.jackpotAudit}/:id`, element: <JackpotAuditDetails /> },
+        ],
+      },
       {
         path: ROUTES.jackpotTierInstance,
         children: [
           { path: ROUTES.jackpotTierInstance, element: <JackpotTierInstance /> },
-          { path: `${ROUTES.jackpotTierInstance}/:id`, element: <DetailedJackpotTierInstance /> },
+          { path: `${ROUTES.jackpotTierInstance}/:id`, element: <JackpotTierInstanceDetails /> },
         ],
       },
-      { path: ROUTES.jackpotTierInstanceAudit, element: <JackpotTierInstanceAudit /> },
+      {
+        path: ROUTES.jackpotTierInstanceAudit,
+        children: [
+          { path: ROUTES.jackpotTierInstanceAudit, element: <JackpotTierInstanceAudit /> },
+          { path: `${ROUTES.jackpotTierInstanceAudit}/:id`, element: <TierInstanceAuditDetails /> },
+        ],
+      },
     ],
   },
 ];

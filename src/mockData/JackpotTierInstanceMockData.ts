@@ -1,6 +1,6 @@
 import { ContentJackpotTierInstance } from 'types/JackpotTierInstanceInterface';
 
-export const JackpotTierInstanceData: ContentJackpotTierInstance[] = Array.from({ length: 100 }, (_, i) => ({
+export const jackpotTierInstanceData: ContentJackpotTierInstance[] = Array.from({ length: 100 }, (_, i) => ({
   config: {
     exchangeRates: {
       currencies: {

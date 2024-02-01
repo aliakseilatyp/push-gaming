@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import { JackpotTierInstanceData } from 'mockData/JackpotTierInstanceMockData';
+import { jackpotTierInstanceData } from 'mockData/JackpotTierInstanceMockData';
 import TableHeadComponent from 'components/TableHeadComponent';
 import { TableCustomCell, TableTitle } from 'layouts/Table/Table';
 import { useState } from 'react';
@@ -20,13 +20,15 @@ import { DATE_FORMAT } from 'constants/constants';
 
 const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
 
-const DetailedJackpotTierInstance = () => {
+const JackpotTierInstanceDetails = () => {
   const { id } = useParams();
   const [open, setOpen] = useState(false);
+
   const handleClick = () => {
     setOpen(!open);
   };
-  const jackpotTierInstance = JackpotTierInstanceData.find(({ instanceId }) => instanceId.toString() === id);
+  
+  const jackpotTierInstance = jackpotTierInstanceData.find(({ instanceId }) => instanceId.toString() === id);
 
   return (
     <>
@@ -100,4 +102,4 @@ const DetailedJackpotTierInstance = () => {
   );
 };
 
-export default DetailedJackpotTierInstance;
+export default JackpotTierInstanceDetails;

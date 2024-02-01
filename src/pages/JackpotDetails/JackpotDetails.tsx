@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { JackpotsData } from 'mockData/JackpotsMockData';
+import { jackpotData } from 'mockData/JackpotsMockData';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
@@ -27,9 +27,9 @@ const TIERS_HEADER_TABLE_ROW = [
 ];
 const INTEGRATIONS_HEADER_TABLE_ROW = [{ label: 'Integrations' }, { label: 'Enabled' }];
 
-const DetailedJackpot = () => {
+const JackpotDetails = () => {
   const { id } = useParams();
-  const jackpot = JackpotsData.find(({ jackpotId }) => jackpotId === id);
+  const jackpot = jackpotData.find(({ jackpotId }) => jackpotId === id);
 
   return (
     <>
@@ -146,4 +146,4 @@ const DetailedJackpot = () => {
   );
 };
 
-export default DetailedJackpot;
+export default JackpotDetails;

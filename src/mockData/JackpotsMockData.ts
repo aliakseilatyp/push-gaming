@@ -1,7 +1,6 @@
-import { ContentJackpots  } from '../types/JackpotsInterface';
+import { ContentJackpots } from 'types';
 
-
-export const JackpotsData: ContentJackpots[] = Array.from({ length: 100 }, (_, i) => ({
+export const jackpotData: ContentJackpots[] = Array.from({ length: 100 }, (_, i) => ({
   config: {
     baseCurrency: 'EUR',
     contribution: {
@@ -25,7 +24,7 @@ export const JackpotsData: ContentJackpots[] = Array.from({ length: 100 }, (_, i
     },
     houseEdge: 70,
     integrations: {
-      'leovegas': {
+      leovegas: {
         enabled: true,
         games: {
           'fatrabbit1-*': {
@@ -41,7 +40,7 @@ export const JackpotsData: ContentJackpots[] = Array.from({ length: 100 }, (_, i
           },
         },
       },
-      'pushGaming': {
+      pushGaming: {
         enabled: true,
         games: {
           'fatrabbit1-*': {
@@ -50,7 +49,7 @@ export const JackpotsData: ContentJackpots[] = Array.from({ length: 100 }, (_, i
           'wildswarm-*': {
             enabled: true,
           },
-          'CS': {
+          CS: {
             enabled: false,
           },
         },
@@ -60,7 +59,7 @@ export const JackpotsData: ContentJackpots[] = Array.from({ length: 100 }, (_, i
           },
         },
       },
-      'dota2': {
+      dota2: {
         enabled: true,
         games: {
           'fatrabbit1-*': {
@@ -69,7 +68,7 @@ export const JackpotsData: ContentJackpots[] = Array.from({ length: 100 }, (_, i
           'wildswarm-*': {
             enabled: true,
           },
-          'CS': {
+          CS: {
             enabled: false,
           },
         },
