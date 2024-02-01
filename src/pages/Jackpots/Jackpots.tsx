@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,7 +15,7 @@ import { Input } from 'layouts/Input';
 const Jackpots = () => {
   const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination();
   const [searchParams, setSearchParams] = useSearchParams({ jackpotId: '' });
-  const { jackpotId } = Object.fromEntries(searchParams.entries());
+  const params = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams]);
   const { status, handleChangeStatus, handleDeleteStatus } = useStatus(['NEW', 'ACTIVE']);
   const content = jackpotData;
 
@@ -31,12 +32,9 @@ const Jackpots = () => {
         </MultipleSelect>
         <Input
           label="Jackpot ID"
-          value={jackpotId}
+          value={params.jackpotId}
           onChange={(e) => {
-            setSearchParams((params) => {
-              params.set('jackpotId', e.target.value);
-              return params;
-            });
+            setSearchParams({ ...params, jackpotId: e.target.value });
           }}
           size="small"
         />

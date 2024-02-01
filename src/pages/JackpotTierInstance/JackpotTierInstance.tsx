@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
@@ -13,7 +14,7 @@ import { StatusJackpotTierInstanceColor } from 'types/JackpotTierInstanceInterfa
 const JackpotTierInstance = () => {
   const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination();
   const [searchParams, setSearchParams] = useSearchParams({ jackpotId: '', instanceId: '', tierId: '' });
-  const { jackpotId, instanceId, tierId } = Object.fromEntries(searchParams.entries());
+  const params = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams]);
   const { status, handleChangeStatus, handleDeleteStatus } = useStatus([]);
   const content = jackpotTierInstanceData;
 
@@ -30,34 +31,25 @@ const JackpotTierInstance = () => {
         </MultipleSelect>
         <Input
           label="Instance ID"
-          value={instanceId}
+          value={params.instanceId}
           onChange={(e) => {
-            setSearchParams((params) => {
-              params.set('instanceId', e.target.value);
-              return params;
-            });
+            setSearchParams({ ...params, instanceId: e.target.value });
           }}
           size="small"
         />
         <Input
           label="Jackpot ID"
-          value={jackpotId}
+          value={params.jackpotId}
           onChange={(e) => {
-            setSearchParams((params) => {
-              params.set('jackpotId', e.target.value);
-              return params;
-            });
+            setSearchParams({ ...params, jackpotId: e.target.value });
           }}
           size="small"
         />
         <Input
           label="Tier ID"
-          value={tierId}
+          value={params.tierId}
           onChange={(e) => {
-            setSearchParams((params) => {
-              params.set('tierId', e.target.value);
-              return params;
-            });
+            setSearchParams({ ...params, tierId: e.target.value });
           }}
           size="small"
         />

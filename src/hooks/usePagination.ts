@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { SelectChangeEvent } from '@mui/material/Select';
-
+import { useMemo } from 'react';
 
 export interface usePaginationInterface {
   initialPage: number;
@@ -9,24 +9,18 @@ export interface usePaginationInterface {
 
 export const usePagination = () => {
   const [searchParams, setSearchParams] = useSearchParams({ page: '1', pageSize: '20' });
-  const { page, pageSize } = Object.fromEntries(searchParams.entries());
+  const params = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams]);
 
   const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
-    setSearchParams((params) => {
-      params.set('page', value.toString());
-      return params;
-    });
+    setSearchParams({ ...params, page: value.toString() });
   };
   const handlePageSizeChange = (event: SelectChangeEvent) => {
-    setSearchParams((params) => {
-      params.set('pageSize', event.target.value);
-      return params;
-    });
+    setSearchParams({ ...params, page: event.target.value });
   };
 
   return {
-    page,
-    pageSize,
+    page: params.page,
+    pageSize: params.pageSize,
     handleChangePage,
     handlePageSizeChange,
   };

@@ -1,31 +1,28 @@
 import { useSearchParams } from 'react-router-dom';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { useMemo } from 'react';
 
 const useStatus = (initialValue: string[]) => {
   const [searchParams, setSearchParams] = useSearchParams({ status: JSON.stringify(initialValue) });
-  const { status } = Object.fromEntries(searchParams.entries());
-  const statusArray = JSON.parse(status);
+  const params = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams]);
 
   const handleChangeStatus = (event: SelectChangeEvent<string[]>) => {
     const {
       target: { value },
     } = event;
-
-    setSearchParams((params) => {
-      params.set('status', JSON.stringify(value));
-      return params;
-    });
+    setSearchParams({ ...params, status: JSON.stringify(value) });
   };
 
   const handleDeleteStatus = (e: MouseEvent, value: string) => {
     e.preventDefault();
-    setSearchParams((params) => {
-      params.set('status', JSON.stringify(statusArray.filter((status: string) => status !== value)));
-      return params;
+    const status = JSON.stringify(JSON.parse(params.status).filter((status: string) => status !== value));
+    setSearchParams({
+      ...params,
+      status,
     });
   };
 
-  return { status: statusArray, handleChangeStatus, handleDeleteStatus };
+  return { status: JSON.parse(params.status), handleChangeStatus, handleDeleteStatus };
 };
 
 export default useStatus;

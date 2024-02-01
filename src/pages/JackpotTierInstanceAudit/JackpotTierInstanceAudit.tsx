@@ -1,15 +1,17 @@
+import { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import PaginationTable from 'components/Pagination';
 import TierInstanceAuditTable from 'components/TierInstanceAuditTable';
 import usePagination from 'hooks/usePagination';
 import { Input } from 'layouts/Input';
 import { tierInstanceAuditMockData } from 'mockData/TierInstanceAuditMockData';
-import { useSearchParams } from 'react-router-dom';
+
 
 const JackpotTierInstanceAudit = () => {
   const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination();
   const [searchParams, setSearchParams] = useSearchParams({ jackpotId: '', instanceId: '' });
-  const { jackpotId, instanceId } = Object.fromEntries(searchParams.entries());
+  const params = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams]);
 
   const content = tierInstanceAuditMockData;
   return (
@@ -18,23 +20,17 @@ const JackpotTierInstanceAudit = () => {
       <Stack direction="row" justifyContent="right" alignItems="center" spacing={2} margin="10px 0">
         <Input
           label="Instance ID"
-          value={instanceId}
+          value={params.instanceId}
           onChange={(e) => {
-            setSearchParams((params) => {
-              params.set('instanceId', e.target.value);
-              return params;
-            });
+            setSearchParams({ ...params, instanceId: e.target.value });
           }}
           size="small"
         />
         <Input
           label="Jackpot ID"
-          value={jackpotId}
+          value={params.jackpotId}
           onChange={(e) => {
-            setSearchParams((params) => {
-              params.set('jackpotId', e.target.value);
-              return params;
-            });
+            setSearchParams({ ...params, jackpotId: e.target.value });
           }}
           size="small"
         />
