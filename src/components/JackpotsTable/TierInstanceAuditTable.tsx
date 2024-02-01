@@ -10,7 +10,7 @@ import TableHeadComponent from 'components/TableHeadComponent';
 import ActionMenu from 'components/ActionMenu';
 import routes from 'constants/routes';
 import { ContentJackpots } from 'types';
-import { TableContainerStyled, TableStyled } from 'layouts/Table/Table';
+import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import { statusColors } from 'constants/colors';
 import { DATE_FORMAT } from 'constants/constants';
 

@@ -1,22 +1,20 @@
+import { useSearchParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import JackpotsTable from 'components/JackpotsTable';
 import PaginationTable from 'components/Pagination';
 import MultipleSelect from 'components/MultipleSelect';
-import InputSearch from 'components/InputSearch';
 import usePagination from 'hooks/usePagination';
-import useSearchValue from 'hooks/useSearchValue';
 import useStatus from 'hooks/useStatus';
 import { StatusJackpotsColor } from 'types';
 import { jackpotData } from 'mockData/JackpotsMockData';
+import { Input } from 'layouts/Input';
 
 const Jackpots = () => {
-  const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination({
-    initialPage: 1,
-    initialPageSize: 20,
-  });
-  const [searchValue, searchHandler] = useSearchValue();
+  const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination();
+  const [searchParams, setSearchParams] = useSearchParams({ jackpotId: '' });
+  const { jackpotId } = Object.fromEntries(searchParams.entries());
   const { status, handleChangeStatus, handleDeleteStatus } = useStatus(['NEW', 'ACTIVE']);
   const content = jackpotData;
 
@@ -31,7 +29,17 @@ const Jackpots = () => {
             </MenuItem>
           ))}
         </MultipleSelect>
-        <InputSearch label="Jackpot ID" value={searchValue} onChange={searchHandler} />
+        <Input
+          label="Jackpot ID"
+          value={jackpotId}
+          onChange={(e) => {
+            setSearchParams((params) => {
+              params.set('jackpotId', e.target.value);
+              return params;
+            });
+          }}
+          size="small"
+        />
         <Button variant="contained" size="large">
           Create Jackpot
         </Button>
@@ -39,8 +47,8 @@ const Jackpots = () => {
       <JackpotsTable content={content} />
       <PaginationTable
         pageCount={10}
-        page={page}
-        pageSize={pageSize}
+        page={parseInt(page)}
+        pageSize={parseInt(pageSize)}
         handleChangePage={handleChangePage}
         handlePageSizeChange={handlePageSizeChange}
       />

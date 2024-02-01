@@ -1,24 +1,31 @@
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { SelectChangeEvent } from '@mui/material/Select';
 
 const useStatus = (initialValue: string[]) => {
-  const [status, setStatus] = useState(initialValue);
+  const [searchParams, setSearchParams] = useSearchParams({ status: JSON.stringify(initialValue) });
+  const { status } = Object.fromEntries(searchParams.entries());
+  const statusArray = JSON.parse(status);
 
-  const handleChangeStatus = (event: SelectChangeEvent<typeof status>) => {
+  const handleChangeStatus = (event: SelectChangeEvent<string[]>) => {
     const {
       target: { value },
     } = event;
-    setStatus(typeof value === 'string' ? value.split(',') : value);
 
+    setSearchParams((params) => {
+      params.set('status', JSON.stringify(value));
+      return params;
+    });
   };
 
   const handleDeleteStatus = (e: MouseEvent, value: string) => {
     e.preventDefault();
-    setStatus((current) => current.filter((status) => status !== value));
-    
+    setSearchParams((params) => {
+      params.set('status', JSON.stringify(statusArray.filter((status: string) => status !== value)));
+      return params;
+    });
   };
 
-  return { status, handleChangeStatus, handleDeleteStatus };
+  return { status: statusArray, handleChangeStatus, handleDeleteStatus };
 };
 
 export default useStatus;

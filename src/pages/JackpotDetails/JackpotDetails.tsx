@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import TableHeadComponent from 'components/TableHeadComponent';
 import CollapsibleRow from 'components/CollapsibleRow';
 import { DetailedList } from './styles';
-import { TableCustomCell, TableTitle } from 'layouts/Table/Table';
+import { TableCustomCell, TableTitle } from 'layouts/Table';
 import { DATE_FORMAT } from 'constants/constants';
 
 const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
