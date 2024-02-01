@@ -101,10 +101,6 @@ export interface Games {
   };
 }
 
-export interface Fatrabbit1 {
-  enabled: boolean;
-}
-
 export interface ExchangeRates {
   currencies: Currencies;
   type: string;

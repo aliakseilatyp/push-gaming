@@ -75,10 +75,10 @@ export interface Config {
 }
 
 export interface Tiers {
-  'daily-drop': Dailydrop;
+  [key: string]: Tier;
 }
 
-export interface Dailydrop {
+export interface Tier{
   contributionPct: number;
   minContribution: number;
   reseedPct: number;
@@ -97,26 +97,25 @@ export interface Schedule {
 }
 
 export interface Integrations {
-  leovegas: Leovegas;
+  [key: string]: Integration;
 }
 
-export interface Leovegas {
+export interface Integration {
   enabled: boolean;
   games: Games;
   igpCodes: IgpCodes;
 }
 
 export interface IgpCodes {
-  '*': Fatrabbit1;
+  [key: string]: {
+    enabled: boolean;
+  };
 }
 
 export interface Games {
-  'fatrabbit1-*': Fatrabbit1;
-  'wildswarm-*': Fatrabbit1;
-}
-
-export interface Fatrabbit1 {
-  enabled: boolean;
+  [key: string]: {
+    enabled: boolean;
+  };
 }
 
 export interface ExchangeRates {
@@ -125,12 +124,10 @@ export interface ExchangeRates {
 }
 
 export interface Currencies {
-  EUR: EUR;
-}
-
-export interface EUR {
-  enabled: boolean;
-  multiplier: number;
+  [key: string]: {
+    enabled: boolean;
+    multiplier: number;
+  };
 }
 
 export interface Contribution {

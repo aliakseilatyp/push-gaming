@@ -72,10 +72,8 @@ export interface ExchangeRates {
 }
 
 export interface Currencies {
-  EUR: EUR;
-}
-
-export interface EUR {
-  enabled: boolean;
-  multiplier: number;
+  [key: string]: {
+    enabled: boolean;
+    multiplier: number;
+  };
 }
