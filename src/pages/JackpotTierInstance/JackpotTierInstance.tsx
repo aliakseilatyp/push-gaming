@@ -1,24 +1,21 @@
+import { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
-import InputSearch from 'components/InputSearch';
 import JackpotTierInstanceTable from 'components/JackpotTierInstanceTable';
 import MultipleSelect from 'components/MultipleSelect';
 import PaginationTable from 'components/Pagination';
 import usePagination from 'hooks/usePagination';
-import useSearchValue from 'hooks/useSearchValue';
 import useStatus from 'hooks/useStatus';
+import { Input } from 'layouts/Input';
 import { jackpotTierInstanceData } from 'mockData/JackpotTierInstanceMockData';
 import { StatusJackpotTierInstanceColor } from 'types/JackpotTierInstanceInterface';
 
 const JackpotTierInstance = () => {
-  const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination({
-    initialPage: 1,
-    initialPageSize: 20,
-  });
+  const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination();
+  const [searchParams, setSearchParams] = useSearchParams({ jackpotId: '', instanceId: '', tierId: '' });
+  const params = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams]);
   const { status, handleChangeStatus, handleDeleteStatus } = useStatus([]);
-  const [instanceId, handleInstanceId] = useSearchValue();
-  const [jackpotId, handleJackpotId] = useSearchValue();
-  const [tierId, handleTierId] = useSearchValue();
   const content = jackpotTierInstanceData;
 
   return (
@@ -32,15 +29,36 @@ const JackpotTierInstance = () => {
             </MenuItem>
           ))}
         </MultipleSelect>
-        <InputSearch label="Instance ID" value={instanceId} onChange={handleInstanceId} />
-        <InputSearch label="Jackpot ID" value={jackpotId} onChange={handleJackpotId} />
-        <InputSearch label="Tier ID" value={tierId} onChange={handleTierId} />
+        <Input
+          label="Instance ID"
+          value={params.instanceId}
+          onChange={(e) => {
+            setSearchParams({ ...params, instanceId: e.target.value });
+          }}
+          size="small"
+        />
+        <Input
+          label="Jackpot ID"
+          value={params.jackpotId}
+          onChange={(e) => {
+            setSearchParams({ ...params, jackpotId: e.target.value });
+          }}
+          size="small"
+        />
+        <Input
+          label="Tier ID"
+          value={params.tierId}
+          onChange={(e) => {
+            setSearchParams({ ...params, tierId: e.target.value });
+          }}
+          size="small"
+        />
       </Stack>
       <JackpotTierInstanceTable content={content} />
       <PaginationTable
         pageCount={10}
-        page={page}
-        pageSize={pageSize}
+        page={parseInt(page)}
+        pageSize={parseInt(pageSize)}
         handleChangePage={handleChangePage}
         handlePageSizeChange={handlePageSizeChange}
       />

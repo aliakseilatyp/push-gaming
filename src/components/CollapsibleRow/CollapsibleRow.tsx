@@ -12,7 +12,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import TableHeadComponent from 'components/TableHeadComponent';
-import { TableCustomCell } from 'layouts/Table/Table';
+import { TableCustomCell } from 'layouts/Table';
 import { TableCollapsibleRow, TableCustomRow } from './styles';
 
 interface ICollapsibleRow {

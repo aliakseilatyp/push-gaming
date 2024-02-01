@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
 import TableHeadComponent from 'components/TableHeadComponent';
 import { ContentJackpotTierInstance } from 'types/JackpotTierInstanceInterface';
-import { TableContainerStyled, TableStyled } from 'layouts/Table/Table';
+import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import { Link } from 'react-router-dom';
 import routes from 'constants/routes';
 import { statusColors } from 'constants/colors';
@@ -45,7 +45,7 @@ const JackpotTierInstanceTable = ({ content }: IJackpotTierInstanceTable) => {
                 <TableCell align="center">{dayjs(createdAt).format(DATE_FORMAT)}</TableCell>
                 <TableCell align="center">{dayjs(modifiedAt).format(DATE_FORMAT)}</TableCell>
                 <TableCell align="center">
-                <Link to={`${routes.jackpotTierInstance}/${instanceId}`}>
+                  <Link to={`${routes.jackpotTierInstance}/${instanceId}`}>
                     <Button>View details</Button>
                   </Link>
                 </TableCell>

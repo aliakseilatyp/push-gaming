@@ -13,7 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { jackpotTierInstanceData } from 'mockData/JackpotTierInstanceMockData';
 import TableHeadComponent from 'components/TableHeadComponent';
-import { TableCustomCell, TableTitle } from 'layouts/Table/Table';
+import { TableCustomCell, TableTitle } from 'layouts/Table';
 import { useState } from 'react';
 import { statusColors } from 'constants/colors';
 import { DATE_FORMAT } from 'constants/constants';
@@ -27,7 +27,7 @@ const JackpotTierInstanceDetails = () => {
   const handleClick = () => {
     setOpen(!open);
   };
-  
+
   const jackpotTierInstance = jackpotTierInstanceData.find(({ instanceId }) => instanceId.toString() === id);
 
   return (

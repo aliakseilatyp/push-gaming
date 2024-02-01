@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
-import { TableContainerStyled, TableStyled } from 'layouts/Table/Table';
+import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import TableHeadComponent from 'components/TableHeadComponent';
 import routes from 'constants/routes';
 import { DATE_FORMAT } from 'constants/constants';
