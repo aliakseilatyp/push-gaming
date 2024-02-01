@@ -7,7 +7,7 @@ import PaginationTable from 'components/Pagination';
 import usePagination from 'hooks/usePagination';
 import useSearchValue from 'hooks/useSearchValue';
 import useStatus from 'hooks/useStatus';
-import { JackpotTierInstanceData } from 'mockData/JackpotTierInstanceMockData';
+import { jackpotTierInstanceData } from 'mockData/JackpotTierInstanceMockData';
 import { StatusJackpotTierInstanceColor } from 'types/JackpotTierInstanceInterface';
 
 const JackpotTierInstance = () => {
@@ -19,11 +19,11 @@ const JackpotTierInstance = () => {
   const [instanceId, handleInstanceId] = useSearchValue();
   const [jackpotId, handleJackpotId] = useSearchValue();
   const [tierId, handleTierId] = useSearchValue();
-  const content = JackpotTierInstanceData;
+  const content = jackpotTierInstanceData;
 
   return (
     <>
-      <h1>Jackpot Tier Instance</h1>
+      <h1>Jackpot tier instance</h1>
       <Stack direction="row" justifyContent="right" alignItems="center" spacing={2} margin="10px 0">
         <MultipleSelect status={status} handleChangeStatus={handleChangeStatus} handleDeleteStatus={handleDeleteStatus}>
           {Object.keys(StatusJackpotTierInstanceColor).map((name) => (

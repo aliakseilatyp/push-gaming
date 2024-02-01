@@ -1,5 +1,5 @@
-export interface JackpotsInterface {
-  content: ContentJackpots[];
+export interface IJackpotAudit {
+  content: ContentJackpotAudit[];
   empty: boolean;
   first: boolean;
   last: boolean;
@@ -27,21 +27,38 @@ export interface Sort {
   unsorted: boolean;
 }
 
-export enum StatusJackpotsColor {
-  ACTIVE = 'ACTIVE',
-  NEW = 'NEW',
-  SUSPENDED = 'SUSPENDED',
-  FINISHED = 'FINISHED',
-  DELETED = 'DELETED',
+export interface ContentJackpotAudit {
+  entity: Entity;
+  metadata: Metadata;
+  requiredRevisionInstant: string;
+  requiredRevisionNumber: number;
+  revisionInstant: string;
+  revisionNumber: number;
 }
 
-export interface ContentJackpots {
+export interface Metadata {
+  delegate: Delegate;
+  requiredRevisionInstant: string;
+  requiredRevisionNumber: number;
+  revisionDate: string;
+  revisionInstant: string;
+  revisionNumber: number;
+  revisionType: string;
+}
+
+export interface Delegate {
+  id: number;
+  revisionDate: string;
+  timestamp: number;
+}
+
+export interface Entity {
   config: Config;
   configSchemaId: string;
   createdAt: string;
   jackpotId: string;
   modifiedAt: string;
-  status: keyof typeof StatusJackpotsColor;
+  status: string;
   tierInstanceConfigSchemaId: string;
   updateConfigSchemaId: string;
 }
@@ -61,7 +78,7 @@ export interface Tiers {
   [key: string]: Tier;
 }
 
-export interface Tier {
+export interface Tier{
   contributionPct: number;
   minContribution: number;
   reseedPct: number;
