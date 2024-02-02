@@ -62,10 +62,14 @@ const JackpotsTable = ({ content }: IJackpotsTable) => {
                   </ActionMenu>
                 </TableCell>
                 <TableCell align="center">
-                  <Button>Audit trail</Button>
+                  <Link to={`${routes.jackpotAudit}?jackpotId=${jackpotId}`}>
+                    <Button>Audit trail</Button>
+                  </Link>
                 </TableCell>
                 <TableCell align="center">
-                  <Button>View Instances</Button>
+                  <Link to={`${routes.jackpotTierInstance}?jackpotId=${jackpotId}`}>
+                    <Button>View Instances</Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
