@@ -3,10 +3,15 @@ import Box from '@mui/material/Box';
 import dayjs from 'dayjs';
 import { DATE_FORMAT } from 'constants/constants';
 import { tierInstanceAuditMockData } from 'mockData/TierInstanceAuditMockData';
+import { DiffEditor } from '@monaco-editor/react';
+import { newData, oldData } from 'mockData/DetailsForMonacoMockData';
 
 const TierInstanceAuditDetails = () => {
   const { id } = useParams();
   const jackpot = tierInstanceAuditMockData.find(({ entity }) => entity.jackpotId === id);
+  const oldCode = JSON.stringify(oldData, null, '\t');
+  const newCode = JSON.stringify(newData, null, '\t');
+
   return (
     <>
       <h1>Jackpot audit details</h1>
@@ -22,6 +27,7 @@ const TierInstanceAuditDetails = () => {
       <Box marginBottom="5px">
         User ID: <strong>{jackpot?.metadata.delegate.id}</strong>
       </Box>
+      <DiffEditor height="76vh" language="json" theme="vs-dark" original={oldCode} modified={newCode} />
     </>
   );
 };
