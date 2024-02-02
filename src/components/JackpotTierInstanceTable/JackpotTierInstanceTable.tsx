@@ -50,7 +50,9 @@ const JackpotTierInstanceTable = ({ content }: IJackpotTierInstanceTable) => {
                   </Link>
                 </TableCell>
                 <TableCell align="center">
-                  <Button>View Jackpot</Button>
+                  <Link to={`${routes.jackpots}?jackpotId=${jackpotId}`}>
+                    <Button>View Jackpot</Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

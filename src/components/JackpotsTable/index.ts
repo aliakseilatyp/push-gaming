@@ -1,3 +1,3 @@
-import JackpotsTable from './TierInstanceAuditTable';
+import JackpotsTable from './JackpotsTable';
 
 export default JackpotsTable;
