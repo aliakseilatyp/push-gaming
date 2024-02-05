@@ -1,5 +1,5 @@
+import { TableCell } from '@mui/material';
 import { styled } from 'styled-components';
-import TableCell from '@mui/material/TableCell';
 
 export const TableHeaderCell = styled(TableCell)`
   && {

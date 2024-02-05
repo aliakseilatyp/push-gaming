@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import dayjs from 'dayjs';
 import { DATE_FORMAT } from 'constants/constants';
 import { tierInstanceAuditMockData } from 'mockData/TierInstanceAuditMockData';

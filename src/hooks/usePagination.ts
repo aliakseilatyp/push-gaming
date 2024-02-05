@@ -15,7 +15,7 @@ export const usePagination = () => {
     setSearchParams({ ...params, page: value.toString() });
   };
   const handlePageSizeChange = (event: SelectChangeEvent) => {
-    setSearchParams({ ...params, page: event.target.value });
+    setSearchParams({ ...params, pageSize: event.target.value });
   };
 
   return {

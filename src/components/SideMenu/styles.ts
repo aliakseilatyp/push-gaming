@@ -1,4 +1,5 @@
-import Drawer from '@mui/material/Drawer';
+
+import { Drawer } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 

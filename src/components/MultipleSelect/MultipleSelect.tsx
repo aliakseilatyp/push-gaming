@@ -1,11 +1,8 @@
 import { ReactNode } from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
-import { FormControlWrapper, StatusChip } from './styles';
 import { statusColors } from 'constants/colors';
+import { InputLabel, OutlinedInput, Select, SelectChangeEvent, Stack } from '@mui/material';
+import { FormControlWrapper, StatusChip } from './styles';
 
 interface IMultipleSelect {
   children: ReactNode;

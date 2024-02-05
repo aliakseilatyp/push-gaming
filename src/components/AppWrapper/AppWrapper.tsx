@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Wrapper } from './styles';
 import SideMenu from 'components/SideMenu';
-import Stack from '@mui/material/Stack';
+import { Stack } from '@mui/material';
+import { Wrapper } from './styles';
 
 const AppWrapper = () => (
   <Stack direction="row">

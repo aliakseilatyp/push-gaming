@@ -1,6 +1,5 @@
+import { TableRow } from '@mui/material';
 import { styled } from 'styled-components';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
 
 export const TableCollapsibleRow = styled(TableRow)`
   && td {

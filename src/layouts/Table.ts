@@ -1,7 +1,5 @@
+import { Table, TableCell, TableContainer } from '@mui/material';
 import { styled } from 'styled-components';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
 
 type Cell = {
   $open?: boolean;

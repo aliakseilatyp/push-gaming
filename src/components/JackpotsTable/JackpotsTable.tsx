@@ -1,13 +1,8 @@
 import { Link } from 'react-router-dom';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
 import dayjs from 'dayjs';
 import TableHeadComponent from 'components/TableHeadComponent';
 import ActionMenu from 'components/ActionMenu';
+import { Button, MenuItem, Paper, TableBody, TableCell, TableRow } from '@mui/material';
 import routes from 'constants/routes';
 import { ContentJackpots } from 'types';
 import { TableContainerStyled, TableStyled } from 'layouts/Table';

@@ -1,6 +1,5 @@
+import { Chip, FormControl } from '@mui/material';
 import { styled } from 'styled-components';
-import FormControl from '@mui/material/FormControl';
-import Chip from '@mui/material/Chip';
 
 export const FormControlWrapper = styled(FormControl)`
   && {
@@ -13,5 +12,3 @@ export const StatusChip = styled(Chip)`
     height: 25px;
   }
 `;
-
-

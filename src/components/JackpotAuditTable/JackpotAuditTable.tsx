@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ContentJackpotAudit } from 'types/JackpotAuditInterface';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
+import { Button, Paper, TableBody, TableCell, TableRow } from '@mui/material';
 import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import TableHeadComponent from 'components/TableHeadComponent';
 import routes from 'constants/routes';

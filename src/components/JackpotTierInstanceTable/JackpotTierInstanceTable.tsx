@@ -1,9 +1,5 @@
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
+import { Button, Paper, TableBody, TableCell, TableRow } from '@mui/material';
 import TableHeadComponent from 'components/TableHeadComponent';
 import { ContentJackpotTierInstance } from 'types/JackpotTierInstanceInterface';
 import { TableContainerStyled, TableStyled } from 'layouts/Table';

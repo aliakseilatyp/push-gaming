@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import MenuItem from '@mui/material/MenuItem';
-import Stack from '@mui/material/Stack';
+import { MenuItem, Stack } from '@mui/material';
 import JackpotTierInstanceTable from 'components/JackpotTierInstanceTable';
 import MultipleSelect from 'components/MultipleSelect';
 import PaginationTable from 'components/Pagination';

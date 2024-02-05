@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import Stack from '@mui/material/Stack';
+import { Link, useSearchParams } from 'react-router-dom';
+import { Button, MenuItem, Stack } from '@mui/material';
 import JackpotsTable from 'components/JackpotsTable';
 import PaginationTable from 'components/Pagination';
 import MultipleSelect from 'components/MultipleSelect';
@@ -11,6 +9,7 @@ import useStatus from 'hooks/useStatus';
 import { StatusJackpotsColor } from 'types';
 import { jackpotData } from 'mockData/JackpotsMockData';
 import { Input } from 'layouts/Input';
+import routes from 'constants/routes';
 
 const Jackpots = () => {
   const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination();
@@ -38,9 +37,11 @@ const Jackpots = () => {
           }}
           size="small"
         />
-        <Button variant="contained" size="large">
-          Create Jackpot
-        </Button>
+        <Link to={routes.createJackpot}>
+          <Button variant="contained" size="large">
+            Create Jackpot
+          </Button>
+        </Link>
       </Stack>
       <JackpotsTable content={content} />
       <PaginationTable

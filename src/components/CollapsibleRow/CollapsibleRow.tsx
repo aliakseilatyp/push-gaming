@@ -1,16 +1,8 @@
 import { useState } from 'react';
 import { Integration } from 'types';
-import TableRow from '@mui/material/TableRow';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { Box, Collapse, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import TableHeadComponent from 'components/TableHeadComponent';
 import { TableCustomCell } from 'layouts/Table';
 import { TableCollapsibleRow, TableCustomRow } from './styles';

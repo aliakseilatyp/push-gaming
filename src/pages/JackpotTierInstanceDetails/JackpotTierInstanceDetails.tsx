@@ -1,14 +1,6 @@
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import Paper from '@mui/material/Paper';
-import Collapse from '@mui/material/Collapse';
+import { Box, Collapse, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { jackpotTierInstanceData } from 'mockData/JackpotTierInstanceMockData';

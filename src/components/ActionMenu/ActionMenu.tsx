@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { IconButton, Menu } from '@mui/material';
 
 interface IActionMenu {
   children: ReactNode;

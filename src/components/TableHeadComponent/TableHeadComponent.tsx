@@ -1,5 +1,4 @@
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { TableHead, TableRow } from '@mui/material';
 import { TableHeaderCell } from './styles';
 
 interface ITableHeadComponent {

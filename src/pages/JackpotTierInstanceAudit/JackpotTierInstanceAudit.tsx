@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Stack from '@mui/material/Stack';
+import { Stack } from '@mui/material';
 import PaginationTable from 'components/Pagination';
 import TierInstanceAuditTable from 'components/TierInstanceAuditTable';
 import usePagination from 'hooks/usePagination';
 import { Input } from 'layouts/Input';
 import { tierInstanceAuditMockData } from 'mockData/TierInstanceAuditMockData';
-
 
 const JackpotTierInstanceAudit = () => {
   const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination();

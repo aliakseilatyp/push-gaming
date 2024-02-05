@@ -1,14 +1,7 @@
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { jackpotData } from 'mockData/JackpotsMockData';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import TableHeadComponent from 'components/TableHeadComponent';
 import CollapsibleRow from 'components/CollapsibleRow';
 import { DetailedList } from './styles';
@@ -16,6 +9,7 @@ import { TableCustomCell, TableTitle } from 'layouts/Table';
 import { DATE_FORMAT } from 'constants/constants';
 
 const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
+
 const TIERS_HEADER_TABLE_ROW = [
   { label: 'Tier' },
   { label: 'Contribution Pct' },

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Stack from '@mui/material/Stack';
+import { Stack } from '@mui/material';
 import JackpotAuditTable from 'components/JackpotAuditTable';
 import PaginationTable from 'components/Pagination';
 import usePagination from 'hooks/usePagination';

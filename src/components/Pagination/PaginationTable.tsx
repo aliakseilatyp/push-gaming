@@ -1,6 +1,4 @@
-import Pagination from '@mui/material/Pagination';
-import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { MenuItem, Pagination, Select, SelectChangeEvent } from '@mui/material';
 import { PaginationTableWrapper } from './styles';
 
 interface IPaginationTable {
