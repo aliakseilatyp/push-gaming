@@ -6,22 +6,11 @@ import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import { Link } from 'react-router-dom';
 import routes from 'constants/routes';
 import { statusColors } from 'constants/colors';
-import { DATE_FORMAT } from 'constants/constants';
+import { DATE_FORMAT, JACKPOT_TIER_INSTANCE_HEADER_TABLE_ROW } from 'constants/constants';
 
 interface IJackpotTierInstanceTable {
   content: ContentJackpotTierInstance[];
 }
-
-const JACKPOT_TIER_INSTANCE_HEADER_TABLE_ROW = [
-  { label: 'Instance ID' },
-  { label: 'Jackpot ID' },
-  { label: 'Tier ID' },
-  { label: 'Status' },
-  { label: 'Created at' },
-  { label: 'Modified at' },
-  { label: 'View details' },
-  { label: 'View Jackpot' },
-];
 
 const JackpotTierInstanceTable = ({ content }: IJackpotTierInstanceTable) => {
   return (

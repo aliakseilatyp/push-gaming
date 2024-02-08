@@ -59,6 +59,7 @@ module.exports = (env, argv) => {
         layouts: path.resolve(__dirname, './src/layouts'),
         types: path.resolve(__dirname, './src/types'),
         utils: path.resolve(__dirname, './src/utils'),
+        validationSchemas: path.resolve(__dirname, './src/validationSchemas'),
         mockData: path.resolve(__dirname, './src/mockData'),
       },
     },

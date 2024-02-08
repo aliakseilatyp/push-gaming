@@ -5,18 +5,12 @@ import { Button, Paper, TableBody, TableCell, TableRow } from '@mui/material';
 import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import TableHeadComponent from 'components/TableHeadComponent';
 import routes from 'constants/routes';
-import { DATE_FORMAT } from 'constants/constants';
+import { DATE_FORMAT, JACKPOT_AUDIT_HEADER_TABLE_ROW } from 'constants/constants';
 
 interface JackpotAuditTable {
   content: ContentJackpotAudit[];
 }
 
-const JACKPOT_AUDIT_HEADER_TABLE_ROW = [
-  { label: 'Jackpot ID' },
-  { label: 'Revision date' },
-  { label: 'User ID' },
-  { label: 'View details' },
-];
 
 const JackpotAuditTable = ({ content }: JackpotAuditTable) => {
   return (

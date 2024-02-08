@@ -22,7 +22,7 @@ const useStatus = (initialValue: string[]) => {
     });
   };
 
-  return { status: JSON.parse(params.status), handleChangeStatus, handleDeleteStatus };
+  return { status: JSON.parse(params.status ?? JSON.stringify(initialValue)), handleChangeStatus, handleDeleteStatus };
 };
 
 export default useStatus;

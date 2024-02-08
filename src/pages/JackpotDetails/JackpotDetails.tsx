@@ -6,20 +6,7 @@ import TableHeadComponent from 'components/TableHeadComponent';
 import CollapsibleRow from 'components/CollapsibleRow';
 import { DetailedList } from './styles';
 import { TableCustomCell, TableTitle } from 'layouts/Table';
-import { DATE_FORMAT } from 'constants/constants';
-
-const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
-
-const TIERS_HEADER_TABLE_ROW = [
-  { label: 'Tier' },
-  { label: 'Contribution Pct' },
-  { label: 'Min contribution' },
-  { label: 'Reseed Pct' },
-  { label: 'seedAmount' },
-  { label: 'Drop at' },
-  { label: 'Type' },
-];
-const INTEGRATIONS_HEADER_TABLE_ROW = [{ label: 'Integrations' }, { label: 'Enabled' }];
+import { CURRENCY_HEADER_TABLE_ROW, DATE_FORMAT, INTEGRATIONS_HEADER_TABLE_ROW, TIERS_HEADER_TABLE_ROW } from 'constants/constants';
 
 const JackpotDetails = () => {
   const { id } = useParams();

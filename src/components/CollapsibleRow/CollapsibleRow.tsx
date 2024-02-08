@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { Integration } from 'types';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { Box, Collapse, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import TableHeadComponent from 'components/TableHeadComponent';
 import { TableCustomCell } from 'layouts/Table';
 import { TableCollapsibleRow, TableCustomRow } from './styles';
+import { Integration } from 'types/JackpotsInterface';
+import { GAMES_HEADER_TABLE_ROW } from 'constants/constants';
 
 interface ICollapsibleRow {
   integrationName: string;
   integrationInfo: Integration;
 }
 
-const GAMES_HEADER_TABLE_ROW = [{ label: 'Game' }, { label: 'Enabled' }];
 
 const CollapsibleRow = ({ integrationName, integrationInfo }: ICollapsibleRow) => {
   const [open, setOpen] = useState(false);

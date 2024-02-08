@@ -5,26 +5,19 @@ import { ContentTierInstance } from 'types/TierInstanceInterface';
 import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import TableHeadComponent from 'components/TableHeadComponent';
 import routes from 'constants/routes';
-import { DATE_FORMAT } from 'constants/constants';
+import { DATE_FORMAT, TIER_AUDIT_HEADER_TABLE_ROW } from 'constants/constants';
 
 interface JackpotAuditTable {
   content: ContentTierInstance[];
 }
 
-const JACKPOT_AUDIT_HEADER_TABLE_ROW = [
-  { label: 'Jackpot ID' },
-  { label: 'Instance ID' },
-  { label: 'Revision date' },
-  { label: 'User ID' },
-  { label: 'View details' },
-];
 
 const TierInstanceAuditTable = ({ content }: JackpotAuditTable) => {
   return (
     <Paper>
       <TableContainerStyled>
         <TableStyled stickyHeader>
-          <TableHeadComponent headerTableItems={JACKPOT_AUDIT_HEADER_TABLE_ROW} />
+          <TableHeadComponent headerTableItems={TIER_AUDIT_HEADER_TABLE_ROW} />
           <TableBody>
             {content.map(({ entity, metadata }) => (
               <TableRow key={entity.jackpotId}>
