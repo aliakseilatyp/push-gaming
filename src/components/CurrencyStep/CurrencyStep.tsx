@@ -69,6 +69,7 @@ const CurrencyStep = ({ currenciesInfo }: ICurrencyStep) => (
                     onChange={currenciesInfo.handleChange}
                     onBlur={currenciesInfo.handleBlur}
                     size="small"
+                    type='number'
                   />
                   <FormControlLabel
                     required

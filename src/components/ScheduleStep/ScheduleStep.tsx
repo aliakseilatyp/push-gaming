@@ -29,6 +29,7 @@ const ScheduleStep = ({ scheduleInfo }: IScheduleStep) => (
       }
       onBlur={scheduleInfo.handleBlur}
       size="small"
+      type='number'
     />
     <h3>Start at</h3>
     <LocalizationProvider dateAdapter={AdapterDayjs}>

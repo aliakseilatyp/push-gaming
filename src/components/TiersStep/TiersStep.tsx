@@ -83,6 +83,7 @@ const TiersStep = ({ tiersInfo }: ITiersStep) => (
                     onChange={tiersInfo.handleChange}
                     onBlur={tiersInfo.handleBlur}
                     size="small"
+                    type='number'
                   />
                   <Label>Minimum contribution</Label>
                   <InputForm
@@ -97,6 +98,7 @@ const TiersStep = ({ tiersInfo }: ITiersStep) => (
                     onChange={tiersInfo.handleChange}
                     onBlur={tiersInfo.handleBlur}
                     size="small"
+                    type='number'
                   />
                   <Label>Reseed percentage</Label>
                   <InputForm
@@ -111,6 +113,7 @@ const TiersStep = ({ tiersInfo }: ITiersStep) => (
                     onChange={tiersInfo.handleChange}
                     onBlur={tiersInfo.handleBlur}
                     size="small"
+                    type='number'
                   />
                   <Label>Seed amount</Label>
                   <InputForm
@@ -125,6 +128,7 @@ const TiersStep = ({ tiersInfo }: ITiersStep) => (
                     onChange={tiersInfo.handleChange}
                     onBlur={tiersInfo.handleBlur}
                     size="small"
+                    type='number'
                   />
                   <Label>Drop at</Label>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>

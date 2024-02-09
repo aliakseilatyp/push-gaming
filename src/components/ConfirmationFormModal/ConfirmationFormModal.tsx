@@ -58,7 +58,7 @@ const ConfirmationFormModal = ({
     <Box margin="5px 0">
       Base currency: <strong>{currenciesInfo.baseCurrency}</strong>
     </Box>
-    {currenciesInfo.currencies.length && (
+    {!!currenciesInfo.currencies.length && (
       <Paper>
         <TableContainer>
           <Table>
@@ -95,7 +95,7 @@ const ConfirmationFormModal = ({
     <Box margin="5px 0">
       House edge: <strong>{contributionsInfo.houseEdge}</strong>
     </Box>
-    {integrationsInfo.games.length && (
+    {!!integrationsInfo.games.length && (
       <Box margin="5px 0">
         <Paper>
           <TableContainer>
@@ -118,7 +118,7 @@ const ConfirmationFormModal = ({
         </Paper>
       </Box>
     )}
-    {integrationsInfo.igpCodes.length && (
+    {!!integrationsInfo.igpCodes.length && (
       <Box margin="5px 0">
         <Paper>
           <TableContainer>
@@ -147,7 +147,7 @@ const ConfirmationFormModal = ({
     <Box margin="5px 0">
       Start at: <strong>{dayjs(scheduleInfo.startAt).format(DATE_FORMAT)}</strong>
     </Box>
-    {tiersInfo.tiers.length && (
+    {!!tiersInfo.tiers.length && (
       <Box margin="5px 0">
         <Paper>
           <TableContainer>

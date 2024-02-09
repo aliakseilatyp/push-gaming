@@ -24,6 +24,7 @@ const ContributionsStep = ({ contributionsInfo }: IContributionsStep) => (
       }
       onBlur={contributionsInfo.handleBlur}
       size="small"
+      type='number'
     />
     <Box margin="20px 0">
       <Label>Player percentage</Label>
@@ -49,6 +50,7 @@ const ContributionsStep = ({ contributionsInfo }: IContributionsStep) => (
         }
         onBlur={contributionsInfo.handleBlur}
         size="small"
+        type='number'
       />
     </Box>
     <Stack direction="row" alignItems="center" spacing={3} maxWidth={300}>
@@ -90,6 +92,7 @@ const ContributionsStep = ({ contributionsInfo }: IContributionsStep) => (
         }
         onBlur={contributionsInfo.handleBlur}
         size="small"
+        type='number'
       />
     </Box>
     <Box margin="20px 0">
@@ -110,6 +113,7 @@ const ContributionsStep = ({ contributionsInfo }: IContributionsStep) => (
         }
         onBlur={contributionsInfo.handleBlur}
         size="small"
+        type='number'
       />
     </Box>
     <Box margin="20px 0">
@@ -130,6 +134,7 @@ const ContributionsStep = ({ contributionsInfo }: IContributionsStep) => (
         }
         onBlur={contributionsInfo.handleBlur}
         size="small"
+        type='number'
       />
     </Box>
   </Box>
