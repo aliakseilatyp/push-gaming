@@ -1,4 +1,4 @@
-import { ContentJackpots } from 'types';
+import { ContentJackpots } from "types/JackpotsInterface";
 
 export const jackpotData: ContentJackpots[] = Array.from({ length: 100 }, (_, i) => ({
   config: {

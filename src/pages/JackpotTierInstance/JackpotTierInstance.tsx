@@ -30,7 +30,7 @@ const JackpotTierInstance = () => {
         </MultipleSelect>
         <Input
           label="Instance ID"
-          value={params.instanceId}
+          value={params.instanceId ?? ''}
           onChange={(e) => {
             setSearchParams({ ...params, instanceId: e.target.value });
           }}
@@ -38,7 +38,7 @@ const JackpotTierInstance = () => {
         />
         <Input
           label="Jackpot ID"
-          value={params.jackpotId}
+          value={params.jackpotId ?? ''}
           onChange={(e) => {
             setSearchParams({ ...params, jackpotId: e.target.value });
           }}
@@ -46,7 +46,7 @@ const JackpotTierInstance = () => {
         />
         <Input
           label="Tier ID"
-          value={params.tierId}
+          value={params.tierId ?? ''}
           onChange={(e) => {
             setSearchParams({ ...params, tierId: e.target.value });
           }}

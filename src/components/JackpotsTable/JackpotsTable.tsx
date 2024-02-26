@@ -4,23 +4,11 @@ import TableHeadComponent from 'components/TableHeadComponent';
 import ActionMenu from 'components/ActionMenu';
 import { Button, MenuItem, Paper, TableBody, TableCell, TableRow } from '@mui/material';
 import routes from 'constants/routes';
-import { ContentJackpots } from 'types';
+import { ContentJackpots } from 'types/JackpotsInterface';
 import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import { statusColors } from 'constants/colors';
-import { DATE_FORMAT } from 'constants/constants';
+import { DATE_FORMAT, JACKPOTS_HEADER_TABLE_ROW } from 'constants/constants';
 
-const JACKPOTS_HEADER_TABLE_ROW = [
-  { label: 'Jackpot ID' },
-  { label: 'Status' },
-  { label: 'Created at' },
-  { label: 'Modified at' },
-  { label: 'Config schema ID' },
-  { label: 'Tier instance config schema ID' },
-  { label: 'View details' },
-  { label: 'Action' },
-  { label: 'Audit Trail ID' },
-  { label: 'View Instances' },
-];
 
 interface IJackpotsTable {
   content: ContentJackpots[];

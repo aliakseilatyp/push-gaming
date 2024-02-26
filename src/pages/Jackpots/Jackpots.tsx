@@ -6,7 +6,7 @@ import PaginationTable from 'components/Pagination';
 import MultipleSelect from 'components/MultipleSelect';
 import usePagination from 'hooks/usePagination';
 import useStatus from 'hooks/useStatus';
-import { StatusJackpotsColor } from 'types';
+import { StatusJackpotsColor } from 'types/JackpotsInterface';
 import { jackpotData } from 'mockData/JackpotsMockData';
 import { Input } from 'layouts/Input';
 import routes from 'constants/routes';
@@ -31,7 +31,7 @@ const Jackpots = () => {
         </MultipleSelect>
         <Input
           label="Jackpot ID"
-          value={params.jackpotId}
+          value={params.jackpotId ?? ''}
           onChange={(e) => {
             setSearchParams({ ...params, jackpotId: e.target.value });
           }}
