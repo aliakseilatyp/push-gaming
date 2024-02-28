@@ -1,38 +1,36 @@
-export interface IJackpotTypesInfo {
-  jackpotType: string;
-}
-
-export interface ICurrenciesInfo {
+export interface ICreateJackpot {
+  jackpotId: string;
   baseCurrency: string;
-  currencies: { currency: string; enabled: boolean; multiplier: number | null }[];
-}
-
-export interface IContributionsInfo {
-  amount: number | null;
-  operatorPct: number;
-  playerPct: number;
-  minWager: number | null;
-  houseEdge: number | null;
-}
-
-export interface IIntegrationsInfo {
-  games: { game: string; enabled: boolean }[];
-  igpCodes: { igp: string; enabled: boolean }[];
-}
-
-export interface IScheduleInfo {
-  iterations: number | null;
-  startAt: string;
-}
-
-export interface ITiersInfo {
+  exclusive: boolean;
+  subscription: boolean;
+  contributionType: string;
+  fundedBy: string;
+  percentage: number;
+  minBet: number;
+  amount: number;
+  currenciesType: string;
+  currencies: { currency: string; multiplier: number }[];
   tiers: {
-    tier: string;
-    contributionPct: number;
-    minContribution: number |null;
+    tierId: string;
+    tierType: string;
+    migrationAmount: number;
+    seedAmount: number;
+    contributionType: string;
+    splitPct: number;
     reseedPct: number;
-    seedAmount: number |null;
-    dropAt: string;
-    type: string;
+    configType: string;
+    config: {
+      frequency?: string;
+      winBy?: string;
+      rampUp?: string;
+      average?: number;
+      max?: number;
+    };
   }[];
+}
+
+export interface IScheduleForm {
+  startTime: string;
+  suspend: string;
+  stopTime?: string;
 }

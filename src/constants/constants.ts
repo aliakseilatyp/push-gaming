@@ -1,16 +1,10 @@
-export const DATE_FORMAT = 'DD/MM/YYYY HH:mm';
+export const DATE_FORMAT = 'DD/MM/YYYY';
 
 export const JACKPOTS_HEADER_TABLE_ROW = [
   { label: 'Jackpot ID' },
   { label: 'Status' },
   { label: 'Created at' },
   { label: 'Modified at' },
-  { label: 'Config schema ID' },
-  { label: 'Tier instance config schema ID' },
-  { label: 'View details' },
-  { label: 'Action' },
-  { label: 'Audit Trail ID' },
-  { label: 'View Instances' },
 ];
 
 export const JACKPOT_TIER_INSTANCE_HEADER_TABLE_ROW = [
@@ -41,17 +35,9 @@ export const JACKPOT_AUDIT_HEADER_TABLE_ROW = [
 
 export const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabled' }, { label: 'Multiplier' }];
 
-export const TIERS_HEADER_TABLE_ROW = [
-  { label: 'Tier' },
-  { label: 'Contribution Pct' },
-  { label: 'Min contribution' },
-  { label: 'Reseed Pct' },
-  { label: 'seedAmount' },
-  { label: 'Drop at' },
-  { label: 'Type' },
-];
+export const TIERS_HEADER_TABLE_ROW = [{ label: 'ID' }, { label: '#' }, { label: 'Last Won' }, { label: 'Balance' }];
 
-export const INTEGRATIONS_HEADER_TABLE_ROW = [{ label: 'Integrations' }, { label: 'Enabled' }];
+export const INTEGRATIONS_HEADER_TABLE_ROW = [{ label: 'System' }, { label: 'Status' },{ label: 'Action' }];
 
 export const GAMES_HEADER_TABLE_ROW = [{ label: 'Game' }, { label: 'Enabled' }];
 

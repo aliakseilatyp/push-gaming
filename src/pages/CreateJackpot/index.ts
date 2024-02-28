@@ -1,3 +1,3 @@
-import CreateJackpot from './CreateJackpot';
+import { CreateJackpot } from './CreateJackpot';
 
 export default CreateJackpot;

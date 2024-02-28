@@ -1,1 +1,1 @@
-export * from './createJackpotsSchema'
+export * from './validationSchemas'
