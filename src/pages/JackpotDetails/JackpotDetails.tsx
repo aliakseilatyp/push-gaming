@@ -1,129 +1,99 @@
 import { useParams } from 'react-router-dom';
-import dayjs from 'dayjs';
-import { jackpotData } from 'mockData/JackpotsMockData';
-import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from '@mui/material';
 import TableHeadComponent from 'components/TableHeadComponent';
-import CollapsibleRow from 'components/CollapsibleRow';
-import { DetailedList } from './styles';
-import { TableCustomCell, TableTitle } from 'layouts/Table';
-import { CURRENCY_HEADER_TABLE_ROW, DATE_FORMAT, INTEGRATIONS_HEADER_TABLE_ROW, TIERS_HEADER_TABLE_ROW } from 'constants/constants';
+import { TableTitle } from 'layouts/Table';
+import { DATE_FORMAT, TIERS_HEADER_TABLE_ROW } from 'constants/constants';
+import { JackpotMockData } from 'mockData/JackpotMockData';
+import JackpotTabs from 'components/JackpotTabs';
+import { SummaryWrapper } from './styles';
+import dayjs from 'dayjs';
 
 const JackpotDetails = () => {
   const { id } = useParams();
-  const jackpot = jackpotData.find(({ jackpotId }) => jackpotId === id);
+  const jackpot = JackpotMockData;
 
   return (
-    <>
-      <h1>Jackpot details</h1>
-      <Stack direction="row" spacing={5}>
-        <Box>
-          <Box marginBottom="5px">
-            Jackpot ID: <strong>{jackpot?.jackpotId}</strong>
+    <Stack direction="column" spacing={5}>
+      <SummaryWrapper>
+        <Stack direction="row" justifyContent="space-between">
+          <Box>
+            <h2>Summary</h2>
+            <Box marginBottom="5px">
+              Jackpot ID: <strong>{jackpot?.jackpotId}</strong>
+            </Box>
+            <Box marginBottom="5px">
+              Status: <strong>{jackpot?.status}</strong>
+            </Box>
           </Box>
-          <Box marginBottom="5px">
-            Base currency: <strong>{jackpot?.config.baseCurrency}</strong>
-          </Box>
-          <div>Contributing details:</div>
-          <DetailedList>
-            <li>
-              Amount: <strong>{jackpot?.config.contribution.amount}</strong>
-            </li>
-            <li>
-              Operator percent: <strong>{jackpot?.config.contribution.operatorPct}</strong>
-            </li>
-            <li>
-              Player percent: <strong>{jackpot?.config.contribution.playerPct}</strong>
-            </li>
-            <li>
-              Type: <strong>{jackpot?.config.contribution.type}</strong>
-            </li>
-          </DetailedList>
-        </Box>
-        <div>
-          <Box marginBottom="5px">
-            House edge: <strong>{jackpot?.config.houseEdge}</strong>
-          </Box>
-          <Box marginBottom="5px">
-            Min wager: <strong>{jackpot?.config.minWager}</strong>
-          </Box>
-          <div>Schedule:</div>
-          <DetailedList>
-            <li>
-              Iterations: <strong>{jackpot?.config.schedule.iterations}</strong>
-            </li>
-            <li>
-              Start at: <strong>{dayjs(jackpot?.config.schedule.startAt).format(DATE_FORMAT)}</strong>
-            </li>
-          </DetailedList>
-        </div>
-      </Stack>
-      <TableTitle>Exchange rates</TableTitle>
-      <Box marginBottom="5px">
-        Type: <strong>{jackpot?.config.exchangeRates.type}</strong>
-      </Box>
-      <Paper>
-        <TableContainer>
-          <Table>
-            <TableHeadComponent headerTableItems={CURRENCY_HEADER_TABLE_ROW} />
-            <TableBody>
-              {Object.entries(jackpot?.config.exchangeRates.currencies ?? {}).map(([currencyName, currencyInfo]) => {
-                return (
-                  <TableRow key={currencyName}>
-                    <TableCell align="center">{currencyName}</TableCell>
-                    <TableCustomCell align="center" $enabled={currencyInfo.enabled}>
-                      {currencyInfo.enabled ? 'true' : 'false'}
-                    </TableCustomCell>
-                    <TableCell align="center">{currencyInfo.multiplier}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-      <TableTitle>Integrations</TableTitle>
-      <Paper>
-        <TableContainer>
-          <Table>
-            <TableHeadComponent headerTableItems={INTEGRATIONS_HEADER_TABLE_ROW} />
-            <TableBody>
-              {Object.entries(jackpot?.config.integrations ?? {}).map(([integrationName, integrationInfo]) => {
-                return (
-                  <CollapsibleRow
-                    integrationName={integrationName}
-                    integrationInfo={integrationInfo}
-                    key={integrationName}
-                  />
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-      <TableTitle>Tier section</TableTitle>
-      <Paper>
-        <TableContainer>
-          <Table>
-            <TableHeadComponent headerTableItems={TIERS_HEADER_TABLE_ROW} />
-            <TableBody>
-              {Object.entries(jackpot?.config.tiers ?? {}).map(([tierName, tierInfo]) => {
-                return (
-                  <TableRow key={tierName}>
-                    <TableCell align="center">{tierName}</TableCell>
-                    <TableCell align="center">{tierInfo.contributionPct}</TableCell>
-                    <TableCell align="center">{tierInfo.minContribution}</TableCell>
-                    <TableCell align="center">{tierInfo.reseedPct}</TableCell>
-                    <TableCell align="center">{tierInfo.seedAmount}</TableCell>
-                    <TableCell align="center">{tierInfo.trigger.dropAt}</TableCell>
-                    <TableCell align="center">{tierInfo.trigger.type}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-    </>
+          {jackpot?.status !== 'closed' && (
+            <Box sx={{ minWidth: 250 }}>
+              <FormControl fullWidth>
+                <InputLabel id="select-label" size='small'>Status</InputLabel>
+                <Select
+                  labelId="select-label"
+                  id="simple-select"
+                  value={''}
+                  label="Status"
+                  onChange={() => {}}
+                  size="small"
+                >
+                  {
+                    {
+                      active: <MenuItem value={'suspend'}>Suspend</MenuItem>,
+                      suspended: (
+                        <>
+                          <MenuItem value={'close'}>Close</MenuItem>
+                          {!!jackpot?.tiers.length && <MenuItem value={'delete'}>Delete</MenuItem>}
+                        </>
+                      ),
+                    }[jackpot?.status]
+                  }
+                </Select>
+              </FormControl>
+            </Box>
+          )}
+        </Stack>
+
+        {!!jackpot?.tiers.length && (
+          <>
+            <TableTitle>Tiers</TableTitle>
+            <Paper>
+              <TableContainer>
+                <Table>
+                  <TableHeadComponent headerTableItems={TIERS_HEADER_TABLE_ROW} />
+                  <TableBody>
+                    {jackpot?.tiers.map((tier) => {
+                      return (
+                        <TableRow key={tier.tierId}>
+                          <TableCell align="center">{tier.tierId}</TableCell>
+                          <TableCell align="center">{tier.tierInstanceId}</TableCell>
+                          <TableCell align="center">{dayjs(tier.winBy).format(DATE_FORMAT)}</TableCell>
+                          <TableCell align="center">$10000.00</TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </>
+        )}
+      </SummaryWrapper>
+      <JackpotTabs />
+    </Stack>
   );
 };
 

@@ -1,208 +1,122 @@
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import { Box, Button, Stack, Step, StepLabel, Stepper } from '@mui/material';
-import {
-  contributionsInfoValidationSchema,
-  currenciesInfoValidationSchema,
-  integrationsInfoValidationSchema,
-  scheduleInfoValidationSchema,
-  tiersInfoValidationSchema,
-  typeInfoValidationSchema,
-} from 'validationSchemas';
-import JackpotTypeStep from 'components/JackpotTypeStep';
-import {
-  IContributionsInfo,
-  ICurrenciesInfo,
-  IIntegrationsInfo,
-  IJackpotTypesInfo,
-  IScheduleInfo,
-  ITiersInfo,
-} from 'types/FormikTypes';
-import CurrencyStep from 'components/CurrencyStep';
-import ContributionsStep from 'components/ContributionsStep';
-import IntegrationsStep from 'components/IntegrationsStep';
-import ScheduleStep from 'components/ScheduleStep';
-import TiersStep from 'components/TiersStep';
-import ConfirmationFormModal from 'components/ConfirmationFormModal';
+import React from 'react';
+import { Box, Button, MenuItem, Select, Stack } from '@mui/material';
+import { FieldArray, FormikProvider, getIn, useFormik } from 'formik';
+import { ICreateJackpot } from 'types/FormikTypes';
+import { createJackpotValidationSchema } from 'validationSchemas';
+import { InputForm, Label } from 'layouts/Form';
+import ClearIcon from '@mui/icons-material/Clear';
+import ConfigurationForm from 'components/ConfigurationForm';
+import CurrenciesForm from 'components/CurrenciesForm';
+import TiersForm from 'components/TiersForm';
 
-const steps = ['Jackpot type', 'Currency', 'Contributions', 'Integrations', 'Schedule', 'Tiers'];
-
-const CreateJackpot = () => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const typeInfo = useFormik<IJackpotTypesInfo>({
+export const CreateJackpot = () => {
+  const jackpotInfo = useFormik<ICreateJackpot>({
     initialValues: {
-      jackpotType: '',
-    },
-    validationSchema: typeInfoValidationSchema,
-    onSubmit: () => {
-      handleNext();
-    },
-  });
-
-  const currenciesInfo = useFormik<ICurrenciesInfo>({
-    initialValues: {
+      jackpotId: '',
       baseCurrency: '',
+      exclusive: false,
+      subscription: false,
+      contributionType: 'fixed',
+      fundedBy: 'player',
+      percentage: 0,
+      minBet: 0,
+      amount: 0,
+      currenciesType: 'fixed-rate',
       currencies: [],
-    },
-    validationSchema: currenciesInfoValidationSchema,
-    onSubmit: () => {
-      handleNext();
-    },
-  });
-
-  const contributionsInfo = useFormik<IContributionsInfo>({
-    initialValues: {
-      amount: null,
-      operatorPct: 0,
-      playerPct: 100,
-      minWager: null,
-      houseEdge: null,
-    },
-    validationSchema: contributionsInfoValidationSchema,
-    onSubmit: () => {
-      handleNext();
-    },
-  });
-
-  const integrationsInfo = useFormik<IIntegrationsInfo>({
-    initialValues: {
-      games: [],
-      igpCodes: [],
-    },
-    validationSchema: integrationsInfoValidationSchema,
-    onSubmit: () => {
-      handleNext();
-    },
-  });
-
-  const scheduleInfo = useFormik<IScheduleInfo>({
-    initialValues: {
-      iterations: null,
-      startAt: new Date().toISOString(),
-    },
-    validationSchema: scheduleInfoValidationSchema,
-    onSubmit: () => {
-      handleNext();
-    },
-  });
-
-  const tiersInfo = useFormik<ITiersInfo>({
-    initialValues: {
       tiers: [],
     },
-    validationSchema: tiersInfoValidationSchema,
-    onSubmit: () => {},
+    validationSchema: createJackpotValidationSchema,
+    onSubmit: () => {
+      alert(
+        JSON.stringify({
+          jackpotId: jackpotInfo.values.jackpotId,
+          config: {
+            baseCurrency: jackpotInfo.values.baseCurrency,
+            exclusive: jackpotInfo.values.exclusive,
+            subscription: jackpotInfo.values.subscription,
+            contribution: {
+              type: jackpotInfo.values.contributionType,
+              fundedBy: jackpotInfo.values.fundedBy,
+              rtp: jackpotInfo.values.percentage,
+              minBet: jackpotInfo.values.minBet,
+              amount: jackpotInfo.values.amount,
+            },
+            currencies: {
+              type: jackpotInfo.values.currenciesType,
+              multipliers: jackpotInfo.values.currencies.reduce(
+                (acc, el) => ({ ...acc, [el.currency]: el.multiplier }),
+                {},
+              ),
+            },
+            tiers: jackpotInfo.values.tiers.map((tier) => {
+              let config;
+              if (tier.configType === 'Daily Time') {
+                config = {
+                  frequency: tier.config.frequency,
+                  winBy: tier.config.winBy,
+                  rampUp: tier.config.rampUp,
+                };
+              } else {
+                config = {
+                  average: tier.config.average,
+                  max: tier.config.max,
+                };
+              }
+              return {
+                tierId: tier.tierId,
+                type: tier.tierType,
+                migrationAmount: tier.migrationAmount,
+                seedAmount: tier.seedAmount,
+                contribution: {
+                  type: tier.contributionType,
+                  splitPct: tier.splitPct,
+                  reseedPct: tier.reseedPct,
+                },
+                config,
+              };
+            }),
+          },
+        }),
+      );
+    },
   });
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const getStepContent = (step: number) => {
-    switch (step) {
-      case 0:
-        return <JackpotTypeStep typeInfo={typeInfo} />;
-      case 1:
-        return <CurrencyStep currenciesInfo={currenciesInfo} />;
-      case 2:
-        return <ContributionsStep contributionsInfo={contributionsInfo} />;
-      case 3:
-        return <IntegrationsStep integrationsInfo={integrationsInfo} />;
-      case 4:
-        return <ScheduleStep scheduleInfo={scheduleInfo} />;
-      case 5:
-        return <TiersStep tiersInfo={tiersInfo} />;
-      default:
-        return 'Unknown step';
-    }
-  };
-
-  const handleSubmit = () => {
-    switch (activeStep) {
-      case 0:
-        typeInfo.handleSubmit();
-        break;
-      case 1:
-        currenciesInfo.handleSubmit();
-        break;
-      case 2:
-        contributionsInfo.handleSubmit();
-        break;
-      case 3:
-        integrationsInfo.handleSubmit();
-        break;
-      case 4:
-        scheduleInfo.handleSubmit();
-        break;
-      case 5:
-        tiersInfo.handleSubmit();
-        break;
-    }
-  };
 
   return (
     <Box sx={{ width: '100%' }}>
       <form noValidate autoComplete="off" onSubmit={(e) => e.preventDefault()}>
-        <Stepper activeStep={activeStep}>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-        <div>
-          {getStepContent(activeStep)}
-          <Stack direction="row" spacing={2} marginTop={3}>
-            <Button disabled={activeStep === 0} onClick={handleBack}>
-              Back
-            </Button>
-            {activeStep === steps.length - 1 ? (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  handleSubmit();
-                  if (!tiersInfo.errors.tiers?.length) {
-                    handleClickOpen();
-                  }
-                }}
-              >
-                Finish
-              </Button>
-            ) : (
-              <Button variant="contained" color="primary" onClick={handleSubmit}>
-                Next
-              </Button>
-            )}
+        <Stack direction="column" spacing={4} maxWidth="525px" margin="0 auto">
+          <Stack direction="row" spacing={3} alignItems="center" justifyContent="end">
+            <Label>Jackpot ID</Label>
+            <InputForm
+              id="jackpotId"
+              placeholder="Jackpot ID"
+              name="jackpotId"
+              variant="outlined"
+              required
+              value={jackpotInfo.values.jackpotId}
+              onChange={jackpotInfo.handleChange}
+              error={!!jackpotInfo.touched.jackpotId && !!jackpotInfo.errors.jackpotId}
+              helperText={
+                jackpotInfo.touched.jackpotId && jackpotInfo.errors.jackpotId ? jackpotInfo.errors.jackpotId : ''
+              }
+              onBlur={jackpotInfo.handleBlur}
+              size="small"
+            />
           </Stack>
-          <ConfirmationFormModal
-            open={open}
-            handleClose={handleClose}
-            typeInfo={typeInfo.values}
-            currenciesInfo={currenciesInfo.values}
-            contributionsInfo={contributionsInfo.values}
-            integrationsInfo={integrationsInfo.values}
-            scheduleInfo={scheduleInfo.values}
-            tiersInfo={tiersInfo.values}
-          />
-        </div>
+          <ConfigurationForm jackpotInfo={jackpotInfo} />
+          <CurrenciesForm jackpotInfo={jackpotInfo} />
+          <TiersForm jackpotInfo={jackpotInfo} />
+          <Button
+            variant="contained"
+            style={{ minWidth: '300px', alignSelf: 'center' }}
+            onClick={() => {
+              jackpotInfo.handleSubmit();
+            }}
+          >
+            Submit
+          </Button>
+        </Stack>
       </form>
     </Box>
   );
 };
-
-export default CreateJackpot;

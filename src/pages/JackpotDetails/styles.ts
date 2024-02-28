@@ -1,8 +1,9 @@
 import { styled } from 'styled-components';
 
-export const DetailedList = styled.ul`
-  padding-left: 15px;
-  margin: 0 0 5px 0;
+export const SummaryWrapper = styled.div`
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+  max-height: 500px;
+  overflow: auto;
 `;
-
-

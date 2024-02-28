@@ -1,4 +1,4 @@
-import { Select, TextField } from '@mui/material';
+import { Button, Select, TextField } from '@mui/material';
 import styled from 'styled-components';
 
 export const InputForm = styled(TextField)`
@@ -7,7 +7,11 @@ export const InputForm = styled(TextField)`
   }
   && .MuiFormHelperText-root {
     margin-left: 0;
-    font-size: 12px;
+    margin-right: 0;
+    font-size: 10px;
+    position: absolute;
+    bottom: -18px;
+    margin-top: 2px;
   }
   && .Mui-error input {
     color: #d32f2f;
@@ -26,4 +30,20 @@ export const Label = styled.div`
   font-size: 18px;
   font-weight: 500;
   margin: 10px 0 15px;
+`;
+
+export const SectionTitle = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: underline;
+`;
+
+export const ClearButton = styled(Button)`
+  && {
+    min-width: 23px;
+    padding: 0;
+    position: absolute;
+    right: -40px;
+    top: 0;
+  }
 `;
