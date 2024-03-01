@@ -1,10 +1,9 @@
 import React from 'react';
-import { Box, Button, MenuItem, Select, Stack } from '@mui/material';
-import { FieldArray, FormikProvider, getIn, useFormik } from 'formik';
+import { Box, Button, Stack } from '@mui/material';
+import { useFormik } from 'formik';
 import { ICreateJackpot } from 'types/FormikTypes';
 import { createJackpotValidationSchema } from 'validationSchemas';
-import { InputForm, Label } from 'layouts/Form';
-import ClearIcon from '@mui/icons-material/Clear';
+import { InputContainer, InputForm, Label } from 'layouts/Form';
 import ConfigurationForm from 'components/ConfigurationForm';
 import CurrenciesForm from 'components/CurrenciesForm';
 import TiersForm from 'components/TiersForm';
@@ -27,65 +26,65 @@ export const CreateJackpot = () => {
     },
     validationSchema: createJackpotValidationSchema,
     onSubmit: () => {
-      alert(
-        JSON.stringify({
-          jackpotId: jackpotInfo.values.jackpotId,
-          config: {
-            baseCurrency: jackpotInfo.values.baseCurrency,
-            exclusive: jackpotInfo.values.exclusive,
-            subscription: jackpotInfo.values.subscription,
-            contribution: {
-              type: jackpotInfo.values.contributionType,
-              fundedBy: jackpotInfo.values.fundedBy,
-              rtp: jackpotInfo.values.percentage,
-              minBet: jackpotInfo.values.minBet,
-              amount: jackpotInfo.values.amount,
-            },
-            currencies: {
-              type: jackpotInfo.values.currenciesType,
-              multipliers: jackpotInfo.values.currencies.reduce(
-                (acc, el) => ({ ...acc, [el.currency]: el.multiplier }),
-                {},
-              ),
-            },
-            tiers: jackpotInfo.values.tiers.map((tier) => {
-              let config;
-              if (tier.configType === 'Daily Time') {
-                config = {
-                  frequency: tier.config.frequency,
-                  winBy: tier.config.winBy,
-                  rampUp: tier.config.rampUp,
-                };
-              } else {
-                config = {
-                  average: tier.config.average,
-                  max: tier.config.max,
-                };
-              }
-              return {
-                tierId: tier.tierId,
-                type: tier.tierType,
-                migrationAmount: tier.migrationAmount,
-                seedAmount: tier.seedAmount,
-                contribution: {
-                  type: tier.contributionType,
-                  splitPct: tier.splitPct,
-                  reseedPct: tier.reseedPct,
-                },
-                config,
-              };
-            }),
+      const submit = {
+        jackpotId: jackpotInfo.values.jackpotId,
+        config: {
+          baseCurrency: jackpotInfo.values.baseCurrency,
+          exclusive: jackpotInfo.values.exclusive,
+          subscription: jackpotInfo.values.subscription,
+          contribution: {
+            type: jackpotInfo.values.contributionType,
+            fundedBy: jackpotInfo.values.fundedBy,
+            rtp: jackpotInfo.values.percentage,
+            minBet: jackpotInfo.values.minBet,
+            amount: jackpotInfo.values.amount,
           },
-        }),
-      );
+          currencies: {
+            type: jackpotInfo.values.currenciesType,
+            multipliers: jackpotInfo.values.currencies.reduce(
+              (acc, el) => ({ ...acc, [el.currency]: el.multiplier }),
+              {},
+            ),
+          },
+          tiers: jackpotInfo.values.tiers.map((tier) => {
+            let config;
+            if (tier.configType === 'Daily Time') {
+              config = {
+                frequency: tier.config.frequency,
+                winBy: tier.config.winBy,
+                rampUp: tier.config.rampUp,
+              };
+            } else {
+              config = {
+                average: tier.config.average,
+                max: tier.config.max,
+              };
+            }
+            return {
+              tierId: tier.tierId,
+              type: tier.tierType,
+              migrationAmount: tier.migrationAmount,
+              seedAmount: tier.seedAmount,
+              contribution: {
+                type: tier.contributionType,
+                splitPct: tier.splitPct,
+                reseedPct: tier.reseedPct,
+              },
+              config,
+            };
+          }),
+        },
+      };
+      alert(JSON.stringify(submit));
     },
   });
 
   return (
     <Box sx={{ width: '100%' }}>
+      <h2>Create Jackpot</h2>
       <form noValidate autoComplete="off" onSubmit={(e) => e.preventDefault()}>
-        <Stack direction="column" spacing={4} maxWidth="525px" margin="0 auto">
-          <Stack direction="row" spacing={3} alignItems="center" justifyContent="end">
+        <Stack direction="column" spacing={4}>
+          <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
             <Label>Jackpot ID</Label>
             <InputForm
               id="jackpotId"
@@ -102,18 +101,20 @@ export const CreateJackpot = () => {
               onBlur={jackpotInfo.handleBlur}
               size="small"
             />
-          </Stack>
+          </InputContainer>
           <ConfigurationForm jackpotInfo={jackpotInfo} />
-          <CurrenciesForm jackpotInfo={jackpotInfo} />
-          <TiersForm jackpotInfo={jackpotInfo} />
+          <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap="32px">
+            <CurrenciesForm jackpotInfo={jackpotInfo} />
+            <TiersForm jackpotInfo={jackpotInfo} />
+          </Stack>
           <Button
             variant="contained"
-            style={{ minWidth: '300px', alignSelf: 'center' }}
+            style={{ minWidth: '300px', alignSelf: 'center', backgroundColor: '#264274' }}
             onClick={() => {
               jackpotInfo.handleSubmit();
             }}
           >
-            Submit
+            Save
           </Button>
         </Stack>
       </form>

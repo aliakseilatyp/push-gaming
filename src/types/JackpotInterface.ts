@@ -7,10 +7,10 @@ export interface JackpotInterface {
 }
 
 export interface Integrations {
-  leovegas: Leovegas;
+  [key: string]: Integration;
 }
 
-export interface Leovegas {
+export interface Integration {
   status: string;
   config: Config3;
 }
@@ -20,20 +20,16 @@ export interface Config3 {
 }
 
 export interface QualifyingMatchers {
-  gameCodes: GameCodes;
-  igpCodes: IgpCodes;
-  currencies: IgpCodes;
-  countries: IgpCodes;
-  jurisdictions: IgpCodes;
+  gameCodes: Matchers;
+  igpCodes: Matchers;
+  currencies: Matchers;
+  countries: Matchers;
+  jurisdictions: Matchers;
 }
 
-export interface IgpCodes {
+export interface Matchers {
   allow: string[];
-}
-
-export interface GameCodes {
-  allow: string[];
-  deny: string[];
+  deny?: string[];
 }
 
 export interface Config2 {
@@ -51,7 +47,12 @@ export interface Tier2 {
   migrationAmount: number;
   seedAmount: number;
   contribution: Contribution2;
-  config: Config;
+  config:
+    | Config
+    | {
+        max: number;
+        average: number;
+      };
 }
 
 export interface Config {

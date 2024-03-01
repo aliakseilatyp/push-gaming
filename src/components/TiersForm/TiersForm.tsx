@@ -1,17 +1,16 @@
-import { Button, MenuItem, Select, Stack } from '@mui/material';
+import { Button, MenuItem, Stack } from '@mui/material';
 import { FieldArray, FormikProps, FormikProvider, getIn } from 'formik';
-import { ClearButton, InputForm, Label, SectionTitle } from 'layouts/Form';
+import { Divider, InputContainer, InputForm, Label, SectionTitle, SelectForm, TitleContainer } from 'layouts/Form';
 import { ICreateJackpot } from 'types/FormikTypes';
-import ClearIcon from '@mui/icons-material/Clear';
 
 interface ITiersForm {
   jackpotInfo: FormikProps<ICreateJackpot> | FormikProps<Omit<ICreateJackpot, 'jackpotId'>>;
   disabled?: boolean;
 }
 
-const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
+const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
   return (
-    <>
+    <Stack direction="column" spacing={3}>
       <SectionTitle>Tiers</SectionTitle>
       <FormikProvider value={jackpotInfo}>
         <FieldArray name="tiers">
@@ -63,8 +62,8 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                 const touchedMax = getIn(jackpotInfo.touched, max);
 
                 return (
-                  <div key={index} style={{ position: 'relative', alignSelf: 'end' }}>
-                    <Stack direction="row" spacing={3} alignItems="center" justifyContent="end">
+                  <InputContainer key={index} direction="column" spacing={3}>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Tier ID</Label>
                       <InputForm
                         id="tierId"
@@ -80,17 +79,10 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                         size="small"
                         disabled={disabled}
                       />
-                    </Stack>
-                    <Stack
-                      direction="row"
-                      spacing={3}
-                      alignItems="center"
-                      justifyContent="end"
-                      marginTop={4}
-                      marginBottom={4}
-                    >
+                    </InputContainer>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Tier type</Label>
-                      <Select
+                      <SelectForm
                         labelId="tierType"
                         id="tierType"
                         name={el.tierType}
@@ -104,16 +96,9 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                         <MenuItem value={'pb-time-trigger'}>pb-time-trigger</MenuItem>
                         <MenuItem value={'dt-value-trigger'}>dt-value-trigger</MenuItem>
                         <MenuItem value={'pb-value-trigger'}>pb-value-trigger</MenuItem>
-                      </Select>
-                    </Stack>
-                    <Stack
-                      direction="row"
-                      spacing={3}
-                      alignItems="center"
-                      justifyContent="end"
-                      marginTop={4}
-                      marginBottom={4}
-                    >
+                      </SelectForm>
+                    </InputContainer>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Override amount</Label>
                       <InputForm
                         id="migrationAmount"
@@ -130,15 +115,8 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                         type="number"
                         disabled={disabled}
                       />
-                    </Stack>
-                    <Stack
-                      direction="row"
-                      spacing={3}
-                      alignItems="center"
-                      justifyContent="end"
-                      marginTop={4}
-                      marginBottom={4}
-                    >
+                    </InputContainer>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Seed amount</Label>
                       <InputForm
                         id="tierId"
@@ -155,18 +133,11 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                         type="number"
                         disabled={disabled}
                       />
-                    </Stack>
-                    <SectionTitle>Tier contribution</SectionTitle>
-                    <Stack
-                      direction="row"
-                      spacing={3}
-                      alignItems="center"
-                      justifyContent="end"
-                      marginTop={4}
-                      marginBottom={4}
-                    >
+                    </InputContainer>
+                    <TitleContainer>Tier contribution</TitleContainer>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Type</Label>
-                      <Select
+                      <SelectForm
                         labelId="contributionType"
                         id="contributionType"
                         name={contributionType}
@@ -177,16 +148,9 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                         disabled={disabled}
                       >
                         <MenuItem value={'percentage'}>percentage</MenuItem>
-                      </Select>
-                    </Stack>
-                    <Stack
-                      direction="row"
-                      spacing={3}
-                      alignItems="center"
-                      justifyContent="end"
-                      marginTop={4}
-                      marginBottom={4}
-                    >
+                      </SelectForm>
+                    </InputContainer>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Split percentage</Label>
                       <InputForm
                         id="splitPct"
@@ -203,15 +167,8 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                         type="number"
                         disabled={disabled}
                       />
-                    </Stack>
-                    <Stack
-                      direction="row"
-                      spacing={3}
-                      alignItems="center"
-                      justifyContent="end"
-                      marginTop={4}
-                      marginBottom={4}
-                    >
+                    </InputContainer>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Reseed percentage </Label>
                       <InputForm
                         id="reseedPct"
@@ -228,18 +185,11 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                         type="number"
                         disabled={disabled}
                       />
-                    </Stack>
-                    <SectionTitle>Tier config</SectionTitle>
-                    <Stack
-                      direction="row"
-                      spacing={3}
-                      alignItems="center"
-                      justifyContent="end"
-                      marginTop={4}
-                      marginBottom={4}
-                    >
+                    </InputContainer>
+                    <TitleContainer>Tier config</TitleContainer>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Config type</Label>
-                      <Select
+                      <SelectForm
                         labelId="configType"
                         id="configType"
                         name={configType}
@@ -251,20 +201,13 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                       >
                         <MenuItem value={'Daily Time'}>Daily Time</MenuItem>
                         <MenuItem value={'Value'}>Value</MenuItem>
-                      </Select>
-                    </Stack>
+                      </SelectForm>
+                    </InputContainer>
                     {el.configType === 'Daily Time' ? (
                       <>
-                        <Stack
-                          direction="row"
-                          spacing={3}
-                          alignItems="center"
-                          justifyContent="end"
-                          marginTop={4}
-                          marginBottom={4}
-                        >
+                        <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                           <Label>Frequency</Label>
-                          <Select
+                          <SelectForm
                             labelId="frequency"
                             id="frequency"
                             name={frequency}
@@ -275,16 +218,9 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                             disabled={disabled}
                           >
                             <MenuItem value={'daily'}>daily</MenuItem>
-                          </Select>
-                        </Stack>
-                        <Stack
-                          direction="row"
-                          spacing={3}
-                          alignItems="center"
-                          justifyContent="end"
-                          marginTop={4}
-                          marginBottom={4}
-                        >
+                          </SelectForm>
+                        </InputContainer>
+                        <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                           <Label>Win by</Label>
                           <InputForm
                             size="small"
@@ -301,8 +237,8 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                             onBlur={jackpotInfo.handleBlur}
                             disabled={disabled}
                           />
-                        </Stack>
-                        <Stack direction="row" spacing={3} alignItems="center" justifyContent="end" marginTop={4}>
+                        </InputContainer>
+                        <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                           <Label>Ramp up</Label>
                           <InputForm
                             size="small"
@@ -319,18 +255,11 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                             onBlur={jackpotInfo.handleBlur}
                             disabled={disabled}
                           />
-                        </Stack>
+                        </InputContainer>
                       </>
                     ) : (
                       <>
-                        <Stack
-                          direction="row"
-                          spacing={3}
-                          alignItems="center"
-                          justifyContent="end"
-                          marginTop={4}
-                          marginBottom={4}
-                        >
+                        <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                           <Label>Average</Label>
                           <InputForm
                             size="small"
@@ -347,8 +276,8 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                             onBlur={jackpotInfo.handleBlur}
                             disabled={disabled}
                           />
-                        </Stack>
-                        <Stack direction="row" spacing={3} alignItems="center" justifyContent="end" marginTop={4}>
+                        </InputContainer>
+                        <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                           <Label>Max</Label>
                           <InputForm
                             size="small"
@@ -365,49 +294,52 @@ const TiersForm = ({ jackpotInfo,disabled }: ITiersForm) => {
                             onBlur={jackpotInfo.handleBlur}
                             disabled={disabled}
                           />
-                        </Stack>
+                        </InputContainer>
                       </>
                     )}
-                    <ClearButton type="button" variant="outlined" onClick={() => remove(index)}                disabled={disabled}>
-                      <ClearIcon />
-                    </ClearButton>
-                  </div>
+                    <Button type="button" variant="outlined" onClick={() => remove(index)} color="error">
+                      Delete
+                    </Button>
+                    <Divider />
+                  </InputContainer>
                 );
               })}
-              <Button
-                type="button"
-                variant="outlined"
-                style={{
-                  alignSelf: 'end',
-                }}
-                onClick={() =>
-                  push({
-                    tierId: '',
-                    tierType: 'dt-time-trigger',
-                    migrationAmount: 0,
-                    seedAmount: 0,
-                    contributionType: 'percentage',
-                    splitPct: 0,
-                    reseedPct: 0,
-                    configType: 'Daily Time',
-                    config: {
-                      frequency: 'daily',
-                      winBy: '00:00',
-                      rampUp: '00:00',
-                      max: 0,
-                      average: 0,
-                    },
-                  })
-                }
-                disabled={disabled}
-              >
-                Add tier
-              </Button>
+              <InputContainer>
+                <Button
+                  type="button"
+                  variant="outlined"
+                  style={{
+                    alignSelf: 'end',
+                  }}
+                  onClick={() =>
+                    push({
+                      tierId: '',
+                      tierType: 'dt-time-trigger',
+                      migrationAmount: 0,
+                      seedAmount: 0,
+                      contributionType: 'percentage',
+                      splitPct: 0,
+                      reseedPct: 0,
+                      configType: 'Daily Time',
+                      config: {
+                        frequency: 'daily',
+                        winBy: '00:00',
+                        rampUp: '00:00',
+                        max: 0,
+                        average: 0,
+                      },
+                    })
+                  }
+                  disabled={disabled}
+                >
+                  Add
+                </Button>
+              </InputContainer>
             </>
           )}
         </FieldArray>
       </FormikProvider>
-    </>
+    </Stack>
   );
 };
 

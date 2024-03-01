@@ -52,13 +52,15 @@ const ConfigTab = () => {
   return (
     <Box sx={{ width: '100%' }}>
       <form noValidate autoComplete="off" onSubmit={(e) => e.preventDefault()}>
-        <Stack direction="column" spacing={4} maxWidth="525px" margin="0 auto">
+        <Stack direction="column" spacing={4}>
           <ConfigurationForm jackpotInfo={jackpotInfo} disabled={isDisabled} />
-          <CurrenciesForm jackpotInfo={jackpotInfo} disabled={isDisabled} />
-          <TiersForm jackpotInfo={jackpotInfo} disabled={isDisabled} />
+          <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap="32px">
+            <CurrenciesForm jackpotInfo={jackpotInfo} disabled={isDisabled} />
+            <TiersForm jackpotInfo={jackpotInfo} disabled={isDisabled} />
+          </Stack>
           <Button
             variant="contained"
-            style={{ minWidth: '300px', alignSelf: 'center' }}
+            style={{ minWidth: '300px', alignSelf: 'center', backgroundColor: '#264274' }}
             onClick={() => {
               jackpotInfo.handleSubmit();
             }}

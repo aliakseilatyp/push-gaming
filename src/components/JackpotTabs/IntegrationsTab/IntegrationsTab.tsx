@@ -3,16 +3,20 @@ import TableHeadComponent from 'components/TableHeadComponent';
 import { INTEGRATIONS_HEADER_TABLE_ROW } from 'constants/constants';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { JackpotMockData } from 'mockData/JackpotMockData';
+import { Link } from 'react-router-dom';
+import routes from 'constants/routes';
+import { statusColors } from 'constants/colors';
 
 const IntegrationsTab = () => {
   const jackpot = JackpotMockData;
-  console.log(jackpot);
 
   return (
     <Stack direction="column" spacing={3}>
-      <Button variant="contained" onClick={() => {}} style={{ alignSelf: 'end' }}>
-        New
-      </Button>
+      <Link to={routes.createIntegration} style={{ alignSelf: 'end' }}>
+        <Button variant="contained" style={{ backgroundColor: '#264274' }}>
+          New
+        </Button>
+      </Link>
       <Paper>
         <TableContainer>
           <Table>
@@ -21,12 +25,16 @@ const IntegrationsTab = () => {
               {Object.entries(jackpot.integrations).map(([integrationName, integrationInfo]) => {
                 return (
                   <TableRow key={integrationName}>
-                    <TableCell align="center">{integrationName}</TableCell>
-                    <TableCell align="center">{integrationInfo.status}</TableCell>
                     <TableCell align="center">
-                      <div>
+                      <Link to={`${routes.updateIntegration}/${integrationName}`}>
+                        <Button style={{ color: '#264274' }}>{integrationName}</Button>
+                      </Link>
+                    </TableCell>
+                    <TableCell align="center" style={{ color: statusColors[integrationInfo.status] }}>{integrationInfo.status}</TableCell>
+                    <TableCell align="center">
+                      <Button style={{ color: '#264274' }}>
                         <DeleteIcon />
-                      </div>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );

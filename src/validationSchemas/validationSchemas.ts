@@ -106,3 +106,72 @@ export const scheduleValidationSchema = yup.object({
     stopTimeString: yup.string(),
   }),
 });
+
+export const createIntegrationValidationSchema = yup.object({
+  systemId: yup
+    .string()
+    .matches(/^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/g, 'Integration can only contain Latin letters.')
+    .matches(/^\S*$/g, "Integration can't contain spaces")
+    .required('Integration is required'),
+  status: yup.string().required('Status by is required'),
+  gameCodes: yup.object().shape({
+    allow: yup.array().of(
+      yup.object().shape({
+        game: yup.string().required('Allow by is required'),
+      }),
+    ),
+    deny: yup.array().of(
+      yup.object().shape({
+        game: yup.string().required('Deny by is required'),
+      }),
+    ),
+  }),
+  igpCodes: yup.object().shape({
+    allow: yup.array().of(
+      yup.object().shape({
+        code: yup.string().required('Allow by is required'),
+      }),
+    ),
+    deny: yup.array().of(
+      yup.object().shape({
+        code: yup.string().required('Deny by is required'),
+      }),
+    ),
+  }),
+  currencies: yup.object().shape({
+    allow: yup.array().of(
+      yup.object().shape({
+        currency: yup.string().required('Allow by is required'),
+      }),
+    ),
+    deny: yup.array().of(
+      yup.object().shape({
+        currency: yup.string().required('Deny by is required'),
+      }),
+    ),
+  }),
+  countries: yup.object().shape({
+    allow: yup.array().of(
+      yup.object().shape({
+        country: yup.string().required('Allow by is required'),
+      }),
+    ),
+    deny: yup.array().of(
+      yup.object().shape({
+        country: yup.string().required('Deny by is required'),
+      }),
+    ),
+  }),
+  jurisdictions: yup.object().shape({
+    allow: yup.array().of(
+      yup.object().shape({
+        jurisdiction: yup.string().required('Allow by is required'),
+      }),
+    ),
+    deny: yup.array().of(
+      yup.object().shape({
+        jurisdiction: yup.string().required('Deny by is required'),
+      }),
+    ),
+  }),
+});
