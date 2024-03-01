@@ -30,7 +30,6 @@ const ScheduleTab = () => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={['DateTimePicker']}>
                 <DateTimePicker
-                  label="Start time"
                   disablePast
                   value={dayjs(schedule.values.startTime)}
                   onChange={(newValue) => {
@@ -65,7 +64,6 @@ const ScheduleTab = () => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DateTimePicker']}>
                   <DateTimePicker
-                    label="Stop time"
                     disablePast
                     value={dayjs(schedule.values.stopTime)}
                     onChange={(newValue) => {
