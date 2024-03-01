@@ -1,8 +1,9 @@
-import { Button, MenuItem, Select, Stack } from '@mui/material';
+import { Button, MenuItem, Stack } from '@mui/material';
 import { FieldArray, FormikProps, FormikProvider, getIn } from 'formik';
-import { ClearButton, InputForm, Label, SectionTitle } from 'layouts/Form';
+import { ClearButton, InputForm, Label, SectionTitle, SelectForm } from 'layouts/Form';
 import { ICreateJackpot } from 'types/FormikTypes';
 import ClearIcon from '@mui/icons-material/Clear';
+import { FieldContainer, InputContainer } from 'layouts/Input';
 
 interface ICurrenciesForm {
   jackpotInfo: FormikProps<ICreateJackpot> | FormikProps<Omit<ICreateJackpot, 'jackpotId'>>;
@@ -11,11 +12,11 @@ interface ICurrenciesForm {
 
 const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
   return (
-    <>
+    <Stack direction="column" spacing={3}>
       <SectionTitle>Currencies</SectionTitle>
-      <Stack direction="row" spacing={3} alignItems="center" justifyContent="end">
+      <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
         <Label>Currencies type</Label>
-        <Select
+        <SelectForm
           labelId="currenciesType"
           id="currenciesType"
           name="currenciesType"
@@ -26,8 +27,8 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
           disabled={disabled}
         >
           <MenuItem value={'fixed-rate'}>fixed-rate</MenuItem>
-        </Select>
-      </Stack>
+        </SelectForm>
+      </InputContainer>
       <FormikProvider value={jackpotInfo}>
         <FieldArray name="currencies">
           {({ push, remove }) => (
@@ -41,8 +42,8 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
                 const touchedMultiplier = getIn(jackpotInfo.touched, multiplier);
 
                 return (
-                  <div key={index} style={{ position: 'relative' }}>
-                    <Stack direction="row" spacing={3} alignItems="center" justifyContent="end">
+                  <FieldContainer key={index}>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Currency</Label>
                       <InputForm
                         id="currency"
@@ -57,8 +58,8 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
                         size="small"
                         disabled={disabled}
                       />
-                    </Stack>
-                    <Stack direction="row" spacing={3} alignItems="center" justifyContent="end" marginTop={4}>
+                    </InputContainer>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end" marginTop={4}>
                       <Label>Multiplier</Label>
                       <InputForm
                         id="multiplier"
@@ -74,29 +75,31 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
                         type="number"
                         disabled={disabled}
                       />
-                    </Stack>
+                    </InputContainer>
                     <ClearButton type="button" variant="outlined" onClick={() => remove(index)} disabled={disabled}>
                       <ClearIcon />
                     </ClearButton>
-                  </div>
+                  </FieldContainer>
                 );
               })}
-              <Button
-                type="button"
-                variant="outlined"
-                onClick={() => push({ currency: '', multiplier: 0 })}
-                style={{
-                  alignSelf: 'end',
-                }}
-                disabled={disabled}
-              >
-                Add currency
-              </Button>
+              <InputContainer>
+                <Button
+                  type="button"
+                  variant="outlined"
+                  onClick={() => push({ currency: '', multiplier: 0 })}
+                  style={{
+                    alignSelf: 'end',
+                  }}
+                  disabled={disabled}
+                >
+                  Add
+                </Button>
+              </InputContainer>
             </>
           )}
         </FieldArray>
       </FormikProvider>
-    </>
+    </Stack>
   );
 };
 

@@ -5,7 +5,6 @@ import {
   InputLabel,
   MenuItem,
   Paper,
-  Select,
   Stack,
   Table,
   TableBody,
@@ -20,6 +19,7 @@ import { JackpotMockData } from 'mockData/JackpotMockData';
 import JackpotTabs from 'components/JackpotTabs';
 import { SummaryWrapper } from './styles';
 import dayjs from 'dayjs';
+import { SelectForm } from 'layouts/Form';
 
 const JackpotDetails = () => {
   const { id } = useParams();
@@ -42,7 +42,7 @@ const JackpotDetails = () => {
             <Box sx={{ minWidth: 250 }}>
               <FormControl fullWidth>
                 <InputLabel id="select-label" size='small'>Status</InputLabel>
-                <Select
+                <SelectForm
                   labelId="select-label"
                   id="simple-select"
                   value={''}
@@ -61,7 +61,7 @@ const JackpotDetails = () => {
                       ),
                     }[jackpot?.status]
                   }
-                </Select>
+                </SelectForm>
               </FormControl>
             </Box>
           )}

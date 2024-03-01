@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const InputForm = styled(TextField)`
   && {
     min-width: 300px;
+    background: #ffffff;
   }
   && .MuiFormHelperText-root {
     margin-left: 0;
@@ -20,6 +21,7 @@ export const InputForm = styled(TextField)`
 
 export const SelectForm = styled(Select)`
   min-width: 300px;
+  background: #ffffff;
   && + .MuiFormHelperText-root {
     margin-left: 0;
     font-size: 12px;
@@ -35,8 +37,13 @@ export const Label = styled.div`
 export const SectionTitle = styled.div`
   font-size: 20px;
   font-weight: 500;
-  text-decoration: underline;
+  font-style: italic;
+  padding: 10px;
+  background-color: #81757540;
+  border-radius: 5px;
 `;
+
+
 
 export const ClearButton = styled(Button)`
   && {
@@ -45,5 +52,6 @@ export const ClearButton = styled(Button)`
     position: absolute;
     right: -40px;
     top: 0;
+    margin-top: 0;
   }
 `;

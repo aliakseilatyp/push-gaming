@@ -3,16 +3,17 @@ import TableHeadComponent from 'components/TableHeadComponent';
 import { INTEGRATIONS_HEADER_TABLE_ROW } from 'constants/constants';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { JackpotMockData } from 'mockData/JackpotMockData';
+import { Link } from 'react-router-dom';
+import routes from 'constants/routes';
 
 const IntegrationsTab = () => {
   const jackpot = JackpotMockData;
-  console.log(jackpot);
 
   return (
     <Stack direction="column" spacing={3}>
-      <Button variant="contained" onClick={() => {}} style={{ alignSelf: 'end' }}>
-        New
-      </Button>
+      <Link to={routes.createIntegration} style={{ alignSelf: 'end' }}>
+        <Button variant="contained">New</Button>
+      </Link>
       <Paper>
         <TableContainer>
           <Table>
