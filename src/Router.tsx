@@ -14,6 +14,7 @@ const JackpotTierInstanceAudit = lazy(() => import('pages/JackpotTierInstanceAud
 const TierInstanceAuditDetails = lazy(() => import('pages/TierInstanceAuditDetails'));
 const CreateJackpot = lazy(() => import('pages/CreateJackpot'));
 const CreateIntegration = lazy(() => import('pages/CreateIntegration'));
+const UpdateIntegration = lazy(() => import('pages/UpdateIntegration'));
 
 const routes: RouteObject[] = [
   {
@@ -30,6 +31,7 @@ const routes: RouteObject[] = [
       },
       { path: ROUTES.createJackpot, element: <CreateJackpot /> },
       { path: ROUTES.createIntegration, element: <CreateIntegration /> },
+      { path: `${ROUTES.updateIntegration}/:systemId`, element: <UpdateIntegration /> },
       {
         path: ROUTES.jackpotAudit,
         children: [

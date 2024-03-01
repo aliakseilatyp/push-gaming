@@ -1,4 +1,4 @@
-import { Button, Select, TextField } from '@mui/material';
+import { Button, Select, Stack, TextField } from '@mui/material';
 import styled from 'styled-components';
 
 export const InputForm = styled(TextField)`
@@ -16,6 +16,12 @@ export const InputForm = styled(TextField)`
   }
   && .Mui-error input {
     color: #d32f2f;
+  }
+`;
+
+export const InputIntegration = styled(InputForm)`
+  && {
+    width: 100%;
   }
 `;
 
@@ -41,17 +47,31 @@ export const SectionTitle = styled.div`
   padding: 10px;
   background-color: #81757540;
   border-radius: 5px;
+  max-width: 525px;
 `;
-
-
 
 export const ClearButton = styled(Button)`
   && {
     min-width: 23px;
-    padding: 0;
-    position: absolute;
-    right: -40px;
-    top: 0;
-    margin-top: 0;
   }
+`;
+
+export const Divider = styled.div`
+  height: 2px;
+  width: 100%;
+  background: #81757540;
+`;
+
+export const InputContainer = styled(Stack)`
+  width: 525px;
+`;
+
+export const TitleContainer = styled(InputContainer)`
+  align-self: center;
+  font-weight: 500;
+  font-size: 20px;
+  width: 50%;
+  text-align: center;
+  background-color: #81757540;
+  border-radius: 5px;
 `;

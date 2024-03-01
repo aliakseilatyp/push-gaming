@@ -3,11 +3,10 @@ import { Box, Button, Stack } from '@mui/material';
 import { useFormik } from 'formik';
 import { ICreateJackpot } from 'types/FormikTypes';
 import { createJackpotValidationSchema } from 'validationSchemas';
-import { InputForm, Label } from 'layouts/Form';
+import { InputContainer, InputForm, Label } from 'layouts/Form';
 import ConfigurationForm from 'components/ConfigurationForm';
 import CurrenciesForm from 'components/CurrenciesForm';
 import TiersForm from 'components/TiersForm';
-import { InputContainer } from 'layouts/Input';
 
 export const CreateJackpot = () => {
   const jackpotInfo = useFormik<ICreateJackpot>({
@@ -104,11 +103,13 @@ export const CreateJackpot = () => {
             />
           </InputContainer>
           <ConfigurationForm jackpotInfo={jackpotInfo} />
-          <CurrenciesForm jackpotInfo={jackpotInfo} />
-          <TiersForm jackpotInfo={jackpotInfo} />
+          <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap="32px">
+            <CurrenciesForm jackpotInfo={jackpotInfo} />
+            <TiersForm jackpotInfo={jackpotInfo} />
+          </Stack>
           <Button
             variant="contained"
-            style={{ minWidth: '300px', alignSelf: 'center' }}
+            style={{ minWidth: '300px', alignSelf: 'center', backgroundColor: '#264274' }}
             onClick={() => {
               jackpotInfo.handleSubmit();
             }}

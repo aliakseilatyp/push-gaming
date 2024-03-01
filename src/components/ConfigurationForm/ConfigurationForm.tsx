@@ -1,7 +1,6 @@
 import { MenuItem, Stack } from '@mui/material';
 import { FormikProps } from 'formik';
-import { InputForm, Label, SectionTitle, SelectForm } from 'layouts/Form';
-import { InputContainer } from 'layouts/Input';
+import { InputContainer, InputForm, Label, SectionTitle, SelectForm } from 'layouts/Form';
 import { ICreateJackpot } from 'types/FormikTypes';
 
 interface IConfigurationForm {
@@ -11,7 +10,7 @@ interface IConfigurationForm {
 
 const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
   return (
-    <>
+    <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap="32px">
       <Stack direction="column" spacing={3}>
         <SectionTitle>Configuration</SectionTitle>
         <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
@@ -156,7 +155,7 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
           />
         </InputContainer>
       </Stack>
-    </>
+    </Stack>
   );
 };
 

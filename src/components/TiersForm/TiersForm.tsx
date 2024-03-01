@@ -1,9 +1,7 @@
 import { Button, MenuItem, Stack } from '@mui/material';
 import { FieldArray, FormikProps, FormikProvider, getIn } from 'formik';
-import { ClearButton, InputForm, Label, SectionTitle, SelectForm } from 'layouts/Form';
+import { Divider, InputContainer, InputForm, Label, SectionTitle, SelectForm, TitleContainer } from 'layouts/Form';
 import { ICreateJackpot } from 'types/FormikTypes';
-import ClearIcon from '@mui/icons-material/Clear';
-import { FieldContainer, InputContainer } from 'layouts/Input';
 
 interface ITiersForm {
   jackpotInfo: FormikProps<ICreateJackpot> | FormikProps<Omit<ICreateJackpot, 'jackpotId'>>;
@@ -12,7 +10,7 @@ interface ITiersForm {
 
 const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
   return (
-    <>
+    <Stack direction="column" spacing={3}>
       <SectionTitle>Tiers</SectionTitle>
       <FormikProvider value={jackpotInfo}>
         <FieldArray name="tiers">
@@ -64,7 +62,7 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                 const touchedMax = getIn(jackpotInfo.touched, max);
 
                 return (
-                  <FieldContainer key={index} direction="column" spacing={3}>
+                  <InputContainer key={index} direction="column" spacing={3}>
                     <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Tier ID</Label>
                       <InputForm
@@ -136,7 +134,7 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                         disabled={disabled}
                       />
                     </InputContainer>
-                    <SectionTitle>Tier contribution</SectionTitle>
+                    <TitleContainer>Tier contribution</TitleContainer>
                     <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Type</Label>
                       <SelectForm
@@ -188,7 +186,7 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                         disabled={disabled}
                       />
                     </InputContainer>
-                    <SectionTitle>Tier config</SectionTitle>
+                    <TitleContainer>Tier config</TitleContainer>
                     <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Config type</Label>
                       <SelectForm
@@ -299,10 +297,11 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                         </InputContainer>
                       </>
                     )}
-                    <ClearButton type="button" variant="outlined" onClick={() => remove(index)} disabled={disabled}>
-                      <ClearIcon />
-                    </ClearButton>
-                  </FieldContainer>
+                    <Button type="button" variant="outlined" onClick={() => remove(index)} color="error">
+                      Delete
+                    </Button>
+                    <Divider />
+                  </InputContainer>
                 );
               })}
               <InputContainer>
@@ -340,7 +339,7 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
           )}
         </FieldArray>
       </FormikProvider>
-    </>
+    </Stack>
   );
 };
 

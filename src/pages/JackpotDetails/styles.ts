@@ -6,5 +6,5 @@ export const SummaryWrapper = styled.div`
   padding: 10px;
   max-height: 500px;
   overflow: auto;
-  background: #fff;
+  border: 1px solid;
 `;

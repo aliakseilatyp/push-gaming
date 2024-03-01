@@ -1,6 +1,7 @@
-export const JackpotMockData = {
+import { JackpotInterface } from "types/JackpotInterface";
+
+export const JackpotMockData:JackpotInterface = {
   jackpotId: 'lv-daily-drop',
-  // status: 'active',
   status: 'suspended',
   tiers: [
     {
@@ -43,9 +44,6 @@ export const JackpotMockData = {
         config: {
           max: 12,
           average: 23,
-          // frequency: 'daily',
-          // winBy: '20:00:00',
-          // rampUp: '16:00:00',
         },
       },
     ],

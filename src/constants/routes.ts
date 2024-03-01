@@ -5,5 +5,6 @@ export default {
   jackpotTierInstanceAudit: '/jackpotTierInstanceAudit',
   createJackpot: '/create-jackpot',
   createIntegration: '/create-integration',
+  updateIntegration: '/update-integration',
   login: '/',
 };

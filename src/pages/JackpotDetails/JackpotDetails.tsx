@@ -20,6 +20,7 @@ import JackpotTabs from 'components/JackpotTabs';
 import { SummaryWrapper } from './styles';
 import dayjs from 'dayjs';
 import { SelectForm } from 'layouts/Form';
+import { statusColors } from 'constants/colors';
 
 const JackpotDetails = () => {
   const { id } = useParams();
@@ -34,8 +35,8 @@ const JackpotDetails = () => {
             <Box marginBottom="5px">
               Jackpot ID: <strong>{jackpot?.jackpotId}</strong>
             </Box>
-            <Box marginBottom="5px">
-              Status: <strong>{jackpot?.status}</strong>
+            <Box marginBottom="5px" >
+              Status: <strong><span style={{ color: statusColors[jackpot?.status] }}>{jackpot?.status}</span></strong>
             </Box>
           </Box>
           {jackpot?.status !== 'closed' && (

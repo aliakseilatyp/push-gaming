@@ -4,31 +4,66 @@ import { InputContainer, InputForm, Label, SectionTitle, SelectForm, TitleContai
 import { ICreateIntegration } from 'types/FormikTypes';
 import { createIntegrationValidationSchema } from 'validationSchemas';
 import IntegrationFormikArray from 'components/IntegrationFormikArray';
+import { JackpotMockData } from 'mockData/JackpotMockData';
+import { useParams } from 'react-router-dom';
 
-const CreateIntegration = () => {
+const UpdateIntegration = () => {
+  const { systemId } = useParams();
+  const integrationId = JackpotMockData.integrations[systemId ?? ''];
+
   const integration = useFormik<ICreateIntegration>({
     initialValues: {
-      systemId: '',
-      status: 'active',
+      systemId: systemId ?? '',
+      status: integrationId.status,
       gameCodes: {
-        allow: [],
-        deny: [],
+        allow: integrationId.config.qualifyingMatchers.gameCodes.allow
+          .filter((el) => el !== '*')
+          .map((el) => ({ game: el })),
+        deny: !!integrationId.config.qualifyingMatchers.gameCodes.deny
+          ? integrationId.config.qualifyingMatchers.gameCodes.deny.map((el) => {
+              return { game: el };
+            })
+          : [],
       },
       igpCodes: {
-        allow: [],
-        deny: [],
+        allow: integrationId.config.qualifyingMatchers.igpCodes.allow
+          .filter((el) => el !== '*')
+          .map((el) => ({ code: el })),
+        deny: !!integrationId.config.qualifyingMatchers.igpCodes.deny
+          ? integrationId.config.qualifyingMatchers.igpCodes.deny.map((el) => {
+              return { code: el };
+            })
+          : [],
       },
       currencies: {
-        allow: [],
-        deny: [],
+        allow: integrationId.config.qualifyingMatchers.currencies.allow
+          .filter((el) => el !== '*')
+          .map((el) => ({ currency: el })),
+        deny: !!integrationId.config.qualifyingMatchers.currencies.deny
+          ? integrationId.config.qualifyingMatchers.currencies.deny.map((el) => {
+              return { currency: el };
+            })
+          : [],
       },
       countries: {
-        allow: [],
-        deny: [],
+        allow: integrationId.config.qualifyingMatchers.countries.allow
+          .filter((el) => el !== '*')
+          .map((el) => ({ country: el })),
+        deny: !!integrationId.config.qualifyingMatchers.countries.deny
+          ? integrationId.config.qualifyingMatchers.countries.deny.map((el) => {
+              return { country: el };
+            })
+          : [],
       },
       jurisdictions: {
-        allow: [],
-        deny: [],
+        allow: integrationId.config.qualifyingMatchers.jurisdictions.allow
+          .filter((el) => el !== '*')
+          .map((el) => ({ jurisdiction: el })),
+        deny: !!integrationId.config.qualifyingMatchers.jurisdictions.deny
+          ? integrationId.config.qualifyingMatchers.jurisdictions.deny.map((el) => {
+              return { jurisdiction: el };
+            })
+          : [],
       },
     },
     validationSchema: createIntegrationValidationSchema,
@@ -109,6 +144,7 @@ const CreateIntegration = () => {
               }
               onBlur={integration.handleBlur}
               size="small"
+              disabled
             />
           </InputContainer>
           <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
@@ -243,4 +279,4 @@ const CreateIntegration = () => {
   );
 };
 
-export default CreateIntegration;
+export default UpdateIntegration;

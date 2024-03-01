@@ -1,9 +1,7 @@
-import { Button, MenuItem, Stack } from '@mui/material';
+import { Button, MenuItem } from '@mui/material';
 import { FieldArray, FormikProps, FormikProvider, getIn } from 'formik';
-import { ClearButton, InputForm, Label, SectionTitle, SelectForm } from 'layouts/Form';
+import { Divider, InputContainer, InputForm, Label, SectionTitle, SelectForm } from 'layouts/Form';
 import { ICreateJackpot } from 'types/FormikTypes';
-import ClearIcon from '@mui/icons-material/Clear';
-import { FieldContainer, InputContainer } from 'layouts/Input';
 
 interface ICurrenciesForm {
   jackpotInfo: FormikProps<ICreateJackpot> | FormikProps<Omit<ICreateJackpot, 'jackpotId'>>;
@@ -12,7 +10,7 @@ interface ICurrenciesForm {
 
 const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
   return (
-    <Stack direction="column" spacing={3}>
+    <InputContainer direction="column" spacing={3}>
       <SectionTitle>Currencies</SectionTitle>
       <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
         <Label>Currencies type</Label>
@@ -29,6 +27,7 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
           <MenuItem value={'fixed-rate'}>fixed-rate</MenuItem>
         </SelectForm>
       </InputContainer>
+      <Divider />
       <FormikProvider value={jackpotInfo}>
         <FieldArray name="currencies">
           {({ push, remove }) => (
@@ -42,7 +41,7 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
                 const touchedMultiplier = getIn(jackpotInfo.touched, multiplier);
 
                 return (
-                  <FieldContainer key={index}>
+                  <InputContainer key={index} direction="column" spacing={3}>
                     <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Currency</Label>
                       <InputForm
@@ -59,7 +58,7 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
                         disabled={disabled}
                       />
                     </InputContainer>
-                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end" marginTop={4}>
+                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Multiplier</Label>
                       <InputForm
                         id="multiplier"
@@ -76,10 +75,11 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
                         disabled={disabled}
                       />
                     </InputContainer>
-                    <ClearButton type="button" variant="outlined" onClick={() => remove(index)} disabled={disabled}>
-                      <ClearIcon />
-                    </ClearButton>
-                  </FieldContainer>
+                    <Button type="button" variant="outlined" onClick={() => remove(index)} color="error">
+                      Delete
+                    </Button>
+                    <Divider />
+                  </InputContainer>
                 );
               })}
               <InputContainer>
@@ -99,7 +99,7 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
           )}
         </FieldArray>
       </FormikProvider>
-    </Stack>
+    </InputContainer>
   );
 };
 

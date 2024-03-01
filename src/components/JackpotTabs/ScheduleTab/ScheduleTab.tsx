@@ -7,8 +7,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { Label, SectionTitle, SelectForm } from 'layouts/Form';
-import { InputContainer } from 'layouts/Input';
+import { InputContainer, Label, SectionTitle, SelectForm } from 'layouts/Form';
 
 const ScheduleTab = () => {
   const schedule = useFormik<IScheduleForm>({
@@ -25,7 +24,7 @@ const ScheduleTab = () => {
     <Box sx={{ width: '100%' }}>
       <form noValidate autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <Stack direction="column" spacing={4} maxWidth="525px" margin="0 auto">
-        <SectionTitle>Schedule</SectionTitle>
+          <SectionTitle>Schedule</SectionTitle>
           <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
             <Label>Start time</Label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -40,7 +39,7 @@ const ScheduleTab = () => {
                   sx={{
                     width: '300px',
                   }}
-                  slotProps={{ textField: { size: 'small' } }}
+                  slotProps={{ textField: { size: 'small', style: { background: '#fff' } } }}
                 />
               </DemoContainer>
             </LocalizationProvider>
@@ -75,7 +74,7 @@ const ScheduleTab = () => {
                     sx={{
                       width: '300px',
                     }}
-                    slotProps={{ textField: { size: 'small' } }}
+                    slotProps={{ textField: { size: 'small', style: { background: '#fff' } } }}
                   />
                 </DemoContainer>
               </LocalizationProvider>
@@ -83,7 +82,7 @@ const ScheduleTab = () => {
           )}
           <Button
             variant="contained"
-            style={{ minWidth: '300px', alignSelf: 'center' }}
+            style={{ minWidth: '300px', alignSelf: 'center', backgroundColor: '#264274' }}
             onClick={() => {
               schedule.handleSubmit();
             }}

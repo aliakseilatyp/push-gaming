@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { CustomTab, JackpotTabWrapper} from './styles';
+import { CustomTab, JackpotTabWrapper, JackpotTabsWrapper } from './styles';
 import ConfigTab from './ConfigTab';
 import ScheduleTab from './ScheduleTab';
 import IntegrationsTab from './IntegrationsTab';
@@ -52,17 +53,12 @@ const JackpotTabs = () => {
   return (
     <Box>
       <Box>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          variant="fullWidth"
-        >
+        <JackpotTabsWrapper value={value} onChange={handleChange} aria-label="basic tabs example" variant="fullWidth">
           <CustomTab label="Config" {...a11yProps(0)} />
           <CustomTab label="Schedule" {...a11yProps(1)} />
           <CustomTab label="Integrations" {...a11yProps(2)} />
           <CustomTab label="Tiers" {...a11yProps(3)} />
-        </Tabs>
+        </JackpotTabsWrapper>
       </Box>
       <CustomTabPanel value={value} index={0}>
         <ConfigTab />

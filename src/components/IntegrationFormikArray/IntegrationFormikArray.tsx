@@ -1,9 +1,8 @@
-import { Button, Stack } from '@mui/material';
+import { Button } from '@mui/material';
 import { FieldArray, FormikContextType, FormikProvider, getIn } from 'formik';
-import { ClearButton, InputForm } from 'layouts/Form';
+import { ClearButton, Divider, InputContainer, InputIntegration } from 'layouts/Form';
 import { ICreateIntegration } from 'types/FormikTypes';
 import ClearIcon from '@mui/icons-material/Clear';
-import { FieldContainer, InputContainer } from 'layouts/Input';
 
 interface IIntegrationFormikArray {
   integration: FormikContextType<ICreateIntegration>;
@@ -24,13 +23,19 @@ const IntegrationFormikArray = ({ integration, fieldName, valuesArray, name }: I
               const touchedValue = getIn(integration.touched, value);
 
               return (
-                <FieldContainer key={index} style={{ position: 'relative' }}>
-                  <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
-                    <InputForm
+                <InputContainer direction="column" spacing={3} key={index}>
+                  <InputContainer
+                    key={index}
+                    direction="row"
+                    spacing={2}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <InputIntegration
                       id={`${name}-${index}`}
                       variant="outlined"
                       name={value}
-                      value={el.value}
+                      value={el[name]}
                       required
                       helperText={touchedValue && errorValue ? errorValue : ''}
                       error={!!touchedValue && !!errorValue}
@@ -38,11 +43,12 @@ const IntegrationFormikArray = ({ integration, fieldName, valuesArray, name }: I
                       onBlur={integration.handleBlur}
                       size="small"
                     />
+                    <ClearButton type="button" variant="outlined" onClick={() => remove(index)} color="error">
+                      <ClearIcon />
+                    </ClearButton>
                   </InputContainer>
-                  <ClearButton type="button" variant="outlined" onClick={() => remove(index)}>
-                    <ClearIcon />
-                  </ClearButton>
-                </FieldContainer>
+                  <Divider />
+                </InputContainer>
               );
             })}
             <InputContainer>

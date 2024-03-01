@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import TableHeadComponent from 'components/TableHeadComponent';
 import ActionMenu from 'components/ActionMenu';
-import { Button, MenuItem, Paper, TableBody, TableCell, TableRow } from '@mui/material';
+import { Button, Paper, TableBody, TableCell, TableRow } from '@mui/material';
 import routes from 'constants/routes';
 import { TableContainerStyled, TableStyled } from 'layouts/Table';
 import { statusColors } from 'constants/colors';
@@ -24,7 +24,7 @@ const JackpotsTable = ({ content }: IJackpotsTable) => {
               <TableRow key={jackpotId}>
                 <TableCell align="center">
                   <Link to={`${routes.jackpots}/${jackpotId}`}>
-                    <Button>{jackpotId}</Button>
+                    <Button style={{ color: '#264274' }}>{jackpotId}</Button>
                   </Link>
                 </TableCell>
                 <TableCell align="center" style={{ color: statusColors[status] }}>
