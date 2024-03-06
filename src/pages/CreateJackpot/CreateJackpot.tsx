@@ -18,8 +18,8 @@ export const CreateJackpot = () => {
       contributionType: 'fixed',
       fundedBy: 'player',
       percentage: 0,
-      minBet: 0,
-      amount: 0,
+      minBet: null,
+      amount: null,
       currenciesType: 'fixed-rate',
       currencies: [],
       tiers: [],
@@ -48,7 +48,7 @@ export const CreateJackpot = () => {
           },
           tiers: jackpotInfo.values.tiers.map((tier) => {
             let config;
-            if (tier.configType === 'Daily Time') {
+            if (tier.tierType === 'dt-time-trigger' || tier.tierType === 'pb-time-trigger') {
               config = {
                 frequency: tier.config.frequency,
                 winBy: tier.config.winBy,
@@ -78,6 +78,7 @@ export const CreateJackpot = () => {
       alert(JSON.stringify(submit));
     },
   });
+
 
   return (
     <Box sx={{ width: '100%' }}>

@@ -24,13 +24,14 @@ const ScheduleTab = () => {
     <Box sx={{ width: '100%' }}>
       <form noValidate autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <Stack direction="column" spacing={4} maxWidth="525px" margin="0 auto">
-          <SectionTitle>Schedule</SectionTitle>
+          <SectionTitle>Schedule (set in UTC)</SectionTitle>
           <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
             <Label>Start time</Label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={['DateTimePicker']}>
                 <DateTimePicker
                   disablePast
+                  format="YYYY-MM-DD"
                   value={dayjs(schedule.values.startTime)}
                   onChange={(newValue) => {
                     schedule.setFieldValue('startTime', newValue?.toISOString());
@@ -65,6 +66,7 @@ const ScheduleTab = () => {
                 <DemoContainer components={['DateTimePicker']}>
                   <DateTimePicker
                     disablePast
+                    format="YYYY-MM-DD"
                     value={dayjs(schedule.values.stopTime)}
                     onChange={(newValue) => {
                       schedule.setFieldValue('stopTime', newValue?.toISOString());

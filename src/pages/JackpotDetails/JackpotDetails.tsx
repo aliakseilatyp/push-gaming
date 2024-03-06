@@ -35,19 +35,24 @@ const JackpotDetails = () => {
             <Box marginBottom="5px">
               Jackpot ID: <strong>{jackpot?.jackpotId}</strong>
             </Box>
-            <Box marginBottom="5px" >
-              Status: <strong><span style={{ color: statusColors[jackpot?.status] }}>{jackpot?.status}</span></strong>
+            <Box marginBottom="5px">
+              Status:{' '}
+              <strong>
+                <span style={{ color: statusColors[jackpot?.status] }}>{jackpot?.status}</span>
+              </strong>
             </Box>
           </Box>
           {jackpot?.status !== 'closed' && (
             <Box sx={{ minWidth: 250 }}>
               <FormControl fullWidth>
-                <InputLabel id="select-label" size='small'>Status</InputLabel>
+                <InputLabel id="select-label" size="small">
+                  Actions
+                </InputLabel>
                 <SelectForm
                   labelId="select-label"
                   id="simple-select"
                   value={''}
-                  label="Status"
+                  label="Actions"
                   onChange={() => {}}
                   size="small"
                 >

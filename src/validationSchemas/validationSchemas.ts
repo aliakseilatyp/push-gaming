@@ -86,7 +86,6 @@ export const updateJackpotValidationSchema = yup.object({
         .integer('Reseed percentage must be an integer')
         .typeError('Reseed percentage must be a number')
         .required('Reseed percentage is required'),
-      configType: yup.string().required('Config type is required'),
       frequency: yup.string(),
       winBy: yup.string().required('Time is required'),
       rampUp: yup.string().required('Time is required'),

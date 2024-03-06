@@ -125,7 +125,7 @@ const UpdateIntegration = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <h2>Create Integration</h2>
+      <h2>Update Integration</h2>
       <form noValidate autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <Stack direction="column" spacing={4}>
           <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">

@@ -55,7 +55,11 @@ const JackpotTabs = () => {
       <Box>
         <JackpotTabsWrapper value={value} onChange={handleChange} aria-label="basic tabs example" variant="fullWidth">
           <CustomTab label="Config" {...a11yProps(0)} />
-          <CustomTab label="Schedule" {...a11yProps(1)} />
+          <CustomTab
+            label="Schedule (set in UTC)
+"
+            {...a11yProps(1)}
+          />
           <CustomTab label="Integrations" {...a11yProps(2)} />
           <CustomTab label="Tiers" {...a11yProps(3)} />
         </JackpotTabsWrapper>

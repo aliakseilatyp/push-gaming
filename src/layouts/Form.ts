@@ -17,6 +17,16 @@ export const InputForm = styled(TextField)`
   && .Mui-error input {
     color: #d32f2f;
   }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield; 
+  }
 `;
 
 export const InputIntegration = styled(InputForm)`

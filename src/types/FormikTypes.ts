@@ -6,8 +6,8 @@ export interface ICreateJackpot {
   contributionType: string;
   fundedBy: string;
   percentage: number;
-  minBet: number;
-  amount: number;
+  minBet: number | null;
+  amount: number | null;
   currenciesType: string;
   currencies: { currency: string; multiplier: number }[];
   tiers: {
@@ -18,7 +18,6 @@ export interface ICreateJackpot {
     contributionType: string;
     splitPct: number;
     reseedPct: number;
-    configType: string;
     config: {
       frequency?: string;
       winBy?: string;

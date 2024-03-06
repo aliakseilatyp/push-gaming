@@ -41,8 +41,6 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                 const errorReseedPct = getIn(jackpotInfo.errors, reseedPct);
                 const touchedReseedPct = getIn(jackpotInfo.touched, reseedPct);
 
-                const configType = `tiers[${index}].configType`;
-
                 const frequency = `tiers[${index}].config.frequency`;
 
                 const winBy = `tiers[${index}].config.winBy`;
@@ -85,7 +83,7 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                       <SelectForm
                         labelId="tierType"
                         id="tierType"
-                        name={el.tierType}
+                        name={tierType}
                         value={el.tierType}
                         onChange={jackpotInfo.handleChange}
                         size="small"
@@ -187,23 +185,7 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                       />
                     </InputContainer>
                     <TitleContainer>Tier config</TitleContainer>
-                    <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
-                      <Label>Config type</Label>
-                      <SelectForm
-                        labelId="configType"
-                        id="configType"
-                        name={configType}
-                        value={el.configType}
-                        onChange={jackpotInfo.handleChange}
-                        size="small"
-                        style={{ width: '300px' }}
-                        disabled={disabled}
-                      >
-                        <MenuItem value={'Daily Time'}>Daily Time</MenuItem>
-                        <MenuItem value={'Value'}>Value</MenuItem>
-                      </SelectForm>
-                    </InputContainer>
-                    {el.configType === 'Daily Time' ? (
+                    {el.tierType === 'dt-time-trigger' || el.tierType === 'pb-time-trigger' ? (
                       <>
                         <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                           <Label>Frequency</Label>
@@ -320,7 +302,6 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                       contributionType: 'percentage',
                       splitPct: 0,
                       reseedPct: 0,
-                      configType: 'Daily Time',
                       config: {
                         frequency: 'daily',
                         winBy: '00:00',

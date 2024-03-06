@@ -9,6 +9,23 @@ interface IConfigurationForm {
 }
 
 const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
+  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    let inputValue = event.currentTarget.value;
+    inputValue = inputValue.replace(/[^0-9.]/g, '');
+    const decimalParts = inputValue.split('.');
+    if (decimalParts.length > 1) {
+      const integerPart = decimalParts[0];
+      let decimalPart = decimalParts[1].slice(0, 2);
+      if (integerPart === '' && decimalPart !== '') {
+        decimalPart = '';
+      }
+
+      inputValue = `${integerPart}.${decimalPart}`;
+    }
+
+    event.currentTarget.value = inputValue;
+  };
+
   return (
     <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap="32px">
       <Stack direction="column" spacing={3}>
@@ -99,10 +116,10 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
           </SelectForm>
         </InputContainer>
         <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
-          <Label>Percentage</Label>
+          <Label>RTP</Label>
           <InputForm
             id="percentage"
-            placeholder="Percentage"
+            placeholder="RTP"
             name="percentage"
             variant="outlined"
             required
@@ -126,8 +143,11 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
             name="minBet"
             variant="outlined"
             required
-            type="number"
-            value={jackpotInfo.values.minBet}
+            inputProps={{
+              inputMode: 'numeric',
+              onInput: handleInputChange,
+            }}
+            value={jackpotInfo.values.minBet ?? ''}
             onChange={jackpotInfo.handleChange}
             error={!!jackpotInfo.touched.minBet && !!jackpotInfo.errors.minBet}
             helperText={jackpotInfo.touched.minBet && jackpotInfo.errors.minBet ? jackpotInfo.errors.minBet : ''}
@@ -144,8 +164,11 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
             name="amount"
             variant="outlined"
             required
-            type="number"
-            value={jackpotInfo.values.amount}
+            inputProps={{
+              inputMode: 'numeric',
+              onInput: handleInputChange,
+            }}
+            value={jackpotInfo.values.amount ?? ''}
             onChange={jackpotInfo.handleChange}
             error={!!jackpotInfo.touched.amount && !!jackpotInfo.errors.amount}
             helperText={jackpotInfo.touched.amount && jackpotInfo.errors.amount ? jackpotInfo.errors.amount : ''}
