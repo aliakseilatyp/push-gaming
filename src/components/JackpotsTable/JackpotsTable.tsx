@@ -23,7 +23,7 @@ const JackpotsTable = ({ content }: IJackpotsTable) => {
             {content.map(({ jackpotId, status, createdAt, modifiedAt }) => (
               <TableRow key={jackpotId}>
                 <TableCell align="center">
-                  <Link to={`${routes.jackpots}/${jackpotId}`}>
+                  <Link to={`${routes.jackpots}${jackpotId}`}>
                     <Button style={{ color: '#264274' }}>{jackpotId}</Button>
                   </Link>
                 </TableCell>

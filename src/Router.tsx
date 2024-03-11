@@ -3,7 +3,6 @@ import { RouteObject, useRoutes } from 'react-router-dom';
 import AppWrapper from 'components/AppWrapper';
 import ROUTES from 'constants/routes';
 
-const Login = lazy(() => import('pages/Login'));
 const Jackpots = lazy(() => import('pages/Jackpots'));
 const JackpotDetails = lazy(() => import('pages/JackpotDetails'));
 const JackpotAudit = lazy(() => import('pages/JackpotAudit'));
@@ -19,14 +18,12 @@ const UpdateIntegration = lazy(() => import('pages/UpdateIntegration'));
 const routes: RouteObject[] = [
   {
     element: <AppWrapper />,
-
     children: [
-      { path: ROUTES.login, element: <Login /> },
       {
         path: ROUTES.jackpots,
         children: [
           { path: ROUTES.jackpots, element: <Jackpots /> },
-          { path: `${ROUTES.jackpots}/:id`, element: <JackpotDetails /> },
+          { path: `${ROUTES.jackpots}:id`, element: <JackpotDetails /> },
         ],
       },
       { path: ROUTES.createJackpot, element: <CreateJackpot /> },

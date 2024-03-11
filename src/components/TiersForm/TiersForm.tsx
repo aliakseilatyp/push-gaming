@@ -87,7 +87,6 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                         value={el.tierType}
                         onChange={jackpotInfo.handleChange}
                         size="small"
-                        style={{ width: '300px' }}
                         disabled={disabled}
                       >
                         <MenuItem value={'dt-time-trigger'}>dt-time-trigger</MenuItem>
@@ -142,7 +141,6 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                         value={el.contributionType}
                         onChange={jackpotInfo.handleChange}
                         size="small"
-                        style={{ width: '300px' }}
                         disabled={disabled}
                       >
                         <MenuItem value={'percentage'}>percentage</MenuItem>
@@ -196,7 +194,6 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                             value={el.config.frequency ?? 'daily'}
                             onChange={jackpotInfo.handleChange}
                             size="small"
-                            style={{ width: '300px' }}
                             disabled={disabled}
                           >
                             <MenuItem value={'daily'}>daily</MenuItem>
@@ -279,7 +276,7 @@ const TiersForm = ({ jackpotInfo, disabled }: ITiersForm) => {
                         </InputContainer>
                       </>
                     )}
-                    <Button type="button" variant="outlined" onClick={() => remove(index)} color="error">
+                    <Button type="button" variant="outlined" onClick={() => remove(index)} color="error" disabled={disabled}>
                       Delete
                     </Button>
                     <Divider />

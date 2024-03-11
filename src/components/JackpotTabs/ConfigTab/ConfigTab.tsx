@@ -2,13 +2,19 @@ import { Box, Button, Stack } from '@mui/material';
 import ConfigurationForm from 'components/ConfigurationForm';
 import CurrenciesForm from 'components/CurrenciesForm';
 import TiersForm from 'components/TiersForm';
+import { ROLES } from 'constants/roles';
+import { KeycloackContext } from 'context/KeyckoakContext';
 import { useFormik } from 'formik';
 import { JackpotMockData } from 'mockData/JackpotMockData';
+import { useContext } from 'react';
 import { ICreateJackpot } from 'types/FormikTypes';
 import { updateJackpotValidationSchema } from 'validationSchemas';
 
 const ConfigTab = () => {
+  const { keycloackValue } = useContext(KeycloackContext);
+  const isAdmin = keycloackValue?.realmAccess?.roles.includes(ROLES.admin);
   const jackpot = JackpotMockData;
+
   const jackpotInfo = useFormik<Omit<ICreateJackpot, 'jackpotId'>>({
     initialValues: {
       baseCurrency: jackpot.config.baseCurrency,
@@ -53,20 +59,22 @@ const ConfigTab = () => {
     <Box sx={{ width: '100%' }}>
       <form noValidate autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <Stack direction="column" spacing={4}>
-          <ConfigurationForm jackpotInfo={jackpotInfo} disabled={isDisabled} />
+          <ConfigurationForm jackpotInfo={jackpotInfo} disabled={isDisabled || !isAdmin} />
           <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap="32px">
-            <CurrenciesForm jackpotInfo={jackpotInfo} disabled={isDisabled} />
-            <TiersForm jackpotInfo={jackpotInfo} disabled={isDisabled} />
+            <CurrenciesForm jackpotInfo={jackpotInfo} disabled={isDisabled || !isAdmin} />
+            <TiersForm jackpotInfo={jackpotInfo} disabled={isDisabled || !isAdmin} />
           </Stack>
-          <Button
-            variant="contained"
-            style={{ minWidth: '300px', alignSelf: 'center', backgroundColor: '#264274' }}
-            onClick={() => {
-              jackpotInfo.handleSubmit();
-            }}
-          >
-            Save
-          </Button>
+          {isAdmin && (
+            <Button
+              variant="contained"
+              style={{ minWidth: '300px', alignSelf: 'center', backgroundColor: '#264274' }}
+              onClick={() => {
+                jackpotInfo.handleSubmit();
+              }}
+            >
+              Save
+            </Button>
+          )}
         </Stack>
       </form>
     </Box>

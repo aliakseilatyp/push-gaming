@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Autocomplete, Button } from '@mui/material';
 import { FieldArray, FormikContextType, FormikProvider, getIn } from 'formik';
 import { ClearButton, Divider, InputContainer, InputIntegration } from 'layouts/Form';
 import { ICreateIntegration } from 'types/FormikTypes';
@@ -9,9 +9,18 @@ interface IIntegrationFormikArray {
   fieldName: string;
   valuesArray: { [key: string]: string }[];
   name: string;
+  autocomplete?: boolean;
+  optionsArray?: string[];
 }
 
-const IntegrationFormikArray = ({ integration, fieldName, valuesArray, name }: IIntegrationFormikArray) => {
+const IntegrationFormikArray = ({
+  integration,
+  fieldName,
+  valuesArray,
+  name,
+  autocomplete = false,
+  optionsArray,
+}: IIntegrationFormikArray) => {
   return (
     <FormikProvider value={integration}>
       <FieldArray name={fieldName}>
@@ -31,18 +40,46 @@ const IntegrationFormikArray = ({ integration, fieldName, valuesArray, name }: I
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <InputIntegration
-                      id={`${name}-${index}`}
-                      variant="outlined"
-                      name={value}
-                      value={el[name]}
-                      required
-                      helperText={touchedValue && errorValue ? errorValue : ''}
-                      error={!!touchedValue && !!errorValue}
-                      onChange={integration.handleChange}
-                      onBlur={integration.handleBlur}
-                      size="small"
-                    />
+                    {autocomplete && optionsArray ? (
+                      <Autocomplete
+                        freeSolo
+                        inputValue={el[name]}
+                        onInputChange={(event, newInputValue) => {
+                          integration.setFieldValue(value, newInputValue);
+                        }}
+                        options={optionsArray.map((el) => el)}
+                        fullWidth
+                        renderInput={(params) => (
+                          <InputIntegration
+                            {...params}
+                            id={`${name}-${index}`}
+                            variant="outlined"
+                            name={value}
+                            value={el[name]}
+                            required
+                            helperText={touchedValue && errorValue ? errorValue : ''}
+                            error={!!touchedValue && !!errorValue}
+                            onChange={integration.handleChange}
+                            onBlur={integration.handleBlur}
+                            size="small"
+                          />
+                        )}
+                      />
+                    ) : (
+                      <InputIntegration
+                        id={`${name}-${index}`}
+                        variant="outlined"
+                        name={value}
+                        value={el[name]}
+                        required
+                        helperText={touchedValue && errorValue ? errorValue : ''}
+                        error={!!touchedValue && !!errorValue}
+                        onChange={integration.handleChange}
+                        onBlur={integration.handleBlur}
+                        size="small"
+                      />
+                    )}
+
                     <ClearButton type="button" variant="outlined" onClick={() => remove(index)} color="error">
                       <ClearIcon />
                     </ClearButton>

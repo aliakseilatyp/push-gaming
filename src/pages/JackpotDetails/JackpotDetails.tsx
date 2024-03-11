@@ -21,10 +21,16 @@ import { SummaryWrapper } from './styles';
 import dayjs from 'dayjs';
 import { SelectForm } from 'layouts/Form';
 import { statusColors } from 'constants/colors';
+import { useContext } from 'react';
+import { KeycloackContext } from 'context/KeyckoakContext';
+import { ROLES } from 'constants/roles';
 
 const JackpotDetails = () => {
   const { id } = useParams();
   const jackpot = JackpotMockData;
+  const { keycloackValue } = useContext(KeycloackContext);
+  const isAdmin = keycloackValue?.realmAccess?.roles.includes(ROLES.admin);
+  const isSuspendViewer = keycloackValue?.realmAccess?.roles.includes(ROLES.suspend);
 
   return (
     <Stack direction="column" spacing={5}>
@@ -42,7 +48,7 @@ const JackpotDetails = () => {
               </strong>
             </Box>
           </Box>
-          {jackpot?.status !== 'closed' && (
+          {jackpot?.status !== 'closed' && (isAdmin || isSuspendViewer) ? (
             <Box sx={{ minWidth: 250 }}>
               <FormControl fullWidth>
                 <InputLabel id="select-label" size="small">
@@ -59,18 +65,27 @@ const JackpotDetails = () => {
                   {
                     {
                       active: <MenuItem value={'suspend'}>Suspend</MenuItem>,
-                      suspended: (
-                        <>
-                          <MenuItem value={'close'}>Close</MenuItem>
-                          {!!jackpot?.tiers.length && <MenuItem value={'delete'}>Delete</MenuItem>}
-                        </>
-                      ),
+                      suspended: !isSuspendViewer
+                        ? [
+                            { value: 'close', label: 'Close' },
+                            { value: 'delete', label: 'Deleted' },
+                          ].map(({ value, label }, i) => {
+                            if (!jackpot?.tiers.length && value === 'delete') {
+                              return null;
+                            }
+                            return (
+                              <MenuItem value={value} key={i}>
+                                {label}
+                              </MenuItem>
+                            );
+                          })
+                        : null,
                     }[jackpot?.status]
                   }
                 </SelectForm>
               </FormControl>
             </Box>
-          )}
+          ) : null}
         </Stack>
 
         {!!jackpot?.tiers.length && (

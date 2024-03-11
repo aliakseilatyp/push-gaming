@@ -1,7 +1,11 @@
 import routes from 'constants/routes';
 import { DrawerUI as Drawer, LeftMenuLink } from './styles';
+import { useContext } from 'react';
+import { Button } from '@mui/material';
+import { KeycloackContext } from 'context/KeyckoakContext';
 
 const SideMenu = () => {
+  const { logout } = useContext(KeycloackContext);
   return (
     <Drawer variant="permanent" anchor="left">
       <LeftMenuLink to={routes.jackpots}>Jackpots</LeftMenuLink>
@@ -14,6 +18,7 @@ const SideMenu = () => {
       <LeftMenuLink to={routes.jackpotTierInstanceAudit} end>
         Jackpots Tier Instance Audit
       </LeftMenuLink>
+      <Button onClick={logout}>Logout</Button>
     </Drawer>
   );
 };

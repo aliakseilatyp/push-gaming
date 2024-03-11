@@ -5,14 +5,17 @@ import PaginationTable from 'components/Pagination';
 import usePagination from 'hooks/usePagination';
 import routes from 'constants/routes';
 import { JackpotsMockData } from 'mockData/JackpotsMockData';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { Input } from 'layouts/Input';
+import { KeycloackContext } from 'context/KeyckoakContext';
+import { ROLES } from 'constants/roles';
 
 const Jackpots = () => {
   const { page, pageSize, handleChangePage, handlePageSizeChange } = usePagination();
   const [searchParams, setSearchParams] = useSearchParams({ jackpotId: '' });
   const params = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams]);
   const { content } = JackpotsMockData;
+  const { keycloackValue } = useContext(KeycloackContext);
 
   return (
     <>
@@ -26,11 +29,13 @@ const Jackpots = () => {
           }}
           size="small"
         />
-        <Link to={routes.createJackpot}>
-          <Button variant="contained" size="large" style={{ backgroundColor: '#264274' }}>
-            Create Jackpot
-          </Button>
-        </Link>
+        {keycloackValue?.realmAccess?.roles.includes(ROLES.admin) && (
+          <Link to={routes.createJackpot}>
+            <Button variant="contained" size="large" style={{ backgroundColor: '#264274' }}>
+              Create Jackpot
+            </Button>
+          </Link>
+        )}
       </Stack>
       <JackpotsTable content={content} />
       <PaginationTable

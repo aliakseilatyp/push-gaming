@@ -1,4 +1,5 @@
-import { MenuItem, Stack } from '@mui/material';
+import { Autocomplete, MenuItem, Stack } from '@mui/material';
+import { CURRENCIES } from 'constants/constants';
 import { FormikProps } from 'formik';
 import { InputContainer, InputForm, Label, SectionTitle, SelectForm } from 'layouts/Form';
 import { ICreateJackpot } from 'types/FormikTypes';
@@ -32,21 +33,35 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
         <SectionTitle>Configuration</SectionTitle>
         <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
           <Label>Base Currency</Label>
-          <InputForm
-            id="baseCurrency"
-            placeholder="Base Currency"
-            name="baseCurrency"
-            variant="outlined"
-            required
-            value={jackpotInfo.values.baseCurrency}
-            onChange={jackpotInfo.handleChange}
-            error={!!jackpotInfo.touched.baseCurrency && !!jackpotInfo.errors.baseCurrency}
-            helperText={
-              jackpotInfo.touched.baseCurrency && jackpotInfo.errors.baseCurrency ? jackpotInfo.errors.baseCurrency : ''
-            }
+          <Autocomplete
+            freeSolo
+            inputValue={jackpotInfo.values.baseCurrency}
+            onInputChange={(event, newInputValue) => {
+              jackpotInfo.setFieldValue('baseCurrency', newInputValue);
+            }}
             disabled={typeof disabled !== 'undefined'}
-            onBlur={jackpotInfo.handleBlur}
-            size="small"
+            options={CURRENCIES.map((el) => el)}
+            renderInput={(params) => (
+              <InputForm
+                {...params}
+                id="baseCurrency"
+                placeholder="Base Currency"
+                name="baseCurrency"
+                variant="outlined"
+                required
+                value={jackpotInfo.values.baseCurrency}
+                onChange={jackpotInfo.handleChange}
+                error={!!jackpotInfo.touched.baseCurrency && !!jackpotInfo.errors.baseCurrency}
+                helperText={
+                  jackpotInfo.touched.baseCurrency && jackpotInfo.errors.baseCurrency
+                    ? jackpotInfo.errors.baseCurrency
+                    : ''
+                }
+                disabled={typeof disabled !== 'undefined'}
+                onBlur={jackpotInfo.handleBlur}
+                size="small"
+              />
+            )}
           />
         </InputContainer>
         <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
@@ -58,7 +73,6 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
             value={jackpotInfo.values.exclusive}
             onChange={jackpotInfo.handleChange}
             size="small"
-            style={{ width: '300px' }}
             disabled={disabled}
           >
             <MenuItem value={'true'}>True</MenuItem>
@@ -74,7 +88,6 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
             value={jackpotInfo.values.subscription}
             onChange={jackpotInfo.handleChange}
             size="small"
-            style={{ width: '300px' }}
             disabled={disabled}
           >
             <MenuItem value={'true'}>True</MenuItem>
@@ -93,7 +106,6 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
             value={jackpotInfo.values.contributionType}
             onChange={jackpotInfo.handleChange}
             size="small"
-            style={{ width: '300px' }}
             disabled={disabled}
           >
             <MenuItem value={'fixed'}>fixed</MenuItem>
@@ -108,7 +120,6 @@ const ConfigurationForm = ({ jackpotInfo, disabled }: IConfigurationForm) => {
             value={jackpotInfo.values.fundedBy}
             onChange={jackpotInfo.handleChange}
             size="small"
-            style={{ width: '300px' }}
             disabled={disabled}
           >
             <MenuItem value={'player'}>player</MenuItem>

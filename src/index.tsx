@@ -6,6 +6,7 @@ import routes from 'constants/routes';
 import Router from './Router';
 import 'styles/index.scss';
 import { theme } from 'styles/theme';
+import { KeycloackContextProvider } from 'context/KeyckoakContext';
 
 const rootNode = document.getElementById('root');
 
@@ -22,9 +23,11 @@ if (rootNode) {
   createRoot(rootNode).render(
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter basename={routes.login}>
-          <Router />
-        </BrowserRouter>
+        <KeycloackContextProvider>
+          <BrowserRouter basename={routes.jackpots}>
+            <Router />
+          </BrowserRouter>
+        </KeycloackContextProvider>
         {/* {isDevMode && <ReactQueryDevtools initialIsOpen={false} />} */}
       </QueryClientProvider>
     </ThemeProvider>,

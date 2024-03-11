@@ -5,9 +5,16 @@ import { ICreateIntegration } from 'types/FormikTypes';
 import { createIntegrationValidationSchema } from 'validationSchemas';
 import IntegrationFormikArray from 'components/IntegrationFormikArray';
 import { JackpotMockData } from 'mockData/JackpotMockData';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { KeycloackContext } from 'context/KeyckoakContext';
+import { ROLES } from 'constants/roles';
+import routes from 'constants/routes';
+import { COUNTRIES, CURRENCIES, JURISDICTIONS } from 'constants/constants';
 
 const UpdateIntegration = () => {
+  const navigate = useNavigate();
+  const { keycloackValue } = useContext(KeycloackContext);
   const { systemId } = useParams();
   const integrationId = JackpotMockData.integrations[systemId ?? ''];
 
@@ -123,6 +130,12 @@ const UpdateIntegration = () => {
     },
   });
 
+  useEffect(() => {
+    if (!keycloackValue?.realmAccess?.roles.includes(ROLES.integrationAdmin)) {
+      navigate(routes.jackpots);
+    }
+  }, []);
+
   return (
     <Box sx={{ width: '100%' }}>
       <h2>Update Integration</h2>
@@ -220,6 +233,8 @@ const UpdateIntegration = () => {
                 fieldName={'currencies.allow'}
                 valuesArray={integration.values.currencies.allow}
                 name="currency"
+                autocomplete
+                optionsArray={CURRENCIES}
               />
               <TitleContainer>Deny</TitleContainer>
               <IntegrationFormikArray
@@ -227,6 +242,8 @@ const UpdateIntegration = () => {
                 fieldName={'currencies.deny'}
                 valuesArray={integration.values.currencies.deny}
                 name="currency"
+                autocomplete
+                optionsArray={CURRENCIES}
               />
             </InputContainer>
             <InputContainer direction="column" spacing={3}>
@@ -237,6 +254,8 @@ const UpdateIntegration = () => {
                 fieldName={'countries.allow'}
                 valuesArray={integration.values.countries.allow}
                 name="country"
+                autocomplete
+                optionsArray={COUNTRIES}
               />
               <TitleContainer>Deny</TitleContainer>
               <IntegrationFormikArray
@@ -244,6 +263,8 @@ const UpdateIntegration = () => {
                 fieldName={'countries.deny'}
                 valuesArray={integration.values.countries.deny}
                 name="country"
+                autocomplete
+                optionsArray={COUNTRIES}
               />
             </InputContainer>
           </Stack>
@@ -255,6 +276,8 @@ const UpdateIntegration = () => {
               fieldName={'jurisdictions.allow'}
               valuesArray={integration.values.jurisdictions.allow}
               name="jurisdiction"
+              autocomplete
+              optionsArray={JURISDICTIONS}
             />
             <TitleContainer>Deny</TitleContainer>
             <IntegrationFormikArray
@@ -262,6 +285,8 @@ const UpdateIntegration = () => {
               fieldName={'jurisdictions.deny'}
               valuesArray={integration.values.jurisdictions.deny}
               name="jurisdiction"
+              autocomplete
+              optionsArray={JURISDICTIONS}
             />
           </InputContainer>
           <Button

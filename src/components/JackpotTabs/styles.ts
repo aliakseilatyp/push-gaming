@@ -7,6 +7,8 @@ export const JackpotTabWrapper = styled.div`
   padding: 10px;
   min-height: 400px;
   box-shadow: 0px 0px 5px 6px #9d9d9d14;
+  max-height: 500px;
+  overflow: auto;
 `;
 
 export const JackpotTabsWrapper = styled(Tabs)`

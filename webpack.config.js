@@ -29,7 +29,7 @@ module.exports = (env, argv) => {
           test: /\.(jpe?g|png|gif)$/,
           use: [{ loader: 'url-loader', options: { limit: 10000 } }],
         },
-        // {
+                // {
         //   test: /\.svg$/,
         //   use: ['@svgr/webpack'],
         // },
@@ -61,6 +61,7 @@ module.exports = (env, argv) => {
         utils: path.resolve(__dirname, './src/utils'),
         validationSchemas: path.resolve(__dirname, './src/validationSchemas'),
         mockData: path.resolve(__dirname, './src/mockData'),
+        context: path.resolve(__dirname, './src/context'),
       },
     },
     output: {
@@ -70,7 +71,7 @@ module.exports = (env, argv) => {
       publicPath: '/',
     },
     devServer: {
-      port: 3000,
+      port: 4200,
       open: '/',
       historyApiFallback: true,
       static: './dist',

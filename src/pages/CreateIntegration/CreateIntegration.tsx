@@ -4,8 +4,16 @@ import { InputContainer, InputForm, Label, SectionTitle, SelectForm, TitleContai
 import { ICreateIntegration } from 'types/FormikTypes';
 import { createIntegrationValidationSchema } from 'validationSchemas';
 import IntegrationFormikArray from 'components/IntegrationFormikArray';
+import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { KeycloackContext } from 'context/KeyckoakContext';
+import { ROLES } from 'constants/roles';
+import routes from 'constants/routes';
+import { COUNTRIES, CURRENCIES, JURISDICTIONS } from 'constants/constants';
 
 const CreateIntegration = () => {
+  const navigate = useNavigate();
+  const { keycloackValue } = useContext(KeycloackContext);
   const integration = useFormik<ICreateIntegration>({
     initialValues: {
       systemId: '',
@@ -88,6 +96,12 @@ const CreateIntegration = () => {
     },
   });
 
+  useEffect(() => {
+    if (!keycloackValue?.realmAccess?.roles.includes(ROLES.integrationAdmin)) {
+      navigate(routes.jackpots);
+    }
+  }, []);
+
   return (
     <Box sx={{ width: '100%' }}>
       <h2>Create Integration</h2>
@@ -120,7 +134,6 @@ const CreateIntegration = () => {
               value={integration.values.status}
               onChange={integration.handleChange}
               size="small"
-              style={{ width: '300px' }}
             >
               <MenuItem value={'active'}>Active</MenuItem>
               <MenuItem value={'suspended'}>Suspended</MenuItem>
@@ -184,6 +197,8 @@ const CreateIntegration = () => {
                 fieldName={'currencies.allow'}
                 valuesArray={integration.values.currencies.allow}
                 name="currency"
+                autocomplete
+                optionsArray={CURRENCIES}
               />
               <TitleContainer>Deny</TitleContainer>
               <IntegrationFormikArray
@@ -191,6 +206,8 @@ const CreateIntegration = () => {
                 fieldName={'currencies.deny'}
                 valuesArray={integration.values.currencies.deny}
                 name="currency"
+                autocomplete
+                optionsArray={CURRENCIES}
               />
             </InputContainer>
             <InputContainer direction="column" spacing={3}>
@@ -201,6 +218,8 @@ const CreateIntegration = () => {
                 fieldName={'countries.allow'}
                 valuesArray={integration.values.countries.allow}
                 name="country"
+                autocomplete
+                optionsArray={COUNTRIES}
               />
               <TitleContainer>Deny</TitleContainer>
               <IntegrationFormikArray
@@ -208,6 +227,8 @@ const CreateIntegration = () => {
                 fieldName={'countries.deny'}
                 valuesArray={integration.values.countries.deny}
                 name="country"
+                autocomplete
+                optionsArray={COUNTRIES}
               />
             </InputContainer>
           </Stack>
@@ -219,6 +240,8 @@ const CreateIntegration = () => {
               fieldName={'jurisdictions.allow'}
               valuesArray={integration.values.jurisdictions.allow}
               name="jurisdiction"
+              autocomplete
+              optionsArray={JURISDICTIONS}
             />
             <TitleContainer>Deny</TitleContainer>
             <IntegrationFormikArray
@@ -226,6 +249,8 @@ const CreateIntegration = () => {
               fieldName={'jurisdictions.deny'}
               valuesArray={integration.values.jurisdictions.deny}
               name="jurisdiction"
+              autocomplete
+              optionsArray={JURISDICTIONS}
             />
           </InputContainer>
           <Button

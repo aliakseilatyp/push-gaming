@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Box, Button, Stack } from '@mui/material';
 import { useFormik } from 'formik';
 import { ICreateJackpot } from 'types/FormikTypes';
@@ -7,8 +7,15 @@ import { InputContainer, InputForm, Label } from 'layouts/Form';
 import ConfigurationForm from 'components/ConfigurationForm';
 import CurrenciesForm from 'components/CurrenciesForm';
 import TiersForm from 'components/TiersForm';
+import { useNavigate } from 'react-router-dom';
+import { KeycloackContext } from 'context/KeyckoakContext';
+import { ROLES } from 'constants/roles';
+import routes from 'constants/routes';
 
 export const CreateJackpot = () => {
+  const navigate = useNavigate();
+  const { keycloackValue } = useContext(KeycloackContext);
+
   const jackpotInfo = useFormik<ICreateJackpot>({
     initialValues: {
       jackpotId: '',
@@ -79,6 +86,11 @@ export const CreateJackpot = () => {
     },
   });
 
+  useEffect(() => {
+    if (!keycloackValue?.realmAccess?.roles.includes(ROLES.admin)) {
+      navigate(routes.jackpots);
+    }
+  }, []);
 
   return (
     <Box sx={{ width: '100%' }}>

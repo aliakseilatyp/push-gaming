@@ -37,8 +37,81 @@ export const CURRENCY_HEADER_TABLE_ROW = [{ label: 'Currency' }, { label: 'Enabl
 
 export const TIERS_HEADER_TABLE_ROW = [{ label: 'ID' }, { label: '#' }, { label: 'Last Won' }, { label: 'Balance' }];
 
-export const INTEGRATIONS_HEADER_TABLE_ROW = [{ label: 'System' }, { label: 'Status' },{ label: 'Action' }];
+export const INTEGRATIONS_HEADER_TABLE_ROW = [{ label: 'System' }, { label: 'Status' }, { label: 'Action' }];
 
 export const GAMES_HEADER_TABLE_ROW = [{ label: 'Game' }, { label: 'Enabled' }];
 
 export const IGP_HEADER_TABLE_ROW = [{ label: 'IGP' }, { label: 'Enabled' }];
+
+export const COUNTRIES = [
+  'AT',
+  'BR',
+  'CA',
+  'CL',
+  'FI',
+  'GI',
+  'IE',
+  'IS',
+  'LU',
+  'MT',
+  'NO',
+  'NZ',
+  'PE',
+  'AD',
+  'SV',
+  'HN',
+  'LI',
+  'MC',
+  'SE',
+  'GB',
+  'NL',
+  'DK',
+  'CAON',
+  'DE',
+];
+
+export const JURISDICTIONS = ['DE', 'DK', 'ET', 'GG', 'GI', 'LV', 'MT', 'NA', 'NO', 'RO', 'SE', 'UK', 'CA-ON', 'NL'];
+
+export const CURRENCIES = [
+  'AMD',
+  'ARS',
+  'AZN',
+  'BDT',
+  'BOB',
+  'BGN',
+  'BIF',
+  'BND',
+  'BRL',
+  'BYN',
+  'BYR',
+  'CAD',
+  'CDF',
+  'CHF',
+  'CLP',
+  'CNY',
+  'COP',
+  'CZK',
+  'DKK',
+  'DOP',
+  'EUR',
+  'GBP',
+  'GEL',
+  'GHS',
+  'GNF',
+  'HRK',
+  'HTG',
+  'HUF',
+  'IDR',
+  'INR',
+  'ISK',
+  'KES',
+  'KGS',
+  'KRW',
+  'KZT',
+  'LKR',
+  'MDL',
+  'MKD',
+  'MNT',
+  'MXN',
+  'MZN',
+];

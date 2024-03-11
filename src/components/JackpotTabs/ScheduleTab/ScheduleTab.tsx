@@ -8,8 +8,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { InputContainer, Label, SectionTitle, SelectForm } from 'layouts/Form';
+import { useContext } from 'react';
+import { KeycloackContext } from 'context/KeyckoakContext';
+import { ROLES } from 'constants/roles';
 
 const ScheduleTab = () => {
+  const { keycloackValue } = useContext(KeycloackContext);
+  const isAdmin = keycloackValue?.realmAccess?.roles.includes(ROLES.admin);
+
   const schedule = useFormik<IScheduleForm>({
     initialValues: {
       startTime: dayjs().add(1, 'h').toISOString(),
@@ -30,6 +36,7 @@ const ScheduleTab = () => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={['DateTimePicker']}>
                 <DateTimePicker
+                  disabled={!isAdmin}
                   disablePast
                   format="YYYY-MM-DD"
                   value={dayjs(schedule.values.startTime)}
@@ -54,6 +61,7 @@ const ScheduleTab = () => {
               onChange={schedule.handleChange}
               size="small"
               style={{ width: '300px' }}
+              disabled={!isAdmin}
             >
               <MenuItem value={'never'}>never</MenuItem>
               <MenuItem value={'after'}>after</MenuItem>
@@ -65,6 +73,7 @@ const ScheduleTab = () => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DateTimePicker']}>
                   <DateTimePicker
+                    disabled={!isAdmin}
                     disablePast
                     format="YYYY-MM-DD"
                     value={dayjs(schedule.values.stopTime)}
@@ -80,15 +89,22 @@ const ScheduleTab = () => {
               </LocalizationProvider>
             </InputContainer>
           )}
-          <Button
-            variant="contained"
-            style={{ minWidth: '300px', alignSelf: 'center', backgroundColor: '#264274' }}
-            onClick={() => {
-              schedule.handleSubmit();
-            }}
-          >
-            Save
-          </Button>
+          {isAdmin && (
+            <Stack direction="row" spacing={4} justifyContent="space-between">
+              <Button variant="outlined" color="error" style={{ width: '100%' }}>
+                Delete
+              </Button>
+              <Button
+                variant="contained"
+                style={{ width: '100%', backgroundColor: '#264274' }}
+                onClick={() => {
+                  schedule.handleSubmit();
+                }}
+              >
+                Save
+              </Button>
+            </Stack>
+          )}
         </Stack>
       </form>
     </Box>

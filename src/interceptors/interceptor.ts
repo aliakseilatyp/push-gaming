@@ -18,7 +18,7 @@ axios.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('at');
-      window.location.href = ROUTES.login;
+      window.location.href = ROUTES.jackpots;
     }
     return Promise.reject(error);
   },

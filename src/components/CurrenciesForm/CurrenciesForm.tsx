@@ -1,4 +1,5 @@
-import { Button, MenuItem } from '@mui/material';
+import { Autocomplete, Button, MenuItem } from '@mui/material';
+import { CURRENCIES } from 'constants/constants';
 import { FieldArray, FormikProps, FormikProvider, getIn } from 'formik';
 import { Divider, InputContainer, InputForm, Label, SectionTitle, SelectForm } from 'layouts/Form';
 import { ICreateJackpot } from 'types/FormikTypes';
@@ -9,6 +10,7 @@ interface ICurrenciesForm {
 }
 
 const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
+  
   return (
     <InputContainer direction="column" spacing={3}>
       <SectionTitle>Currencies</SectionTitle>
@@ -21,7 +23,6 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
           value={jackpotInfo.values.currenciesType}
           onChange={jackpotInfo.handleChange}
           size="small"
-          style={{ width: '300px' }}
           disabled={disabled}
         >
           <MenuItem value={'fixed-rate'}>fixed-rate</MenuItem>
@@ -39,23 +40,36 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
                 const multiplier = `currencies[${index}].multiplier`;
                 const errorMultiplier = getIn(jackpotInfo.errors, multiplier);
                 const touchedMultiplier = getIn(jackpotInfo.touched, multiplier);
+                
 
                 return (
                   <InputContainer key={index} direction="column" spacing={3}>
                     <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
                       <Label>Currency</Label>
-                      <InputForm
-                        id="currency"
-                        variant="outlined"
-                        name={currency}
-                        value={el.currency}
-                        required
-                        helperText={touchedCurrency && errorCurrency ? errorCurrency : ''}
-                        error={!!touchedCurrency && !!errorCurrency}
-                        onChange={jackpotInfo.handleChange}
-                        onBlur={jackpotInfo.handleBlur}
-                        size="small"
+                      <Autocomplete
+                        freeSolo
+                        inputValue={el.currency}
+                        onInputChange={(event, newInputValue) => {
+                          jackpotInfo.setFieldValue(currency, newInputValue);
+                        }}
+                        options={CURRENCIES.map((el) => el)}
                         disabled={disabled}
+                        renderInput={(params) => (
+                          <InputForm
+                            {...params}
+                            id="currency"
+                            variant="outlined"
+                            name={currency}
+                            value={el.currency}
+                            required
+                            helperText={touchedCurrency && errorCurrency ? errorCurrency : ''}
+                            error={!!touchedCurrency && !!errorCurrency}
+                            onChange={jackpotInfo.handleChange}
+                            onBlur={jackpotInfo.handleBlur}
+                            size="small"
+                            disabled={disabled}
+                          />
+                        )}
                       />
                     </InputContainer>
                     <InputContainer direction="row" spacing={3} alignItems="center" justifyContent="end">
@@ -75,7 +89,13 @@ const CurrenciesForm = ({ jackpotInfo, disabled }: ICurrenciesForm) => {
                         disabled={disabled}
                       />
                     </InputContainer>
-                    <Button type="button" variant="outlined" onClick={() => remove(index)} color="error">
+                    <Button
+                      type="button"
+                      variant="outlined"
+                      onClick={() => remove(index)}
+                      color="error"
+                      disabled={disabled}
+                    >
                       Delete
                     </Button>
                     <Divider />

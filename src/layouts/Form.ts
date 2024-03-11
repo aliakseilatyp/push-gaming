@@ -1,4 +1,4 @@
-import { Button, Select, Stack, TextField } from '@mui/material';
+import { Autocomplete, Button, Select, Stack, TextField } from '@mui/material';
 import styled from 'styled-components';
 
 export const InputForm = styled(TextField)`
@@ -36,13 +36,15 @@ export const InputIntegration = styled(InputForm)`
 `;
 
 export const SelectForm = styled(Select)`
-  min-width: 300px;
+  width: 300px;
   background: #ffffff;
   && + .MuiFormHelperText-root {
     margin-left: 0;
     font-size: 12px;
   }
 `;
+
+// export const InputSelect = styled(Autocomplete)``
 
 export const Label = styled.div`
   font-size: 18px;
